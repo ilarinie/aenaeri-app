@@ -1,0 +1,11 @@
+{
+  "watch": ["server"],
+  "ext": "ts",
+  "ignore": ["test", "src"],
+  "restartable": "rs",
+  "env": {
+    "TS_NODE_PROJECT": "server/tsconfig.json"
+  },
+  "exec": "node --inspect -r ts-node/register ./server/index.ts",
+  "signal": "SIGINT"
+}
