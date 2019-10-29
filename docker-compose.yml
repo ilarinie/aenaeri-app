@@ -14,7 +14,7 @@ services:
       - postgres
     environment:
       - NODE_ENV=development
-      - DATABASE_URL=postgresql://fullstack-boilerplate:password123@postgres/fullstack-boilerplate
+      - DATABASE_URL=postgresql://aenaeri-app:password123@postgres/aenaeri-app
     networks:
       - backend
     command: npm run dev
@@ -22,9 +22,9 @@ services:
     image: 'postgres:11.5'
     restart: unless-stopped
     environment:
-      - POSTGRES_USER=fullstack-boilerplate
+      - POSTGRES_USER=aenaeri-app
       - POSTGRES_PASSWORD=password123
-      - POSTGRES_DB=fullstack-boilerplate
+      - POSTGRES_DB=aenaeri-app
     ports:
       - "5432:5432"
     volumes:

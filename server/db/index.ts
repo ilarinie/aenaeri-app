@@ -2,6 +2,8 @@ import env from 'env-var';
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import logger from '../logger';
+import { populateDatabase } from './populator';
+import { PlayerDataRefresh } from './entities/PlayerDataRefresh';
 
 const fileExtension = (): string => {
     if (env.get('NODE_ENV').asString() === 'production') {
@@ -32,7 +34,6 @@ const options = () => {
 
 const initializeDB = async () => {
     try {
-        console.log(env.get('DATABASE_URL').asString())
         await createConnection({
             type: 'postgres' as 'postgres',
             url: env.get('DATABASE_URL').asString() || '',
@@ -41,6 +42,7 @@ const initializeDB = async () => {
             ...options(),
         });
         logger.info('Database connection initialized.');
+        populateDatabase();
     } catch (err) {
         logger.error(`Could not create a database connection: ${err}`);
     }

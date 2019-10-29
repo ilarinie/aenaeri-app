@@ -12,6 +12,8 @@
         "space-within-parens": true,
         "no-unused-expression": true,
         "no-unused-declaration": true,
+        "interface-name": false,
+        "max-line-length": false,
         "indent": [
           true,
           "spaces",
