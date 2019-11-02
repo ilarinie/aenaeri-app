@@ -1,30 +1,61 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Div100vh from 'react-div-100vh';
+import { BaseDataResponse } from '../server/models/BaseDataResponse';
 import './App.css';
-import logo from './logo.svg';
+import { Dashboard } from './views/Dashboard/Dashboard';
+
+const INITIAL_BASE_DATA: BaseDataResponse = {
+  teams: {
+    teamList: [],
+    teamObject: {},
+  },
+  players: {
+    playerList: [],
+    playerObject: {},
+  },
+  skaterStats: {},
+  goalieStats: {},
+  playerStandings: {
+    goals: [],
+    assists: [],
+    points: [],
+    finnishPlayers: [],
+    savePct: [],
+    gaa: [],
+    gpg: [],
+    ppg: [],
+  },
+  teamStats: {},
+  teamStandings: {
+    metropolitan: [],
+    atlantic: [],
+    central: [],
+    western: [],
+    eastern: [],
+    pacific: [],
+    nhl: [],
+  },
+};
 
 const App: React.FC = () => {
 
+  const [ baseData, setBaseData ] = useState(INITIAL_BASE_DATA);
+
   useEffect(() => {
-    fetch('/api/test');
+    const fetchBaseData = async () => {
+      const duu = await fetch('/api/basedata');
+      const daa = await duu.json();
+      setBaseData(daa);
+    };
+    fetchBaseData();
   }, []);
 
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Div100vh>
+      <div className='App'>
+        <Dashboard dataModel={baseData} />
+      </div>
+    </Div100vh>
   );
 };
 

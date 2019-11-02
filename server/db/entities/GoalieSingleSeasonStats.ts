@@ -1,32 +1,6 @@
 import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
-
-export interface GoalieSingleSeasonStats {
-    season: string;
-    playerId: number;
-    timeOnIce: string;
-    ot: number;
-    shutouts: number;
-    ties: number;
-    wins: number;
-    losses: number;
-    saves: number;
-    powerPlaySaves: number;
-    shortHandedSaves: number;
-    evenSaves: number;
-    shortHandedShots: number;
-    evenShots: number;
-    powerPlayShots: number;
-    savePercentage: number;
-    goalAgainstAverage: number;
-    games: number;
-    gamesStarted: number;
-    shotsAgainst: number;
-    goalsAgainst: number;
-    timeOnIcePerGame: string;
-    powerPlaySavePercentage: number;
-    shortHandedSavePercentage: number;
-    evenStrengthSavePercentage: number;
-}
+import { SeasonStatsObject } from '../../models/BaseDataResponse';
+import { GoalieSingleSeasonStats } from '../../models/GoalieSingleSeasonStats';
 
 @Index(['season', 'playerId'])
 @Entity()
@@ -40,6 +14,21 @@ export class GoalieSingleSeasonStatsEntity extends BaseEntity implements GoalieS
             playerId,
             ...stat,
         });
+    }
+
+    public static apiResponseFromArray = (statArray: GoalieSingleSeasonStats[]): SeasonStatsObject<GoalieSingleSeasonStats> => {
+        const response: SeasonStatsObject<GoalieSingleSeasonStats> = {};
+        statArray.forEach((s) => {
+            if (response[s.playerId.toString()] == null) {
+                response[s.playerId.toString()] = {
+                    seasonList: [],
+                    statObject: {},
+                };
+            }
+            response[s.playerId.toString()].seasonList.push(s.season);
+            response[s.playerId.toString()].statObject[s.season] = s;
+        });
+        return response;
     }
 
     @PrimaryGeneratedColumn()

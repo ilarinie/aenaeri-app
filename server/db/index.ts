@@ -3,7 +3,6 @@ import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import logger from '../logger';
 import { populateDatabase } from './populator';
-import { PlayerDataRefresh } from './entities/PlayerDataRefresh';
 
 const fileExtension = (): string => {
     if (env.get('NODE_ENV').asString() === 'production') {

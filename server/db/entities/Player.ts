@@ -1,28 +1,9 @@
 import { BaseEntity, Column, Entity, Index, PrimaryColumn } from 'typeorm';
+import { PlayerBaseDataResponse } from '../../models/BaseDataResponse';
+import { Player } from '../../models/Player';
 
-export interface Player {
-    id: number;
-    fullName: string;
-    firstName: string;
-    lastName: string;
-    primaryNumber: number;
-    birthDate: string;
-    currentAge: number;
-    birthCity: string;
-    birthStateProvince?: string;
-    birthCountry: string;
-    nationality: string;
-    height: string;
-    weight: string;
-    active: boolean;
-    alternateCaptain: boolean;
-    captain: boolean;
-    rookie: boolean;
-    shootsCatches: string;
-    rosterStatus: string;
-    teamId: number;
-    position: string;
-}
+
+
 
 @Entity()
 export class PlayerEntity extends BaseEntity implements Player {
@@ -76,6 +57,18 @@ export class PlayerEntity extends BaseEntity implements Player {
             teamId: currentTeam.id,
             position: primaryPosition.name,
         });
+    }
+
+    public static apiResponseFromArray = (playerArray: PlayerEntity[]): PlayerBaseDataResponse => {
+        const response: PlayerBaseDataResponse = {
+            playerList: [],
+            playerObject: {}
+        }
+        playerArray.forEach((p) => {
+            response.playerList.push(p.id.toString());
+            response.playerObject[p.id.toString()] = p;
+        });
+        return response;
     }
 
     @PrimaryColumn()

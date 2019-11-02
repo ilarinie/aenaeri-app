@@ -3,9 +3,11 @@ import path from 'path';
 import { loggerMiddleWare } from '../logger/middleware';
 import { handleError } from './errorHandler';
 import { initializeRoutes } from './routes';
+import bodyParser from 'body-parser';
 const app = express();
 
 app.use(loggerMiddleWare);
+app.use(bodyParser.json());
 initializeRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {

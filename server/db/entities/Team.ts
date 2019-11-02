@@ -1,16 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
-
-export interface Team {
-    id: number;
-    name: string;
-    city: string;
-    abbreviation: string;
-    teamName: string;
-    firstYearOfPlay: number;
-    division: string;
-    confrence: string;
-    shortName: string;
-}
+import { TeamBaseDataResponse } from '../../models/BaseDataResponse';
+import { Team } from '../../models/Team';
 
 @Entity()
 export class TeamEntity extends BaseEntity implements Team {
@@ -27,6 +17,18 @@ export class TeamEntity extends BaseEntity implements Team {
             confrence: response.conference.name,
             shortName: response.shortName,
         });
+    }
+
+    public static apiResponseFromArray = (teamArray: TeamEntity[]): TeamBaseDataResponse => {
+      const response: TeamBaseDataResponse = {
+        teamList: [],
+        teamObject: {},
+      };
+      teamArray.forEach((team) => {
+        response.teamList.push(team.id.toString());
+        response.teamObject[team.id.toString()] = team;
+      });
+      return response;
     }
 
     @PrimaryColumn()
@@ -112,6 +114,47 @@ export interface NHLApiTeamResponse {
             }
           }>;
     };
+    teamStats: [
+      {
+        type: {
+          displayName: string;
+        },
+        splits: [
+          {
+            stat: {
+              gamesPlayed: number;
+              wins: number;
+              losses: number;
+              ot: number
+              pts: number;
+              ptPctg: number;
+              goalsPerGame: number
+              goalsAgainstPerGame: number;
+              evGGARatio: number;
+              powerPlayPercentage: number;
+              powerPlayGoals: number;
+              powerPlayGoalsAgainst: number;
+              powerPlayOpportunities: number;
+              penaltyKillPercentage: number;
+              shotsPerGame: number;
+              shotsAllowed: number;
+              winScoreFirst: number;
+              winOppScoreFirst: number;
+              winLeadFirstPer: number;
+              winLeadSecondPer: number;
+              winOutshootOpp: number;
+              winOutshotByOpp: number;
+              faceOffsTaken: number;
+              faceOffsWon: number;
+              faceOffsLost: number;
+              faceOffWinPercentage: number;
+              shootingPctg: number;
+              savePctg: number;
+            },
+          },
+        ],
+      }
+    ];
   }
 
 export interface NHLApiTeamList {

@@ -1,36 +1,6 @@
 import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
-
-export interface SkaterSingleSeasonStats {
-    season: string;
-    playerId: number;
-    timeOnIce: string;
-    assists: number;
-    goals: number;
-    pim: number;
-    shots: number;
-    games: number;
-    hits: number;
-    powerPlayGoals: number;
-    powerPlayPoints: number;
-    powerPlayTimeOnIce: string;
-    evenTimeOnIce: string;
-    penaltyMinutes: string;
-    faceOffPct: number;
-    shotPct: number;
-    gameWinningGoals: number;
-    overTimeGoals: number;
-    shortHandedGoals: number;
-    shortHandedPoints: number;
-    shortHandedTimeOnIce: string;
-    blocked: number;
-    plusMinus: number;
-    points: number;
-    shifts: number;
-    timeOnIcePerGame: string;
-    evenTimeOnIcePerGame: string;
-    shortHandedTimeOnIcePerGame: string;
-    powerPlayTimeOnIcePerGame: string;
-}
+import { SeasonStatsObject } from '../../models/BaseDataResponse';
+import { SkaterSingleSeasonStats } from '../../models/SkaterSingleSeasonStats';
 
 @Index(['season', 'playerId'])
 @Entity()
@@ -43,7 +13,23 @@ export class SkaterSingleSeasonStatsEntity extends BaseEntity implements SkaterS
             season,
             playerId,
             ...stat,
+            ppg: stat.points ? stat.points / stat.games : 0,
+            gpg: stat.goals ? stat.goals / stat.games : 0,
+        }) as SkaterSingleSeasonStatsEntity;
+    }
+    public static apiResponseFromArray = (statArray: SkaterSingleSeasonStats[]): SeasonStatsObject<SkaterSingleSeasonStats> => {
+        const response: SeasonStatsObject<SkaterSingleSeasonStats> = {};
+        statArray.forEach((s) => {
+            if (response[s.playerId.toString()] == null) {
+                response[s.playerId.toString()] = {
+                    seasonList: [],
+                    statObject: {},
+                };
+            }
+            response[s.playerId.toString()].seasonList.push(s.season);
+            response[s.playerId.toString()].statObject[s.season] = s;
         });
+        return response;
     }
 
     @PrimaryGeneratedColumn()
@@ -137,6 +123,12 @@ export class SkaterSingleSeasonStatsEntity extends BaseEntity implements SkaterS
 
     @Column()
     public powerPlayTimeOnIcePerGame: string;
+
+    @Column({ type: 'decimal', nullable: true})
+    public ppg: number;
+
+    @Column({type: 'decimal', nullable: true})
+    public gpg: number;
 
 }
 

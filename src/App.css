@@ -1,5 +1,10 @@
 .App {
-  text-align: center;
+  padding-top: 5rem;
+  padding-left: 10rem;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+ font-family: 'Montserrat', sans-serif;
 }
 
 .App-logo {

@@ -1,0 +1,32 @@
+export interface TeamSingleSeasonStats {
+    season: string;
+    teamId: number;
+    gamesPlayed: number;
+    wins: number;
+    losses: number;
+    ot: number;
+    pts: number;
+    ptPctg: number;
+    goalsPerGame: number;
+    goalsAgainstPerGame: number;
+    evGGARatio: number;
+    powerPlayPercentage: number;
+    powerPlayGoals: number;
+    powerPlayGoalsAgainst: number;
+    powerPlayOpportunities: number;
+    penaltyKillPercentage: number;
+    shotsPerGame: number;
+    shotsAllowed: number;
+    winScoreFirst: number;
+    winOppScoreFirst: number;
+    winLeadFirstPer: number;
+    winLeadSecondPer: number;
+    winOutshootOpp: number;
+    winOutshotByOpp: number;
+    faceOffsTaken: number;
+    faceOffsWon: number;
+    faceOffsLost: number;
+    faceOffWinPercentage: number;
+    shootingPctg: number;
+    savePctg: number;
+}

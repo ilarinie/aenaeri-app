@@ -1,4 +1,4 @@
-import { BaseEntity, Column, PrimaryColumn, PrimaryGeneratedColumn, Entity } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class PlayerDataRefresh extends BaseEntity {
@@ -10,6 +10,6 @@ export class PlayerDataRefresh extends BaseEntity {
     public id: number;
 
     @Column({ type: 'bigint' })
-    public refreshTime: number;
-     
+    public refreshTime: string;
+
 }

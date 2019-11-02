@@ -12,7 +12,6 @@ const statsEndpoint = (playerId: number): string => {
 
 export const populatePlayers = async (playerIds: number[]) => {
     logger.info('Populating players');
-    logger.profile('player_list_fetch');
     const beginPlayerFetch = new Date().getTime();
     let sum = 0;
     let avg = 5000;
@@ -55,10 +54,10 @@ export const populatePlayers = async (playerIds: number[]) => {
         const end = new Date().getTime();
         const diff = end - start;
         sum = sum + diff;
-        avg = i > 0 ? sum / ( i + 1 )  : sum;
+        avg = i > 0 ? sum / (i + 1)  : sum;
         logger.info(`Estimated time remaining ${((avg * (playerIds.length - i)) / 1000).toFixed(2) }, fetching player ${index} of ${playerIds.length}`);
     }
     const endPlayerFetch = new Date().getTime();
-    const diff = ((endPlayerFetch - beginPlayerFetch) / 1000).toFixed(2) + 's';
-    logger.info(`Player list refresh took ${diff}`);
+    const totalDiff = ((endPlayerFetch - beginPlayerFetch) / 1000).toFixed(2) + 's';
+    logger.info(`Player list refresh took ${totalDiff}`);
 };
