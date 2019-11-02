@@ -20,7 +20,7 @@ interface PlayerStandingsPanelProps {
 export const PlayerStandingsPanel: React.FC<PlayerStandingsPanelProps> = ({ playerObject, skaterStats, goalieStats, playerStandings }) => {
 
     const renderPlayerList = (playerIds: string[], statName: keyof SkaterSingleSeasonStats | keyof GoalieSingleSeasonStats, goalie: boolean) => {
-        return playerIds.slice(1, 7).map((playerId, index) => {
+        return playerIds.slice(0, 7).map((playerId, index) => {
             const player = playerObject[playerId.toString()];
             let stat;
             if (!goalie) {
