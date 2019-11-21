@@ -1,6 +1,7 @@
 import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 import { SeasonStatsObject } from '../../models/BaseDataResponse';
 import { SkaterSingleSeasonStats } from '../../models/SkaterSingleSeasonStats';
+import { NHLApiSkaterStatsResponse } from '../../services/NHLApiService/responseModels/SkaterStatsResponseModels';
 
 @Index(['season', 'playerId'])
 @Entity()
@@ -130,45 +131,4 @@ export class SkaterSingleSeasonStatsEntity extends BaseEntity implements SkaterS
     @Column({type: 'decimal', nullable: true})
     public gpg: number;
 
-}
-
-export interface NHLApiSkaterStatsResponse {
-    copyright: string;
-    stats: Array<{
-        type: {
-            displayName: string;
-        },
-        splits: Array<{
-            season: string;
-            stat: {
-                timeOnIce: string;
-                assists: number;
-                goals: number;
-                pim: number;
-                shots: number;
-                games: number;
-                hits: number;
-                powerPlayGoals: number;
-                powerPlayPoints: number;
-                powerPlayTimeOnIce: string;
-                evenTimeOnIce: string;
-                penaltyMinutes: string;
-                faceOffPct: number;
-                shotPct: number;
-                gameWinningGoals: number;
-                overTimeGoals: number;
-                shortHandedGoals: number;
-                shortHandedPoints: number;
-                shortHandedTimeOnIce: string;
-                blocked: number;
-                plusMinus: number;
-                points: number;
-                shifts: number;
-                timeOnIcePerGame: string;
-                evenTimeOnIcePerGame: string;
-                shortHandedTimeOnIcePerGame: string;
-                powerPlayTimeOnIcePerGame: string;
-            }
-        }>,
-    }>;
 }

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { getConnectionManager } from 'typeorm';
 import { initializeDB } from '..';
-import { NHLApiTeamList, NHLApiTeamResponse, TeamEntity } from '../entities/Team';
+import { NHLApiTeamList, NHLApiTeamResponse } from '../../services/NHLApiService/responseModels/TeamResponseModels';
+import {  TeamEntity } from '../entities/Team';
 import { TeamSingleSeasonStatsEntity } from '../entities/TeamSingleSeasonStats';
 
 export const populateTeams = async (): Promise<number[]> => {

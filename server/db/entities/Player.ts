@@ -1,9 +1,7 @@
 import { BaseEntity, Column, Entity, Index, PrimaryColumn } from 'typeorm';
 import { PlayerBaseDataResponse } from '../../models/BaseDataResponse';
 import { Player } from '../../models/Player';
-
-
-
+import { NHLApiPlayerResponse } from '../../services/NHLApiService/responseModels/PlayerResponseModels';
 
 @Entity()
 export class PlayerEntity extends BaseEntity implements Player {
@@ -62,8 +60,8 @@ export class PlayerEntity extends BaseEntity implements Player {
     public static apiResponseFromArray = (playerArray: PlayerEntity[]): PlayerBaseDataResponse => {
         const response: PlayerBaseDataResponse = {
             playerList: [],
-            playerObject: {}
-        }
+            playerObject: {},
+        };
         playerArray.forEach((p) => {
             response.playerList.push(p.id.toString());
             response.playerObject[p.id.toString()] = p;
@@ -135,41 +133,4 @@ export class PlayerEntity extends BaseEntity implements Player {
     @Column()
     public position: string;
 
-}
-
-export interface NHLApiPlayerResponse {
-    copyright: string;
-    people: Array<{
-        id: number;
-        fullName: string;
-        link: string;
-        firstName: string;
-        lastName: string;
-        primaryNumber: number;
-        birthDate: string;
-        currentAge: number;
-        birthCity: string;
-        birthStateProvince: string;
-        birthCountry: string;
-        nationality: string;
-        height: string;
-        weight: string;
-        active: boolean;
-        alternateCaptain: boolean;
-        captain: boolean;
-        rookie: boolean;
-        shootsCatches: string;
-        rosterStatus: string;
-        currentTeam: {
-            id: number;
-            name: string;
-            link: string;
-        };
-        primaryPosition: {
-            code: string;
-            name: string;
-            type: string;
-            abbreviation: string;
-        }
-    }>;
 }

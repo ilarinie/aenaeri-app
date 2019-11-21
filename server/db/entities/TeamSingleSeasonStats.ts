@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { SeasonStatsObject } from '../../models/BaseDataResponse';
 import { TeamSingleSeasonStats } from '../../models/TeamSingleSeasonStats';
-import { NHLApiTeamResponse } from './Team';
+import { NHLApiTeamResponse } from '../../services/NHLApiService/responseModels/TeamResponseModels';
 
 @Entity()
 export class TeamSingleSeasonStatsEntity extends BaseEntity implements TeamSingleSeasonStats {
