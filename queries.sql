@@ -11,5 +11,8 @@ ORDER BY pts DESC;
 
 SELECT "playerId" FROM skater_single_season_stats_entity    ORDER BY points DESC LIMIT 100;
 
-SELECT "playerId" FROM skater_single_season_stats_entity LEFT JOIN player_entity
+SELECT "playerId", player_entity."fullName" FROM skater_single_season_stats_entity LEFT JOIN player_entity
         ON "playerId" = player_entity.id WHERE  nationality = 'FIN'  ORDER BY points DESC LIMIT 100;
+
+SELECT "playerId", player_entity."fullName", points, assists, ppg FROM skater_single_season_stats_entity LEFT JOIN player_entity
+ON "playerId" = player_entity.id WHERE nationality = 'FIN' ORDER BY points DESC LIMIT 100;

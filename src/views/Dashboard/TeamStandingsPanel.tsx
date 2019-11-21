@@ -4,6 +4,7 @@ import { SeasonStatsObject, TeamBaseDataResponse, TeamStandings } from '../../..
 import { TeamSingleSeasonStats } from '../../../server/models/TeamSingleSeasonStats';
 import { BoxHeader } from '../../components/BoxHeader';
 import { SmallTeamRow } from '../../components/SmallTeamRow';
+import { TEAMS_ROUTE } from '../../routes';
 import { getTeamLogoUri } from '../../utils/teamLogoUri';
 
 interface TeamStandingsPanelProps {
@@ -17,6 +18,7 @@ export const TeamStandingsPanel = React.memo<TeamStandingsPanelProps>(({ teamSta
     const renderTeams = (teamIds: string[]) => (
         teamIds.map((teamId, index) => (
             <SmallTeamRow
+                link={TEAMS_ROUTE + teamId}
                 key={teamId}
                 index={index + 1}
                 logoUri={getTeamLogoUri(teamId)}
@@ -29,49 +31,62 @@ export const TeamStandingsPanel = React.memo<TeamStandingsPanelProps>(({ teamSta
     return (
         <TeamStandingsPanelContainer>
             <GridContainer gridRow='1 / 1' gridColumn='1 / 1' >
-            <BoxHeader>Atlantic</BoxHeader>
-                {renderTeams(teamStandings.atlantic)}
+                <BoxHeader>Central</BoxHeader>
+                <StandingsContainer rows={8}>
+                    {renderTeams(teamStandings.central)}
+                </StandingsContainer>
             </GridContainer>
             <GridContainer gridRow='1 / 1' gridColumn='2 / 2' >
-            <BoxHeader>Central</BoxHeader>
-            {renderTeams(teamStandings.central)}
-
+                <BoxHeader>Atlantic</BoxHeader>
+                <StandingsContainer rows={8}>
+                    {renderTeams(teamStandings.atlantic)}
+                </StandingsContainer>
             </GridContainer>
             <GridContainer gridRow='2 / 2' gridColumn='1 / 1' >
-            <BoxHeader>Pacific</BoxHeader>
-            {renderTeams(teamStandings.pacific)}
-
+                <BoxHeader>Pacific</BoxHeader>
+                <StandingsContainer rows={8}>
+                    {renderTeams(teamStandings.pacific)}
+                </StandingsContainer>
             </GridContainer>
             <GridContainer gridRow='2 / 2' gridColumn='2 / 2' >
-            <BoxHeader>Metropolitan</BoxHeader>
-            {renderTeams(teamStandings.metropolitan)}
-
+                <BoxHeader>Metropolitan</BoxHeader>
+                <StandingsContainer rows={8}>
+                    {renderTeams(teamStandings.metropolitan)}
+                </StandingsContainer>
             </GridContainer>
             <GridContainer gridRow='3 / 3' gridColumn='1 / 1' >
-            <BoxHeader>Western confrence</BoxHeader>
-            {renderTeams(teamStandings.western)}
-
+                <BoxHeader>Western confrence</BoxHeader>
+                <StandingsContainer rows={8}>
+                    {renderTeams(teamStandings.western)}
+                </StandingsContainer>
             </GridContainer>
             <GridContainer gridRow='3 / 3' gridColumn='2 / 2' >
                 <BoxHeader>Eastern Confrence</BoxHeader>
-                {renderTeams(teamStandings.eastern)}
-
+                <StandingsContainer rows={8}>
+                    {renderTeams(teamStandings.eastern)}
+                </StandingsContainer>
             </GridContainer>
         </TeamStandingsPanelContainer>
     );
 });
+
+const StandingsContainer = styled.div<{ rows: number}>`
+    min-height: calc( ${(props) => props.rows} * 20px);
+    min-width: 100%;
+`;
 
 const GridContainer = styled.div<{ gridRow: string, gridColumn: string}>`
     grid-column: ${(props) => props.gridColumn};
     grid-row: ${(props) => props.gridRow};
     width: 100%;
     height: 100%;
+    padding: 0 0.5em;
 `;
 
 const TeamStandingsPanelContainer = styled.div`
     display: grid;
-    grid-template-columns: 45%, 45%;
-    grid-template-rows: 1fr 1fr 2fr;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 25% 25% 50%;
     grid-column-gap: 0.5em;
     grid-row-gap: 0.5em;
     overflow: hidden;

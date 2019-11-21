@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface SmallTeamRowProps {
@@ -6,15 +7,16 @@ interface SmallTeamRowProps {
     statistic: number;
     index: number;
     logoUri: string;
+    link: string;
 }
 
-export const SmallTeamRow = React.memo<SmallTeamRowProps>(({ logoUri, mainText, statistic, index }) => {
+export const SmallTeamRow = React.memo<SmallTeamRowProps>(({ logoUri, mainText, statistic, index, link }) => {
 
     return (
         <TeamRowContainer>
             <Index>{index}.</Index>
             <TeamLogo src={logoUri} />
-            <TeamName>{mainText}</TeamName>
+            <TeamName><Link to={link}>{mainText}</Link></TeamName>
             <div style={{ fontFamily: 'monospace'}}>{statistic}</div>
         </TeamRowContainer>
     );
@@ -34,14 +36,20 @@ const TeamName = styled.div`
     margin-right: auto;
     line-height: 15px;
     margin-bottom: 0.2em;
+    a {
+        color: inherit;
+        text-decoration: none;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
 `;
 
 const TeamRowContainer = styled.div`
     display: flex;
     align-items: center;
-    border-bottom: 1px solid lightgray;
     justify-content: flex-start;
-    height: 17px;
+    min-height: 17px;
     padding: 0 0.5em;
 `;
 

@@ -6,6 +6,7 @@ import { Player } from '../../../server/models/Player';
 import { SkaterSingleSeasonStats } from '../../../server/models/SkaterSingleSeasonStats';
 import { BoxHeader } from '../../components/BoxHeader';
 import { SmallTeamRow } from '../../components/SmallTeamRow';
+import { PLAYERS_ROUTE } from '../../routes';
 import { playerThumbnailUrlFromPlayerId } from '../../utils/playerThumbnailUrl';
 
 interface PlayerStandingsPanelProps {
@@ -30,6 +31,7 @@ export const PlayerStandingsPanel: React.FC<PlayerStandingsPanelProps> = ({ play
             }
             return (
                 <SmallTeamRow
+                    link={PLAYERS_ROUTE + playerId}
                     key={playerId}
                     logoUri={playerThumbnailUrlFromPlayerId(player.id.toString())}
                     statistic={stat}
@@ -43,31 +45,48 @@ export const PlayerStandingsPanel: React.FC<PlayerStandingsPanelProps> = ({ play
         <PlayerStandingsPanelContainer>
             <PlayerStandingsListContainer gridRow='1 / 1' gridColumn='1 / 1'>
                 <BoxHeader>Points</BoxHeader>
-                {renderPlayerList(playerStandings.points, 'points', false)}
+                <StandingsContainer rows={7}>
+                    {renderPlayerList(playerStandings.points, 'points', false)}
+                </StandingsContainer>
             </PlayerStandingsListContainer>
             <PlayerStandingsListContainer gridRow='1 / 1' gridColumn='2 / 2'>
                 <BoxHeader>Assists</BoxHeader>
-                {renderPlayerList(playerStandings.assists, 'assists', false)}
+                <StandingsContainer rows={7}>
+                    {renderPlayerList(playerStandings.assists, 'assists', false)}
+                </StandingsContainer>
             </PlayerStandingsListContainer>
             <PlayerStandingsListContainer gridRow='2 / 2' gridColumn='1 / 1'>
                 <BoxHeader>Goals</BoxHeader>
-                {renderPlayerList(playerStandings.goals, 'goals', false)}
+                <StandingsContainer rows={7}>
+                    {renderPlayerList(playerStandings.goals, 'goals', false)}
+                </StandingsContainer>
             </PlayerStandingsListContainer>
             <PlayerStandingsListContainer gridRow='2 / 2' gridColumn='2 / 2'>
                 <BoxHeader>Finnish players</BoxHeader>
-                {renderPlayerList(playerStandings.finnishPlayers, 'points', false)}
+                <StandingsContainer rows={7}>
+                    {renderPlayerList(playerStandings.finnishPlayers, 'points', false)}
+                </StandingsContainer>
             </PlayerStandingsListContainer>
             <PlayerStandingsListContainer gridRow='3 / 3' gridColumn='1 / 1'>
                 <BoxHeader>Save PCT</BoxHeader>
-                {renderPlayerList(playerStandings.savePct, 'savePercentage', true)}
+                <StandingsContainer rows={7}>
+                    {renderPlayerList(playerStandings.savePct, 'savePercentage', true)}
+                </StandingsContainer>
             </PlayerStandingsListContainer>
             <PlayerStandingsListContainer gridRow='3 / 3' gridColumn='2 / 2'>
                 <BoxHeader>GAA</BoxHeader>
-                {renderPlayerList(playerStandings.gaa, 'goalAgainstAverage', true)}
+                <StandingsContainer rows={7}>
+                    {renderPlayerList(playerStandings.gaa, 'goalAgainstAverage', true)}
+                </StandingsContainer>
             </PlayerStandingsListContainer>
         </PlayerStandingsPanelContainer>
     );
 };
+
+const StandingsContainer = styled.div<{ rows: number}>`
+    min-height: calc( ${(props) => props.rows} * 19px);
+    min-width: 100%;
+`;
 
 const PlayerStandingsListContainer = styled.div<{ gridRow: string, gridColumn: string}>`
     grid-row: ${(props) => props.gridRow};
@@ -78,6 +97,8 @@ const PlayerStandingsListContainer = styled.div<{ gridRow: string, gridColumn: s
 
 const PlayerStandingsPanelContainer = styled.div`
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 50% 50%;
+    height: calc(100% - 5em);
+    grid-template-rows: 33% 33% 33%;
     grid-row-gap: 0.5em;
 `;

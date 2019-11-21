@@ -22,7 +22,7 @@ export const SmallPlayerRow =  React.memo<SmallPlayerRowProps>(({ firstName, las
                 <PlayerNumberContainer>
                     #{playerNumber}
                 </PlayerNumberContainer>
-                <PlayerNameContainer>
+                <PlayerNameContainer >
                     <div>{firstName}</div>
                     <span>{lastName}</span>
                 </PlayerNameContainer>
@@ -74,6 +74,9 @@ const PlayerNameContainer = styled.div`
     margin-left: 0.5em;
     text-transform: uppercase;
     font-variant: small-caps;
+    &:hover {
+        text-decoration: underline;
+    }
     div {
         font-size: 10px;
         margin-bottom: -0.2em;

@@ -18,8 +18,7 @@ export const populatePlayers = async (playerIds: number[]) => {
     await PlayerEntity.clear();
     await SkaterSingleSeasonStatsEntity.clear();
     await GoalieSingleSeasonStatsEntity.clear();
-    for (let i = 0; i < playerIds.length; i++) {
-        const id = playerIds[i];
+    playerIds.forEach(async (id, i) => {
         const index = i;
         const start = new Date().getTime();
         const playerResponse = await axios.request<NHLApiPlayerResponse>({ method: 'GET', url: PLAYER_ENDPOINT + '/' + id});
@@ -56,7 +55,7 @@ export const populatePlayers = async (playerIds: number[]) => {
         sum = sum + diff;
         avg = i > 0 ? sum / (i + 1)  : sum;
         logger.info(`Estimated time remaining ${((avg * (playerIds.length - i)) / 1000).toFixed(2) }, fetching player ${index} of ${playerIds.length}`);
-    }
+    });
     const endPlayerFetch = new Date().getTime();
     const totalDiff = ((endPlayerFetch - beginPlayerFetch) / 1000).toFixed(2) + 's';
     logger.info(`Player list refresh took ${totalDiff}`);

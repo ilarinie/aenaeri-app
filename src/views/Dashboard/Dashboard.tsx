@@ -1,25 +1,25 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
 import styled from 'styled-components';
-import { BaseDataResponse } from '../../../server/models/BaseDataResponse';
 import { BoxHeader } from '../../components/BoxHeader';
+import { RootState } from '../../state/rootReducer';
 import { PlayerStandingsPanel } from './PlayerStandingsPanel';
 import { TeamStandingsPanel } from './TeamStandingsPanel';
 
-interface DashboardProps {
-    dataModel: BaseDataResponse;
-}
+export const Dashboard: React.FC<RouteComponentProps> = () => {
 
-export const Dashboard: React.FC<DashboardProps> = ({ dataModel }) => {
+    const baseData = useSelector((state: RootState) => state.baseData);
 
     return (
         <DashboardContainer>
             <DashboardGridItem gridRow='1 / 1' gridColumn='1 / 7'>
                 <BoxHeader>Player standings</BoxHeader>
                 <PlayerStandingsPanel
-                    playerStandings={dataModel.playerStandings}
-                    goalieStats={dataModel.goalieStats}
-                    skaterStats={dataModel.skaterStats}
-                    playerObject={dataModel.players.playerObject}
+                    playerStandings={baseData.playerStandings}
+                    goalieStats={baseData.goalieStats}
+                    skaterStats={baseData.skaterStats}
+                    playerObject={baseData.players.playerObject}
                 />
             </DashboardGridItem>
             <DashboardGridItem gridRow='2 / 2' gridColumn='1 / 7'>
@@ -34,9 +34,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ dataModel }) => {
             <DashboardGridItem gridRow='1 / 3' gridColumn='7 / 13'>
                 <BoxHeader>NHL STANDINGS</BoxHeader>
                 <TeamStandingsPanel
-                    teamStandings={dataModel.teamStandings}
-                    teams={dataModel.teams}
-                    teamStats={dataModel.teamStats}
+                    teamStandings={baseData.teamStandings}
+                    teams={baseData.teams}
+                    teamStats={baseData.teamStats}
                 />
 
             </DashboardGridItem>
@@ -46,22 +46,19 @@ export const Dashboard: React.FC<DashboardProps> = ({ dataModel }) => {
 
 const DashboardContainer = styled.div`
     display: grid;
-    width: 100%;
-    min-height: 100%;
-    height: 500px;
     grid-column-gap: 1em;
     grid-row-gap: 0.5em;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 3fr 1fr;
+    grid-template-rows: 75% 30%;
     padding: 0.5em;
+    max-height: calc(100% - 1em);
+    overflow: hidden;
 `;
 
 const DashboardGridItem = styled.div<{ gridRow: string, gridColumn: string }>`
     grid-column: ${(props) => props.gridColumn};
     grid-row: ${(props) => props.gridRow};
-    width: 100%;
     overflow: auto;
-    height: 100%;
     padding: 0.5em;
     background-color: #1E1E1E;
 `;
