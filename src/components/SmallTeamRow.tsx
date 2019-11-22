@@ -4,20 +4,21 @@ import styled from 'styled-components';
 
 interface SmallTeamRowProps {
     mainText: string;
-    statistic: number;
+    statistic: string;
+    statisticNominator?: string;
     index: number;
     logoUri: string;
     link: string;
 }
 
-export const SmallTeamRow = React.memo<SmallTeamRowProps>(({ logoUri, mainText, statistic, index, link }) => {
+export const SmallTeamRow = React.memo<SmallTeamRowProps>(({ logoUri, mainText, statistic, index, link, statisticNominator }) => {
 
     return (
         <TeamRowContainer>
             <Index>{index}.</Index>
             <TeamLogo src={logoUri} />
             <TeamName><Link to={link}>{mainText}</Link></TeamName>
-            <div style={{ fontFamily: 'monospace'}}>{statistic}</div>
+            <div style={{ fontFamily: 'monospace'}}>{statistic}{statisticNominator && ' / ' + statisticNominator}</div>
         </TeamRowContainer>
     );
 });
@@ -34,8 +35,9 @@ const TeamName = styled.div`
     font-variant: small-caps;
     letter-spacing: 2px;
     margin-right: auto;
-    line-height: 15px;
-    margin-bottom: 0.2em;
+    line-height: 16px;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
     a {
         color: inherit;
         text-decoration: none;
@@ -49,8 +51,10 @@ const TeamRowContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    min-height: 17px;
     padding: 0 0.5em;
+    &:nth-child(odd) {
+        background: #1E1E1E;
+    }
 `;
 
 const TeamLogo = styled.img`

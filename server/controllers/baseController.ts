@@ -23,7 +23,16 @@ export const handleBaseRoute = async (req: Request, res: Response, next: NextFun
 
         const teamStats = await TeamSingleSeasonStatsEntity.find();
 
+        const lastRefresh = await PlayerDataRefresh.find({order: { id: 'DESC' }, take: 1 });
+        let refreshTime = '';
+        if (lastRefresh[0]) {
+            refreshTime = lastRefresh[0].refreshTime;
+        } else {
+            refreshTime = '9999999999999';
+        }
+
         const response: BaseDataResponse = {
+            refreshTime,
             teams: TeamEntity.apiResponseFromArray(teams),
             players: PlayerEntity.apiResponseFromArray(players),
             skaterStats: SkaterSingleSeasonStatsEntity.apiResponseFromArray(playerStats),

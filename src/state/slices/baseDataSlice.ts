@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from 'redux-starter-kit';
 import { BaseDataResponse } from '../../../server/models/BaseDataResponse';
 
 const initialState: BaseDataResponse = {
+        refreshTime: '',
         teams: {
             teamList: [],
             teamObject: {},

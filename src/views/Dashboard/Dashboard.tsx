@@ -49,7 +49,7 @@ const DashboardContainer = styled.div`
     grid-column-gap: 1em;
     grid-row-gap: 0.5em;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 75% 30%;
+    grid-template-rows: 80% 20%;
     padding: 0.5em;
     max-height: calc(100% - 1em);
     overflow: hidden;
@@ -60,5 +60,4 @@ const DashboardGridItem = styled.div<{ gridRow: string, gridColumn: string }>`
     grid-row: ${(props) => props.gridRow};
     overflow: auto;
     padding: 0.5em;
-    background-color: #1E1E1E;
 `;

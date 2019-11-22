@@ -23,7 +23,8 @@ export const TeamStandingsPanel = React.memo<TeamStandingsPanelProps>(({ teamSta
                 index={index + 1}
                 logoUri={getTeamLogoUri(teamId)}
                 mainText={teams.teamObject[teamId].name}
-                statistic={teamStats[teamId].statObject['20192020'].pts}
+                statistic={teamStats[teamId].statObject['20192020'].pts.toFixed(0)}
+                statisticNominator={teamStats[teamId].statObject['20192020'].gamesPlayed + 'gp'}
             />
         ))
     );
@@ -81,12 +82,13 @@ const GridContainer = styled.div<{ gridRow: string, gridColumn: string}>`
     width: 100%;
     height: 100%;
     padding: 0 0.5em;
+    background-color: #333;
 `;
 
 const TeamStandingsPanelContainer = styled.div`
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 25% 25% 50%;
+    grid-template-rows: 27% 27% 46%;
     grid-column-gap: 0.5em;
     grid-row-gap: 0.5em;
     overflow: hidden;

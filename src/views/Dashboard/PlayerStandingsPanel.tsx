@@ -34,7 +34,8 @@ export const PlayerStandingsPanel: React.FC<PlayerStandingsPanelProps> = ({ play
                     link={PLAYERS_ROUTE + playerId}
                     key={playerId}
                     logoUri={playerThumbnailUrlFromPlayerId(player.id.toString())}
-                    statistic={stat}
+                    statistic={stat.toString()}
+                    statisticNominator={goalie ? goalieStats[playerId.toString()].statObject['20192020'].games + 'gp' : skaterStats[playerId.toString()].statObject['20192020'].games + 'gp'}
                     mainText={player.fullName}
                     index={index + 1}
                 />
@@ -93,6 +94,7 @@ const PlayerStandingsListContainer = styled.div<{ gridRow: string, gridColumn: s
     grid-column: ${(props) => props.gridColumn};
     margin-right: 0.5em;
     padding-bottom: 0.5em;
+    background-color: #333;
 `;
 
 const PlayerStandingsPanelContainer = styled.div`
@@ -101,4 +103,5 @@ const PlayerStandingsPanelContainer = styled.div`
     height: calc(100% - 5em);
     grid-template-rows: 33% 33% 33%;
     grid-row-gap: 0.5em;
+    padding: 0.5em;
 `;

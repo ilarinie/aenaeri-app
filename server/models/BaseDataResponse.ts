@@ -31,6 +31,7 @@ export interface SeasonStatsObject<T> {
 }
 
 export interface BaseDataResponse {
+    refreshTime: string;
     teams: TeamBaseDataResponse;
     players: PlayerBaseDataResponse;
     skaterStats: SeasonStatsObject<SkaterSingleSeasonStats>;
@@ -71,4 +72,8 @@ export interface PlayerStandings {
     gaa: string[];
     ppg: string[];
     gpg: string[];
+}
+
+export interface RefreshCheckResponse {
+    doRefresh: boolean;
 }
