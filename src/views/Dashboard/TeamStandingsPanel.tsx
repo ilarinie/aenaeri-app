@@ -82,7 +82,6 @@ const GridContainer = styled.div<{ gridRow: string, gridColumn: string}>`
     width: 100%;
     height: 100%;
     padding: 0 0.5em;
-    background-color: #333;
 `;
 
 const TeamStandingsPanelContainer = styled.div`

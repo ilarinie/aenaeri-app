@@ -87,14 +87,15 @@ export const PlayerStandingsPanel: React.FC<PlayerStandingsPanelProps> = ({ play
 const StandingsContainer = styled.div<{ rows: number}>`
     min-height: calc( ${(props) => props.rows} * 19px);
     min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-height: calc( ${(props) => props.rows} * 19px);
 `;
 
 const PlayerStandingsListContainer = styled.div<{ gridRow: string, gridColumn: string}>`
     grid-row: ${(props) => props.gridRow};
     grid-column: ${(props) => props.gridColumn};
     margin-right: 0.5em;
-    padding-bottom: 0.5em;
-    background-color: #333;
 `;
 
 const PlayerStandingsPanelContainer = styled.div`
@@ -102,6 +103,7 @@ const PlayerStandingsPanelContainer = styled.div`
     grid-template-columns: 50% 50%;
     height: calc(100% - 5em);
     grid-template-rows: 33% 33% 33%;
-    grid-row-gap: 0.5em;
+    grid-row-gap: 1em;
+    grid-column-gap: 1em;
     padding: 0.5em;
 `;

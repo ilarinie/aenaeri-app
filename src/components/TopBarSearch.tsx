@@ -34,7 +34,12 @@ export const TopBarSearch: React.FC<{ players: PlayerBaseDataResponse, teams: Te
 
     const handleInputKeyPress = (event: any) => {
         if (event.key === 'Enter') {
-          if (foundItem) {
+            executeNavigation();
+        }
+    };
+
+    const executeNavigation = () => {
+        if (foundItem) {
             const parsedId = parseInt(foundItem.value, 10);
             if (parsedId < 100) {
                 navigate('/teams/' + parsedId);
@@ -43,7 +48,6 @@ export const TopBarSearch: React.FC<{ players: PlayerBaseDataResponse, teams: Te
             }
             setSearchText('');
           }
-        }
     };
 
     return (
@@ -52,6 +56,7 @@ export const TopBarSearch: React.FC<{ players: PlayerBaseDataResponse, teams: Te
                 list='searchdatalist'
                 onKeyPress={handleInputKeyPress}
                 placeholder='Search for players or teams'
+                value={searchText}
                 onChange={(event) => { event.persist(); handleSearchChange(event); }}
             />
            <datalist id='searchdatalist'>
@@ -59,8 +64,8 @@ export const TopBarSearch: React.FC<{ players: PlayerBaseDataResponse, teams: Te
                  <option key={d.value}>{d.text}</option>
                ))}
             </datalist>
-            <GoIcon visible={foundItem != null}>
-                GO &rarr;
+            <GoIcon visible={foundItem != null} onClick={executeNavigation}>
+                OPEN
             </GoIcon>
         </InputContainer>
     );
@@ -73,16 +78,21 @@ const InputContainer = styled.div`
 `;
 
 const GoIcon = styled.div<{ visible: boolean}>`
-    ${(props) => !props.visible && 'display: none;'}
-    color: green;
-    padding-left: 0.5em;
-    border: 1px solid white;
+    ${(props) => !props.visible ? 'display: none;' : 'display: flex;'}
+    padding: 0.7em 0.5em 0.5em 0.5em;
     height: 1.5rem;
+    align-items: center;
+    background-color: #333;
+    cursor: pointer;
+    &:hover {
+        background-color: #121212;
+    }
 `;
 
 const StyledInput = styled.input`
     background: #eee;
-    border-radius: 5px;
+    border: none;
+    padding: 1em;
     height: 1.5rem;
     width: 20rem;
 `;
