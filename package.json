@@ -15,6 +15,7 @@
     "@types/react-dom": "16.9.3",
     "@types/react-redux": "^7.1.5",
     "@types/react-router-dom": "^5.1.2",
+    "@types/recharts": "^1.8.3",
     "@types/redux": "^3.6.0",
     "@types/redux-logger": "^3.0.7",
     "@types/request-ip": "^0.0.34",
@@ -38,6 +39,7 @@
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
+    "recharts": "^1.8.5",
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-starter-kit": "^1.0.1",
@@ -71,7 +73,8 @@
     "backend-test": "export NODE_ENV=test; export TS_NODE_PROJECT=server/tsconfig.json; nyc mocha --bail --recursive --require ts-node/register \"server/test/**/*.spec.{ts,tsx}\" ",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public .storybook",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "populate-database": "ts-node populateDatabase.ts"
   },
   "eslintConfig": {
     "extends": "react-app"

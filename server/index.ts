@@ -9,4 +9,3 @@ initializeDB().then(() => {
 }).catch((err) => {
     logger.error(`Application startup failed ${err}`);
 });
-

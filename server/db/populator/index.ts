@@ -3,7 +3,7 @@ import { populatePlayers } from './populatePlayers';
 import { populateTeams } from './populateTeams';
 
 export const populateDatabase = async () => {
-    const lastRefresh = await PlayerDataRefresh.find({order: { id: 'DESC' }, take: 1 });
+    const lastRefresh = await PlayerDataRefresh.find({ order: { id: 'DESC' }, take: 1 });
     let doRefresh = true;
     if (lastRefresh[0]) {
         doRefresh = (parseInt(lastRefresh[0].refreshTime, 10) + (1000 * 60 * 60) < new Date().getTime());

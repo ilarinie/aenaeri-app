@@ -6,4 +6,5 @@ export const initializeRoutes = (app: Application) => {
   app.get(TEST_ROUTE, controllers.testController.handleTestRoute);
   app.get('/api/basedata', controllers.baseController.handleBaseRoute);
   app.post('/api/basedataupdated', controllers.baseController.handleRefreshCheckRoute);
+  app.get('/api/gamestats/:id', controllers.gameStatsController.playerGameByGameStats);
 };

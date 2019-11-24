@@ -41,7 +41,7 @@ const initializeDB = async () => {
             ...options(),
         });
         logger.info('Database connection initialized.');
-        populateDatabase();
+        // populateDatabase();
     } catch (err) {
         logger.error(`Could not create a database connection: ${err}`);
     }
