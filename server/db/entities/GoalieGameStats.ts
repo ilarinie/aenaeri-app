@@ -20,7 +20,7 @@ export class GoalieGameStatsEntity extends BaseEntity implements GoalieGameStats
             }));
         });
         return entities;
-    };
+    }
 
     @PrimaryGeneratedColumn()
     public id: number;

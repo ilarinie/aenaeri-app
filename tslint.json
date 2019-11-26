@@ -6,8 +6,14 @@
     ],
     "jsRules": {},
     "rules": {
-        "semicolon": true,
-        "quotemark": [true, "single"],
+        "semicolon": [
+            true,
+            "always"
+        ],
+        "quotemark": [
+            true,
+            "single"
+        ],
         "object-literal-sort-keys": false,
         "space-within-parens": true,
         "no-unused-expression": true,
@@ -16,9 +22,9 @@
         "max-line-length": false,
         "no-namespace": false,
         "indent": [
-          true,
-          "spaces",
-          2
+            true,
+            "spaces",
+            2
         ]
     },
     "rulesDirectory": []

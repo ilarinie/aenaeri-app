@@ -7,4 +7,5 @@ export const initializeRoutes = (app: Application) => {
   app.get('/api/basedata', controllers.baseController.handleBaseRoute);
   app.post('/api/basedataupdated', controllers.baseController.handleRefreshCheckRoute);
   app.get('/api/gamestats/:id', controllers.gameStatsController.playerGameByGameStats);
+  app.get('/api/schedule', controllers.scheduleController.handleCurrentDayScheduleRoute);
 };

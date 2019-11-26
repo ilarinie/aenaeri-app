@@ -6,6 +6,7 @@ import { BoxHeader } from '../../components/BoxHeader';
 import { RootState } from '../../state/rootReducer';
 import { PlayerStandingsPanel } from './PlayerStandingsPanel';
 import { TeamStandingsPanel } from './TeamStandingsPanel';
+import { NextGamesPanel } from './NextGames';
 
 export const Dashboard: React.FC<RouteComponentProps> = () => {
 
@@ -24,12 +25,7 @@ export const Dashboard: React.FC<RouteComponentProps> = () => {
             </DashboardGridItem>
             <DashboardGridItem gridRow='2 / 2' gridColumn='1 / 7'>
                 <BoxHeader>Next games</BoxHeader>
-                <div style={{ minHeight: '7rem'}}>asd
-                    asd
-                    asd
-                    asd
-                    asd
-                </div>
+                <NextGamesPanel />
             </DashboardGridItem>
             <DashboardGridItem gridRow='1 / 3' gridColumn='7 / 13'>
                 <BoxHeader>NHL STANDINGS</BoxHeader>

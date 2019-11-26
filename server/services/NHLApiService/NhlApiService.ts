@@ -3,6 +3,7 @@ import { NHLApiGoalieStatsResponse } from './responseModels/GoalieStatsResponseM
 import { NHLApiPlayerResponse } from './responseModels/PlayerResponseModels';
 import { NHLApiSkaterStatsResponse } from './responseModels/SkaterStatsResponseModels';
 import { NHLApiSkaterGameByGameStatsResponse, NHLApiGoalieGameByGameStatsResponse } from './responseModels/PlayerGameByGameStatsResponseModels';
+import { NHLApiCurrentDaySchedule } from './responseModels/CurrentDaySchedule';
 
 export namespace NhlApiService {
 
@@ -55,4 +56,8 @@ export namespace NhlApiService {
         return fetchPlayerGameByGameStats<NHLApiGoalieGameByGameStatsResponse>(playerId, season);
     };
 
+    export const fetchCurrentDaySchedule = async (): Promise<NHLApiCurrentDaySchedule> => {
+        const response = await axios.request<NHLApiCurrentDaySchedule>({ method: 'GET', url: 'https://statsapi.web.nhl.com/api/v1/schedule' });
+        return Promise.resolve(response.data);
+    }
 }

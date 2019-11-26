@@ -31,7 +31,7 @@ const App: React.FC<RouteComponentProps> = ({ history }) => {
 
   useEffect(() => {
     dispatch(fetchBaseData());
-  }, [ dispatch ]);
+  }, [dispatch]);
 
   return (
     <Div100vh>

@@ -16,3 +16,5 @@ SELECT "playerId", player_entity."fullName" FROM skater_single_season_stats_enti
 
 SELECT "playerId", player_entity."fullName", points, assists, ppg FROM skater_single_season_stats_entity LEFT JOIN player_entity
 ON "playerId" = player_entity.id WHERE nationality = 'FIN' ORDER BY points DESC LIMIT 100;
+
+SELECT avg(assists) FROM skater_single_season_stats_entity WHERE season='20192020' AND games > (SELECT avg(games) FROM skater_single_season_stats_entity) - 10;  ;

@@ -12,6 +12,7 @@ interface TopBarProps {
 
 export const TopBar: React.FC<TopBarProps> = ({ players, teams, navigate }) => {
 
+
     return (
         <TopBarContainer>
             <TitleContainer onClick={() => navigate(ROOT_ROUTE)}>
