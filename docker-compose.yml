@@ -15,6 +15,7 @@ services:
     environment:
       - NODE_ENV=development
       - DATABASE_URL=postgresql://aenaeri-app:password123@postgres/aenaeri-app
+      - SECRET=acdcabbacd
     networks:
       - backend
     command: npm run dev
