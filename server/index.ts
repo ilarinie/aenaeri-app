@@ -4,8 +4,10 @@ import logger from './logger';
 import cron from 'node-cron';
 import { populateDatabase } from './db/populator';
 
+const PORT = process.env.PORT || 3001;
+
 initializeDB().then(() => {
-    app.listen(3001, () => {
+    app.listen(PORT, () => {
         logger.info('Aenaeri-app backend started, listening to port 3001');
     });
     cron.schedule('* 59 * * *', () => {
