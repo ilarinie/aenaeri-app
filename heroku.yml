@@ -5,5 +5,6 @@ setup:
 build:
     docker:
         web: Dockerfile
+        worker: worker/Dockerfile
 release:
-    image: aenaeri-app
+    image: worker
