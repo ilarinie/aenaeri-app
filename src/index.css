@@ -40,5 +40,7 @@ body, html {
 
 :root {
   --main-bg-color: #121212;
+  --semi-dark-gray: #1e1e1e;
+  --semi-light-gray: #333;
   --main-text-color: #CCCCCC;
 }

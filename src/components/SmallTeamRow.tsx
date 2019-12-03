@@ -66,7 +66,7 @@ const TeamRowContainer = styled.div`
     justify-content: flex-start;
     padding: 0 0.5em;
     &:nth-child(odd) {
-        background: #333;
+        background: var(--semi-light-gray);
     }
     height: 100%;
 `;

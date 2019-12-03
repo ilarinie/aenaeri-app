@@ -1,17 +1,22 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { PlayerBaseDataResponse, TeamBaseDataResponse } from '../../server/models/BaseDataResponse';
 import { ROOT_ROUTE } from '../routes';
+import { RootState } from '../state/rootReducer';
 import { TopBarSearch } from './TopBarSearch';
 
 interface TopBarProps {
     players: PlayerBaseDataResponse;
     teams: TeamBaseDataResponse;
     navigate: (path: string) => void;
+    openLoginModal: () => void;
 }
 
-export const TopBar: React.FC<TopBarProps> = ({ players, teams, navigate }) => {
+export const TopBar: React.FC<TopBarProps> = ({ players, teams, navigate, openLoginModal }) => {
 
+    const user = useSelector((state: RootState) => state.uiState.user);
 
     return (
         <TopBarContainer>
@@ -19,16 +24,39 @@ export const TopBar: React.FC<TopBarProps> = ({ players, teams, navigate }) => {
                 NHL APP
             </TitleContainer>
             <TopBarSearch navigate={navigate} teams={teams} players={players} />
+            <LinksContainer>
+                <NavLink to='/account' selected={window.location.href.includes('/account')}>
+                    profile
+                </NavLink>
+                <NavLink to="/nhl-stats"  selected={window.location.href.includes('/nhl-stats')}>
+                    nhl standings
+                </NavLink>
+            </LinksContainer>
         </TopBarContainer>
     );
 };
+
+const LinksContainer = styled.div`
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2em;
+`;
+
+const NavLink = styled(Link)<{ selected: boolean}>`
+    color: #eee;
+    font-variant: small-caps;
+    text-decoration: none;
+    margin-right: 1em;
+    ${(props) => props.selected && 'font-weight: 700; text-decoration: underline;'}
+`;
 
 const TopBarContainer = styled.div`
     position: absolute;
     top: 0;
     width: 100vw;
     height: 60px;
-    background-color: #1E1E1E;
+    background-color: var(--semi-dark-gray);
     display: flex;
     align-items: center;
 `;

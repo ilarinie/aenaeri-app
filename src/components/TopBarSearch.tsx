@@ -82,7 +82,7 @@ const GoIcon = styled.div<{ visible: boolean}>`
     padding: 0.7em 0.5em 0.5em 0.5em;
     height: 1.5rem;
     align-items: center;
-    background-color: #333;
+    background-color: var(--semi-light-gray);
     cursor: pointer;
     &:hover {
         background-color: #121212;

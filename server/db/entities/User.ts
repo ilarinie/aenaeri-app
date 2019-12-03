@@ -14,6 +14,12 @@ export class UserEntity extends BaseEntity implements User {
     @Column({ unique: true })
     public username: string;
 
+    @Column({ nullable: true })
+    public vLogin: string;
+
+    @Column({ nullable: true })
+    public vPass: string;
+
     @Column()
     public password: string;
 

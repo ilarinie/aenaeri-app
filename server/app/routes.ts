@@ -13,4 +13,5 @@ export const initializeRoutes = (app: Application) => {
   app.get('/api/schedule', controllers.scheduleController.handleCurrentDayScheduleRoute);
   app.post('/api/login', handleLogin);
   app.get('/api/checklogin', checkAuth,  handleTestAuth);
+  app.post('/api/profile/updateveikkaus', checkAuth, controllers.usersController.handleVLoginUpdate)
 };

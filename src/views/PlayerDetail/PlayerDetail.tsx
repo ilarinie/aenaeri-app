@@ -41,6 +41,6 @@ const PlayerDetailsContainer = styled.div`
 `;
 
 const Content = styled.div`
-    background: #1E1E1E;
+    background: var(--semi-dark-gray);
     padding: 2em;
 `;
