@@ -14,4 +14,4 @@ childProcess.execSync("react-scripts build", { stdio: "inherit" });
 childProcess.execSync("tsc -p server/tsconfig.json", { stdio: "inherit" });
 
 
-fse.moveSync("./build", "./dist/public", { overwrite: true });
+fse.moveSync("./build", "./dist/app/public", { overwrite: true });
