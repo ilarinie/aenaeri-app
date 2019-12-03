@@ -6,6 +6,7 @@ import passport from '../auth/passport';
 import { loggerMiddleWare } from '../logger/middleware';
 import { handleError } from './errorHandler';
 import { initializeRoutes } from './routes';
+
 const app = express();
 
 const corsOptions: CorsOptions = {
