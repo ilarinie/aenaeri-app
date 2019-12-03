@@ -7,3 +7,5 @@ build:
         web: Dockerfile
 release:
     image: web
+    command:
+        - echo 'Starting server after deployment!';
