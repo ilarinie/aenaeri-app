@@ -10,9 +10,11 @@ initializeDB().then(() => {
     app.listen(PORT, () => {
         logger.info('Aenaeri-app backend started, listening to port 3001');
     });
-    cron.schedule('* 59 * * *', () => {
-        populateDatabase();
-    })
+    if (process.env.NODE_ENV === 'production') {
+        cron.schedule('59 * * * *', () => {
+            populateDatabase();
+        });
+    }
 }).catch((err) => {
     logger.error(`Application startup failed ${err}`);
 });
