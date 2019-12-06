@@ -1,3 +1,3 @@
-import runUpdate from '../dist/db/populateDatabase';
+var runUpdate = require('../dist/db/populateDatabase');
 
 runUpdate();
