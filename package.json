@@ -86,7 +86,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public .storybook",
     "build-storybook": "build-storybook -s public",
-    "populate-database": "ts-node populateDatabase.ts"
+    "populate-database": "node bin/updateStatistics.js"
   },
   "eslintConfig": {
     "extends": "react-app"
