@@ -1,10 +1,12 @@
 import { initializeDB } from '.';
 
 import { populateDatabase } from './populator';
+// process.env.NODE_ENV = 'production';
 
-// process.env.DATABASE_URL = 'postgresql://aenaeri-app:password123@localhost:5432/aenaeri-app';
+const populate = () => {
+    initializeDB().then(() => {
+        populateDatabase();
+    });
+};
 
-export default async () => {
-    await initializeDB();
-    await populateDatabase();
-}
+export default populate;

@@ -1,3 +1,3 @@
 var runUpdate = require('../dist/db/populateDatabase');
 
-runUpdate();
+runUpdate.default();
