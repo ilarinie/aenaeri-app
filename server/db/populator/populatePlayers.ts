@@ -37,6 +37,7 @@ export const populatePlayers = async (playerIds: number[]) => {
                 try {
                     await GoalieSingleSeasonStatsEntity.fromNHLApiResonse(statsResponse, id).save();
                 } catch (err) {
+                    logger.error(err);
                     logger.error(`Error saving goalie stats ${JSON.stringify(statsResponse, null, 2)}`);
                     return Promise.reject();
                 }

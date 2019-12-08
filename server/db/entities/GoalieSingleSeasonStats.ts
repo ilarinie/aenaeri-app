@@ -79,7 +79,7 @@ export class GoalieSingleSeasonStatsEntity extends BaseEntity implements GoalieS
     @Column()
     public evenShots: number;
 
-    @Column()
+    @Column({ nullable: true })
     public powerPlayShots: number;
 
     @Column({ type: 'decimal' })
@@ -103,13 +103,13 @@ export class GoalieSingleSeasonStatsEntity extends BaseEntity implements GoalieS
     @Column()
     public timeOnIcePerGame: string;
 
-    @Column({ type: 'decimal' })
+    @Column({ type: 'decimal', nullable: true })
     public powerPlaySavePercentage: number;
 
     @Column({ type: 'decimal', nullable: true })
     public shortHandedSavePercentage: number;
 
-    @Column({ type: 'decimal' })
+    @Column({ type: 'decimal', nullable: true })
     public evenStrengthSavePercentage: number;
 
 }
