@@ -1,7 +1,7 @@
 import { initializeDB } from '.';
 
 import { populateDatabase } from './populator';
-// process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'production';
 
 const populate = () => {
     initializeDB().then(() => {

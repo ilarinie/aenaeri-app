@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import jsonWebToken from 'jsonwebtoken';
 import { UserEntity } from '../db/entities/User';
+import { HttpException } from '../exceptions/HttpException';
 
 export const generateToken = (user: UserEntity) => {
     return jsonWebToken.sign(
@@ -20,10 +21,10 @@ export const handleLogin = async (req: Request, res: Response, next: NextFunctio
                 res.setHeader('Authentication', 'Bearer ' + generateToken(user));
                 res.status(200).send({ token: generateToken(user), user: { username: user.username } });
             } else {
-                throw Error('muu');
+                next('Invalid login');
             }
         } catch (err) {
-            res.status(401).send('Incorrect login details.');
+            next(new HttpException(401, 'Unauthorized.'))
         }
     }
 };

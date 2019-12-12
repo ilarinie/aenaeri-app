@@ -1,6 +1,8 @@
+import dotenv from 'dotenv';
 import app from './app/app';
 import { initializeDB } from './db';
 import logger from './logger';
+dotenv.config();
 
 const PORT = process.env.PORT || 3001;
 

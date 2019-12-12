@@ -2,7 +2,6 @@ import env from 'env-var';
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import logger from '../logger';
-import { populateDatabase } from './populator';
 
 const fileExtension = (): string => {
     if (env.get('NODE_ENV').asString() === 'production') {
@@ -41,7 +40,6 @@ const initializeDB = async () => {
             ...options(),
         });
         logger.info('Database connection initialized.');
-        // populateDatabase();
     } catch (err) {
         logger.error(`Could not create a database connection: ${err}`);
     }
