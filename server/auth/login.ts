@@ -24,7 +24,7 @@ export const handleLogin = async (req: Request, res: Response, next: NextFunctio
                 next('Invalid login');
             }
         } catch (err) {
-            next(new HttpException(401, 'Unauthorized.'))
+            next(new HttpException(401, 'Unauthorized.'));
         }
     }
 };

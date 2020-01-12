@@ -8,7 +8,7 @@ export const populateDatabase = async () => {
     if (lastRefresh[0]) {
         doRefresh = (parseInt(lastRefresh[0].refreshTime, 10) + (1000 * 60 * 60) < new Date().getTime());
     }
-    if (doRefresh) {
+    if (doRefresh || true) {
         const playerIds = await populateTeams();
         await populatePlayers(playerIds);
         await PlayerDataRefresh.create({

@@ -70,9 +70,9 @@ export const PlayerStandingsPanel: React.FC<PlayerStandingsPanelProps> = ({ play
             </PlayerStandingsListContainer>
             <PlayerStandingsListContainer gridRow='3 / 3' gridColumn='1 / 1'>
                 <BoxHeader>Save PCT</BoxHeader>
-                <StandingsContainer rows={7}>
+                {/* <StandingsContainer rows={7}>
                     {renderPlayerList(playerStandings.savePct, 'savePercentage', true)}
-                </StandingsContainer>
+                </StandingsContainer> */}
             </PlayerStandingsListContainer>
             <PlayerStandingsListContainer gridRow='3 / 3' gridColumn='2 / 2'>
                 <BoxHeader>GAA</BoxHeader>

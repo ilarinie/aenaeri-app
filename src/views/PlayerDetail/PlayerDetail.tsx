@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import styled from 'styled-components';
 import { StatisticChart } from '../../components/StatisticChart/StatisticChart';
 import { RootState } from '../../state/rootReducer';
+import { GameDataSeason } from '../../state/slices/gameStatsSlice';
 import { fetchGameData } from '../../state/thunks/GameDataThunk';
 import { PlayerBasicInfoPanel } from './PlayerBasicInfoPanel';
 
@@ -11,6 +12,8 @@ export const PlayerDetail: React.FC<RouteComponentProps<{ id: string; }>> = ({ m
 
     const player = useSelector((state: RootState) => state.baseData.players.playerObject[match.params.id]);
     const gameData = useSelector((state: RootState) => state.gameData[match.params.id] ? state.gameData[match.params.id].seasonObject['20192020'] : null);
+    const gameDataLastSeason = useSelector((state: RootState) => state.gameData[match.params.id] ? state.gameData[match.params.id].seasonObject['20182019'] : null);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -24,7 +27,7 @@ export const PlayerDetail: React.FC<RouteComponentProps<{ id: string; }>> = ({ m
                 {gameData &&
                     <>
                         <h4>Season 2019-2020 performance</h4>
-                        <StatisticChart data={{ [match.params.id]: gameData }} stat='goals' />
+                        <StatisticChart data={{ [match.params.id + '-20192020']: gameData as GameDataSeason, [match.params.id + '-20182019']: gameDataLastSeason as GameDataSeason }} stat='goals' />
                     </>
                 }
             </Content>

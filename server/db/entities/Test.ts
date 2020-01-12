@@ -6,7 +6,7 @@ export class Test extends BaseEntity {
     @PrimaryGeneratedColumn()
     public id: number;
 
-    @Column({ type:'varchar' })
+    @Column({ type: 'varchar' })
     public message: string;
 
 }

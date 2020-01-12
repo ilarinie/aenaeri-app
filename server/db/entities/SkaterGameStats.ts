@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, BaseEntity, Index } from 'typeorm';
+import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 import { SkaterGameStats } from '../../models/SkaterGameStats';
 import { NHLApiSkaterGameByGameStatsResponse } from '../../services/NHLApiService/responseModels/PlayerGameByGameStatsResponseModels';
 
@@ -7,7 +7,7 @@ export class SkaterGameStatsEntity extends BaseEntity implements SkaterGameStats
 
     public static fromNHLApiResponse = (response: NHLApiSkaterGameByGameStatsResponse, playerId: number): SkaterGameStatsEntity[] => {
         const entities: SkaterGameStatsEntity[] = [];
-        response.stats[0].splits.forEach(s => {
+        response.stats[0].splits.forEach((s) => {
             const { stat, season } = s;
             entities.push(SkaterGameStatsEntity.create({
                 playerId,

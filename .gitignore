@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 
+.env
+
 .nyc_output
 
 /postgres-data
@@ -15,6 +17,7 @@
 
 dev.log
 test.log
+app.log
 
 # production
 /build

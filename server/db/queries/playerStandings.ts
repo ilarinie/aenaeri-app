@@ -10,7 +10,8 @@ export const getPlayerStandings = async (): Promise<PlayerStandings> => {
     const resp = await Promise.all([
         getSkatersOrderedByStat('points'),
         getSkatersOrderedByStat('goals'),
-        getSkatersOrderedByStat('assists'),
+        getSkatersOrderedByStatAndWhereClause('assists', [
+        ]),
         getSkatersOrderedByStatAndWhereClause('points', [{ column: 'nationality', clause: 'FIN'}]),
         getGoaliesOrderedByStat(`"savePercentage"` as keyof GoalieSingleSeasonStats, false),
         getGoaliesOrderedByStat(`"goalAgainstAverage"` as keyof GoalieSingleSeasonStats, true),
@@ -32,7 +33,7 @@ export const getPlayerStandings = async (): Promise<PlayerStandings> => {
 };
 
 const getSkatersOrderedByStat = async (stat: keyof SkaterSingleSeasonStats): Promise<string[]> => {
-    const sql = `SELECT "playerId" FROM skater_single_season_stats_entity ORDER BY ${stat} DESC LIMIT 100;`;
+    const sql = `SELECT "playerId" FROM skater_single_season_stats_entity WHERE season = '20192020' ORDER BY ${stat} DESC LIMIT 100;`;
     const res = await getManager().query(sql);
     logger.debug(sql);
     return Promise.resolve(res.map((e: { playerId: string }) => e.playerId));
@@ -53,13 +54,13 @@ const getGoaliesOrderedByStat = async (stat: keyof GoalieSingleSeasonStats, reve
     return Promise.resolve(res.map((e: { playerId: string }) => e.playerId));
 };
 
-const getGoaliesOrderedByStatAndWhereClause = async (stat: keyof GoalieSingleSeasonStats, clauses: Array<{column: keyof PlayerEntity, clause: string}> = []) => {
-    const sql = `SELECT "playerId" FROM goalie_single_season_stats_entity LEFT JOIN player_entity
-    ON "playerId" = player_entity.id ${generateWhereClause(clauses)} ORDER BY points DESC LIMIT 100;`;
-    const res = await getManager().query(sql);
-    logger.debug(sql);
-    return Promise.resolve(res.map((e: { playerId: string }) => e.playerId));
-};
+// const getGoaliesOrderedByStatAndWhereClause = async (stat: keyof GoalieSingleSeasonStats, clauses: Array<{column: keyof PlayerEntity, clause: string}> = []) => {
+//     const sql = `SELECT "playerId" FROM goalie_single_season_stats_entity LEFT JOIN player_entity
+//     ON "playerId" = player_entity.id ${generateWhereClause(clauses)} ORDER BY points DESC LIMIT 100;`;
+//     const res = await getManager().query(sql);
+//     logger.debug(sql);
+//     return Promise.resolve(res.map((e: { playerId: string }) => e.playerId));
+// };
 
 const generateWhereClause = (clauses: Array<{ column: string, clause: string}>): string => {
     if (clauses.length === 0) {

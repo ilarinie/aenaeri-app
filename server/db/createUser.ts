@@ -11,8 +11,10 @@ const createUser = async () => {
             const user = UserEntity.create({ username: process.env.USERNAME, password: process.env.PASSWORD });
             await user.save();
             logger.info('created user');
+            process.exit(0);
         } catch (err) {
             logger.error('could not create user', err);
+            process.exit(1);
         }
     }).catch((err) => {
         logger.error('Could not connect to DB');

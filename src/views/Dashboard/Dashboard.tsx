@@ -4,9 +4,9 @@ import { RouteComponentProps } from 'react-router';
 import styled from 'styled-components';
 import { BoxHeader } from '../../components/BoxHeader';
 import { RootState } from '../../state/rootReducer';
+import { NextGamesPanel } from './NextGames';
 import { PlayerStandingsPanel } from './PlayerStandingsPanel';
 import { TeamStandingsPanel } from './TeamStandingsPanel';
-import { NextGamesPanel } from './NextGames';
 
 export const Dashboard: React.FC<RouteComponentProps> = () => {
 

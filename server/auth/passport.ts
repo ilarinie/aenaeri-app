@@ -13,7 +13,6 @@ passport.serializeUser<UserEntity, number>((user: UserEntity, done) => {
 
 passport.deserializeUser<UserEntity, number>(async (id, done) => {
     try {
-        console.log(id);
         const user = await UserEntity.findOne({ id });
         // console.log(user);
         return done(null, user);
@@ -33,7 +32,7 @@ passport.use(new JwtStrategy(opts, async (jwtPayload, done) => {
             return;
         }
     } catch (err) {
-        logger.info('fuck')
+        logger.info('fuck');
         done(err, null);
         return;
     }

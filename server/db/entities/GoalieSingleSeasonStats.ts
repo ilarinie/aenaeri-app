@@ -46,58 +46,58 @@ export class GoalieSingleSeasonStatsEntity extends BaseEntity implements GoalieS
     @Column()
     public timeOnIce: string;
 
-    @Column()
+    @Column({ nullable: true })
     public ot: number;
 
-    @Column()
+    @Column({ nullable: true })
     public shutouts: number;
 
-    @Column()
+    @Column({ nullable: true })
     public ties: number;
 
-    @Column()
+    @Column({ nullable: true })
     public wins: number;
 
-    @Column()
+    @Column({ nullable: true })
     public losses: number;
 
-    @Column()
+    @Column({ nullable: true })
     public saves: number;
 
-    @Column()
+    @Column({ nullable: true })
     public powerPlaySaves: number;
 
-    @Column()
+    @Column({ nullable: true })
     public shortHandedSaves: number;
 
-    @Column()
+    @Column({ nullable: true })
     public evenSaves: number;
 
-    @Column()
+    @Column({ nullable: true })
     public shortHandedShots: number;
 
-    @Column()
+    @Column({ nullable: true })
     public evenShots: number;
 
     @Column({ nullable: true })
     public powerPlayShots: number;
 
-    @Column({ type: 'decimal' })
+    @Column({ type: 'decimal', nullable: true })
     public savePercentage: number;
 
-    @Column({ type: 'decimal' })
+    @Column({ type: 'decimal', nullable: true })
     public goalAgainstAverage: number;
 
     @Column()
     public games: number;
 
-    @Column()
+    @Column({ nullable: true })
     public gamesStarted: number;
 
-    @Column()
+    @Column({ nullable: true })
     public shotsAgainst: number;
 
-    @Column()
+    @Column({ nullable: true })
     public goalsAgainst: number;
 
     @Column()

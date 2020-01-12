@@ -1,11 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Legend, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { GameStats } from '../../../server/models/GameStats';
+import { CartesianAxis, Legend, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+// import { GameStats } from '../../../server/models/GameStats';
 import { SkaterGameStats, SkaterNumericGameStats } from '../../../server/models/SkaterGameStats';
 import { RootState } from '../../state/rootReducer';
 import { GameDataSeason } from '../../state/slices/gameStatsSlice';
-import { generateSeasonTicks } from './generateSeasonTicks';
 import { SkaterStatSelector } from './StatSelector';
 
 interface StatisticChartProps {
@@ -14,12 +13,17 @@ interface StatisticChartProps {
 }
 
 interface StatisticChartDataObject {
-    [playerId: string]: GameDataSeason;
+    [playerId: string]: GameDataSeason | null;
 }
 
-const isSkaterGameStats = (x: GameStats): x is SkaterGameStats => {
-    return x !== null && x !== undefined && x.hasOwnProperty('goals');
-};
+// interface ChartDataItem {
+//     time: number;
+//     [playerId: string]: number;
+// }
+
+// const isSkaterGameStats = (x: GameStats): x is SkaterGameStats => {
+//     return x !== null && x !== undefined && x.hasOwnProperty('goals');
+// };
 
 export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) => {
 
@@ -27,34 +31,45 @@ export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) =>
 
     const players = useSelector((state: RootState) => state.baseData.players.playerObject);
 
-    const computeCumulativeData = (gameDataSeason: StatisticChartDataObject) => {
-        const playerStatArrays: Array<{ [date: string]: { playerId: string, value: number; }; }> = Object.keys(gameDataSeason).map((playerId) => {
-            let cumulativeTotal = 0;
-            const obj: any = {};
-            gameDataSeason[playerId].dateList.forEach((date) => {
-                if (isSkaterGameStats(gameDataSeason[playerId].gameDataObject[date])) {
-                    cumulativeTotal = cumulativeTotal + (gameDataSeason[playerId].gameDataObject[date] as SkaterGameStats)[selectedStat];
-                    obj[date] = { playerId, value: cumulativeTotal };
-                }
+    const computeCumulativeData = (gameDataSeasons: StatisticChartDataObject) => {
+
+        let projected = 0;
+
+        const duta = Object.keys(gameDataSeasons).map((playerId) => {
+            let cumTotal = 0;
+
+            const arr = gameDataSeasons[playerId]?.dateList.map((date) => {
+                const dataPoint =  {
+                    [playerId]: cumTotal + (gameDataSeasons[playerId]?.gameDataObject[date] as SkaterGameStats)[selectedStat],
+                    time: new Date(date).getTime(),
+                };
+                cumTotal = dataPoint[playerId];
+                return dataPoint;
             });
-            return obj;
+            if (
+                gameDataSeasons[playerId]?.season === '20192020'
+            ) {
+                projected = Math.ceil(cumTotal / (arr ? arr.length : 1) * 82);
+            }
+            return arr;
         });
 
-        return generateSeasonTicks().map((d) => {
-            const obj: any = { date: d };
-            playerStatArrays.forEach((a) => {
-                if (a[d]) {
-                    obj[a[d].playerId] = a[d].value;
-                }
+        if (duta[1]) {
+            duta[1] = (duta[1] as any[]).map((duu: any) => {
+                return {
+                    ...duu,
+                    time: duu.time + 31556952000,
+                };
             });
-            return obj;
-        });
+        }
 
+        const fukka = duta[1] ? [ ...duta[0] as any[], ...duta[1] as any[]] : duta[0];
+        return { data: fukka, projected };
     };
 
     const renderLines = useMemo(() => (
         Object.keys(data).map((key) => (
-            <Line key={key} dataKey={key} name={players[key].fullName} connectNulls dot={false} />
+            <Line key={key} dataKey={key} name={players[key.substr(0, 7)].fullName + ' - ' + key.substr(8, 8)} stroke={key.includes('20192020') ? 'blue' : 'red'} connectNulls dot={false} />
         ))
     ), [data, players, selectedStat]);
 
@@ -63,16 +78,35 @@ export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) =>
     return (
         <>
             <ResponsiveContainer height={300}>
-                <LineChart data={formattedData}>
-                    <XAxis type='category' dataKey='date' tickCount={5} />
+                <LineChart data={formattedData.data}>
+                    <XAxis
+                        dataKey='time'
+                        scale='time'
+                        type='number'
+                        domain={[new Date('2019-10-02').getTime(),  new Date('2020-04-05').getTime()]}
+                        tick={CustomTick}
+                    />
                     {renderLines}
-                    <YAxis domain={[0, 100]} />
+                    <YAxis domain={[0, formattedData.projected + 20]}  />
+                    <CartesianAxis  />
                     <Legend />
-                    <Tooltip />
-                    <ReferenceLine y={50} />
+                    <Tooltip labelFormatter={(props: any) => <span>{new Date(props).toLocaleDateString()}</span>}/>
+                    <ReferenceLine y={formattedData.projected} label={(props) => <CustomLabel {...props} projected={formattedData.projected} />} />
                 </LineChart>
             </ResponsiveContainer>
             <SkaterStatSelector value={selectedStat} onChange={setSelectedStat} />
         </>
+    );
+};
+
+const CustomLabel = (props: any) => {
+    return (
+        <text x={900} textAnchor='right' fill='white' y={props.viewBox.y - 15}>Projected: {props.projected}</text>
+    );
+};
+
+const CustomTick = (props: any) => {
+    return (
+        <text x={props.x} textAnchor='middle' fill='white' y={props.y + 15}>{new Date(props.payload.value).toLocaleDateString()}</text>
     );
 };

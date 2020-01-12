@@ -13,6 +13,7 @@ interface GameData {
 }
 
 export interface GameDataSeason {
+    season: string;
     dateList: string[];
     gameDataObject: {
         [date: string]: GoalieGameStats | SkaterGameStats;
@@ -32,7 +33,7 @@ const gameDataSlice = createSlice({
             if (state[action.payload.playerId].seasons.indexOf(action.payload.season) < 0) {
                 state[action.payload.playerId].seasons.push(action.payload.season);
             }
-            state[action.payload.playerId].seasonObject[action.payload.season] = action.payload.data;
+            state[action.payload.playerId].seasonObject[action.payload.season] = { ...action.payload.data, season: action.payload.season };
             return state;
         },
     },

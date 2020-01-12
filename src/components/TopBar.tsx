@@ -28,7 +28,7 @@ export const TopBar: React.FC<TopBarProps> = ({ players, teams, navigate, openLo
                 <NavLink to='/account' selected={window.location.href.includes('/account')}>
                     profile
                 </NavLink>
-                <NavLink to="/nhl-stats"  selected={window.location.href.includes('/nhl-stats')}>
+                <NavLink to='/nhl-stats'  selected={window.location.href.includes('/nhl-stats')}>
                     nhl standings
                 </NavLink>
             </LinksContainer>

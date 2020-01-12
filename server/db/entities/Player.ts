@@ -85,7 +85,7 @@ export class PlayerEntity extends BaseEntity implements Player {
     @Column()
     public lastName: string;
 
-    @Column()
+    @Column({ nullable: true })
     public primaryNumber: number;
 
     @Column()

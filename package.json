@@ -82,6 +82,7 @@
     "start-backend": "nodemon",
     "start-frontend": "react-scripts start",
     "build": "node buildScript.js",
+    "build-backend": "tsc -P server/tsconfig.json",
     "frontend-test": "react-scripts test",
     "backend-test": "export NODE_ENV=test; export TS_NODE_PROJECT=server/tsconfig.json; nyc mocha --bail --recursive --require ts-node/register \"server/test/**/*.spec.{ts,tsx}\" ",
     "eject": "react-scripts eject",
