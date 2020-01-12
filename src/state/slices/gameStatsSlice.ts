@@ -26,14 +26,16 @@ const gameDataSlice = createSlice({
     name: 'gameStats',
     initialState,
     reducers: {
-        addGameDataForSeason(state, action: PayloadAction<GameDataResponse>) {
-            if (!state[action.payload.playerId]) {
-                state[action.payload.playerId] = { seasons: [], seasonObject: {} };
-            }
-            if (state[action.payload.playerId].seasons.indexOf(action.payload.season) < 0) {
-                state[action.payload.playerId].seasons.push(action.payload.season);
-            }
-            state[action.payload.playerId].seasonObject[action.payload.season] = { ...action.payload.data, season: action.payload.season };
+        addGameDataForSeason(state, action: PayloadAction<GameDataResponse[]>) {
+            action.payload.forEach((gameDataSeason) => {
+                if (!state[gameDataSeason.playerId]) {
+                    state[gameDataSeason.playerId] = { seasons: [], seasonObject: {} };
+                }
+                if (state[gameDataSeason.playerId].seasons.indexOf(gameDataSeason.season) < 0) {
+                    state[gameDataSeason.playerId].seasons.push(gameDataSeason.season);
+                }
+                state[gameDataSeason.playerId].seasonObject[gameDataSeason.season] = { ...gameDataSeason.data, season: gameDataSeason.season };
+            })
             return state;
         },
     },
