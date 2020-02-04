@@ -1,22 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { PlayerBaseDataResponse, TeamBaseDataResponse } from '../../server/models/BaseDataResponse';
 import { ROOT_ROUTE } from '../routes';
-import { RootState } from '../state/rootReducer';
 import { TopBarSearch } from './TopBarSearch';
 
 interface TopBarProps {
     players: PlayerBaseDataResponse;
     teams: TeamBaseDataResponse;
     navigate: (path: string) => void;
-    openLoginModal: () => void;
 }
 
-export const TopBar: React.FC<TopBarProps> = ({ players, teams, navigate, openLoginModal }) => {
-
-    const user = useSelector((state: RootState) => state.uiState.user);
+export const TopBar: React.FC<TopBarProps> = ({ players, teams, navigate }) => {
 
     return (
         <TopBarContainer>

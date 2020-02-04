@@ -1,7 +1,10 @@
 import env from 'env-var';
+import mongoose from 'mongoose';
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import logger from '../logger';
+
+// mongoose.connect(process.env.MONGO_URI as string);
 
 const fileExtension = (): string => {
     if (env.get('NODE_ENV').asString() === 'production') {

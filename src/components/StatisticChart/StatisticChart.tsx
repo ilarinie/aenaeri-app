@@ -71,9 +71,9 @@ export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) =>
         Object.keys(data).map((key) => (
             <Line key={key} dataKey={key} name={players[key.substr(0, 7)].fullName + ' - ' + key.substr(8, 8)} stroke={key.includes('20192020') ? 'blue' : 'red'} connectNulls dot={false} />
         ))
-    ), [data, players, selectedStat]);
+    ), [data, players]);
 
-    const formattedData = useMemo(() => computeCumulativeData(data), [data, selectedStat]);
+    const formattedData = useMemo(() => computeCumulativeData(data), [data]);
 
     return (
         <>

@@ -5,10 +5,9 @@
 /.pnp
 .pnp.js
 
-.env
-
 .nyc_output
 
+mongo-volume
 /postgres-data
 /dist
 
@@ -21,6 +20,7 @@ app.log
 
 # production
 /build
+
 
 # misc
 .DS_Store

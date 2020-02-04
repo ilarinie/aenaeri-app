@@ -5,13 +5,14 @@ import { GoalieSingleSeasonStats } from '../../models/GoalieSingleSeasonStats';
 import { SkaterSingleSeasonStats } from '../../models/SkaterSingleSeasonStats';
 import { PlayerEntity } from '../entities/Player';
 
+const CURRENT_SEASON = '20192020';
+
 export const getPlayerStandings = async (): Promise<PlayerStandings> => {
 
     const resp = await Promise.all([
         getSkatersOrderedByStat('points'),
         getSkatersOrderedByStat('goals'),
-        getSkatersOrderedByStatAndWhereClause('assists', [
-        ]),
+        getSkatersOrderedByStat('assists'),
         getSkatersOrderedByStatAndWhereClause('points', [{ column: 'nationality', clause: 'FIN'}]),
         getGoaliesOrderedByStat(`"savePercentage"` as keyof GoalieSingleSeasonStats, false),
         getGoaliesOrderedByStat(`"goalAgainstAverage"` as keyof GoalieSingleSeasonStats, true),
@@ -32,23 +33,23 @@ export const getPlayerStandings = async (): Promise<PlayerStandings> => {
 
 };
 
-const getSkatersOrderedByStat = async (stat: keyof SkaterSingleSeasonStats): Promise<string[]> => {
-    const sql = `SELECT "playerId" FROM skater_single_season_stats_entity WHERE season = '20192020' ORDER BY ${stat} DESC LIMIT 100;`;
+const getSkatersOrderedByStat = async (stat: keyof SkaterSingleSeasonStats, season: string = CURRENT_SEASON): Promise<string[]> => {
+    const sql = `SELECT "playerId" FROM skater_single_season_stats_entity WHERE season = '${season}' ORDER BY ${stat} DESC LIMIT 100;`;
     const res = await getManager().query(sql);
     logger.debug(sql);
     return Promise.resolve(res.map((e: { playerId: string }) => e.playerId));
 };
 
-const getSkatersOrderedByStatAndWhereClause = async (stat: keyof SkaterSingleSeasonStats, clauses: Array<{column: keyof PlayerEntity, clause: string}> = []) => {
+const getSkatersOrderedByStatAndWhereClause = async (stat: keyof SkaterSingleSeasonStats, clauses: Array<{column: string, clause: string}> = [], season: string = CURRENT_SEASON) => {
     const sql = `SELECT "playerId" FROM skater_single_season_stats_entity LEFT JOIN player_entity
-    ON "playerId" = player_entity.id ${generateWhereClause(clauses)} ORDER BY points DESC LIMIT 100;`;
+    ON "playerId" = player_entity.id ${generateWhereClause([...clauses, { column: 'season', clause: season }])} ORDER BY points DESC LIMIT 100;`;
     const res = await getManager().query(sql);
     logger.debug(sql);
     return Promise.resolve(res.map((e: { playerId: string }) => e.playerId));
 };
 
 const getGoaliesOrderedByStat = async (stat: keyof GoalieSingleSeasonStats, reverse: boolean): Promise<string[]> => {
-    const sql = `SELECT "playerId" FROM goalie_single_season_stats_entity ORDER BY ${stat} ${reverse ? 'ASC' : 'DESC'} LIMIT 100;`;
+    const sql = `SELECT "playerId" FROM goalie_single_season_stats_entity WHERE season = '20192020' ORDER BY -${stat} ${reverse ? 'ASC' : 'DESC'} LIMIT 100;`;
     const res = await getManager().query(sql);
     logger.info(sql);
     return Promise.resolve(res.map((e: { playerId: string }) => e.playerId));

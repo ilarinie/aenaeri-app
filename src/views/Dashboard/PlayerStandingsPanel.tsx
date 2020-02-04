@@ -4,7 +4,7 @@ import { PlayerStandings, SeasonStatsObject } from '../../../server/models/BaseD
 import { GoalieSingleSeasonStats } from '../../../server/models/GoalieSingleSeasonStats';
 import { Player } from '../../../server/models/Player';
 import { SkaterSingleSeasonStats } from '../../../server/models/SkaterSingleSeasonStats';
-import { BoxHeader } from '../../components/BoxHeader';
+import { BoxHeader, BoxHeaderLink } from '../../components/BoxHeader';
 import { SmallTeamRow } from '../../components/SmallTeamRow';
 import { PLAYERS_ROUTE } from '../../routes';
 import { playerThumbnailUrlFromPlayerId } from '../../utils/playerThumbnailUrl';
@@ -63,16 +63,16 @@ export const PlayerStandingsPanel: React.FC<PlayerStandingsPanelProps> = ({ play
                 </StandingsContainer>
             </PlayerStandingsListContainer>
             <PlayerStandingsListContainer gridRow='2 / 2' gridColumn='2 / 2'>
-                <BoxHeader>Finnish players</BoxHeader>
+                <BoxHeaderLink to="stats/finnishPlayers">Finnish players</BoxHeaderLink>
                 <StandingsContainer rows={7}>
                     {renderPlayerList(playerStandings.finnishPlayers, 'points', false)}
                 </StandingsContainer>
             </PlayerStandingsListContainer>
             <PlayerStandingsListContainer gridRow='3 / 3' gridColumn='1 / 1'>
                 <BoxHeader>Save PCT</BoxHeader>
-                {/* <StandingsContainer rows={7}>
+                <StandingsContainer rows={7}>
                     {renderPlayerList(playerStandings.savePct, 'savePercentage', true)}
-                </StandingsContainer> */}
+                </StandingsContainer>
             </PlayerStandingsListContainer>
             <PlayerStandingsListContainer gridRow='3 / 3' gridColumn='2 / 2'>
                 <BoxHeader>GAA</BoxHeader>
