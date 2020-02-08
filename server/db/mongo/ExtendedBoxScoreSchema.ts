@@ -9,7 +9,7 @@ import { SchemaTypes } from 'mongoose';
 
 const ExtendedBoxScoreSchema = new mongoose.Schema<ExtendedBoxScoreSchemaType>({
     copyright: String,
-    gamePk: Number,
+    gamePk: { type: Number, index: true, unique: true },
     link: String,
     metadata: {
         wait: Number,
