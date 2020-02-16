@@ -36,8 +36,8 @@ yarn-debug.log*
 yarn-error.log*
 
 /odds-scraper/venv
-/odds-scraper/logs
-/odds-scraper/chromedriver/chromedriver
+/odds-scraper/logs/*
+/odds-scraper/chromedriver/*
 /odds-scraper/oddsportal/__pycache__
 /odds-scraper/output/nhl/NHL.json
 
