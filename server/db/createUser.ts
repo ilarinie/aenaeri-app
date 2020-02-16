@@ -8,7 +8,7 @@ const createUser = async () => {
     logger.info('Connecting to database');
     initializeDB().then(async () => {
         try {
-            const user = UserEntity.create({ username: process.env.USERNAME, password: process.env.PASSWORD });
+            const user = UserEntity.create({ username: process.env.NHL_USERNAME, password: process.env.PASSWORD });
             await user.save();
             logger.info('created user');
             process.exit(0);
