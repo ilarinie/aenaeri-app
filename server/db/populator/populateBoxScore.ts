@@ -93,7 +93,11 @@ const generateIdsToBeFetched = async (season: string) => {
 
 
 const populateOdds = () => {
-    const ads = spawnSync('python', ['op.py'], { cwd: 'odds-scraper'});
+    const ads = spawnSync('python3', ['op.py'], { cwd: 'odds-scraper'});
+    if (ads.stderr) {
+        logger.error('Following errors reported when scraping odds:');
+        logger.error(ads.stderr.toString());
+    }
     odds = JSON.parse(fs.readFileSync('odds-scraper/output/nhl/NHL.json').toString());
 }
 
