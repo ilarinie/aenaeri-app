@@ -6,6 +6,7 @@ import { GameDataTeamSchema } from './GameDataTeamSchema';
 import { LineScorePeriodSchema } from './LineScorePeriodSchema';
 import { LineScoreTeamSchema } from './LineScoreTeamSchema';
 import { SchemaTypes } from 'mongoose';
+import { GameOddsAndResultsSchema, GameOddsAndResults } from './GameOddsAndResultsSchema';
 
 const ExtendedBoxScoreSchema = new mongoose.Schema<ExtendedBoxScoreSchemaType>({
     copyright: String,
@@ -28,11 +29,11 @@ const ExtendedBoxScoreSchema = new mongoose.Schema<ExtendedBoxScoreSchemaType>({
             /**
              * timestamp of game start
              */
-            dateTime: String,
+            dateTime: Date,
             /**
              * timestamp of game end
              */
-            endDateTime: String,
+            endDateTime: { type: Date, nullable: true },
         },
         status: {
             /**
@@ -134,8 +135,11 @@ const ExtendedBoxScoreSchema = new mongoose.Schema<ExtendedBoxScoreSchemaType>({
             },
         },
     },
+    odds: { type: GameOddsAndResultsSchema, nullable: true },
 
 });
+
+interface ExtendedBoxScoreSchemaDocumentType extends ExtendedBoxScoreSchemaType, mongoose.Document {};
 
 export interface ExtendedBoxScoreSchemaType {
     copyright: string;
@@ -158,11 +162,11 @@ export interface ExtendedBoxScoreSchemaType {
             /**
              * timestamp of game start
              */
-            dateTime: string;
+            dateTime: Date;
             /**
              * timestamp of game end
              */
-            endDateTime: string;
+            endDateTime: Date;
         },
         status: {
             /**
@@ -264,6 +268,7 @@ export interface ExtendedBoxScoreSchemaType {
             },
         },
     };
+    odds?: GameOddsAndResults;
 }
 
-export default mongoose.model('ExtendedBoxScore', ExtendedBoxScoreSchema);
+export default mongoose.model<ExtendedBoxScoreSchemaDocumentType>('ExtendedBoxScore', ExtendedBoxScoreSchema);

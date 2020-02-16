@@ -1,6 +1,5 @@
 export interface User {
     username: string;
-    veikkausStats?: {
-        accountBalance: number;
-    };
+    vPass: string;
+    vLogin: string;
 }

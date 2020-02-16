@@ -49,6 +49,10 @@ const DashboardContainer = styled.div`
     padding: 0.5em;
     max-height: calc(100% - 1em);
     overflow: hidden;
+    @media screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+    }
 `;
 
 const DashboardGridItem = styled.div<{ gridRow: string, gridColumn: string }>`

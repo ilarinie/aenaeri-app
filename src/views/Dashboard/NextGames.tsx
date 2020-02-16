@@ -23,13 +23,13 @@ export const NextGamesPanel: React.FC<NextGamesPanelProps> = () => {
 
     return (
         <div>
-            {daySchedule &&
+            {/* {daySchedule &&
                 daySchedule.games.map((g) => (
                     <div key={g.gamePk}>
                         {teams[g.teams.home.team.id].name} vs {teams[g.teams.away.team.id].name}
                     </div>
                 ))
-            }
+            } */}
         </div>
     );
 };

@@ -90,6 +90,10 @@ const TeamStandingsPanelContainer = styled.div`
     grid-template-rows: 27% 27% 46%;
     grid-column-gap: 0.5em;
     grid-row-gap: 0.5em;
+    @media screen and (max-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+    }
     overflow: hidden;
     height: calc(1005 - 3em);
     width: 100%;

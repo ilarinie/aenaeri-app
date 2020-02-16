@@ -90,7 +90,8 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public .storybook",
     "build-storybook": "build-storybook -s public",
-    "populate-database": "export MONGO_URI=mongodb://aenaeri-app:password123@localhost/aenaeri-app; export DATABASE_URL=postgresql://aenaeri-app:password123@localhost/aenaeri-app; npm run build-backend; node bin/updateStatistics.js"
+    "create-user": "export NODE_ENV=production; npm run build-backend; node dist/db/createUser.js",
+    "populate-database": "npm run build-backend; node bin/updateStatistics.js"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -33,7 +33,7 @@ body, html {
   width: 100%;
   background-color: var(--main-bg-color);
   color: var(--main-text-color);
-  position: fixed;
+
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: none;
 }

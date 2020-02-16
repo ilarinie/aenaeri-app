@@ -73,7 +73,7 @@ export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) =>
         ))
     ), [data, players]);
 
-    const formattedData = useMemo(() => computeCumulativeData(data), [data]);
+    const formattedData = useMemo(() => computeCumulativeData(data), [data, selectedStat]);
 
     return (
         <>

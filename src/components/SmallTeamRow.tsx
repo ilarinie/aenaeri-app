@@ -54,6 +54,7 @@ const TeamName = styled.div`
     a {
         color: inherit;
         text-decoration: none;
+        text-overflow: ellipsis;
         &:hover{
             text-decoration: underline;
         }

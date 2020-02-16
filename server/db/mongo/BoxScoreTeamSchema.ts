@@ -31,6 +31,6 @@ export const BoxScoreTeamSchema = new mongoose.Schema({
     onIce: [Number],
     onIcePlus: [SchemaTypes.Mixed],
     scratches: [Number],
-    penaltyBox: [Number],
+    penaltyBox: [SchemaTypes.Mixed],
     coaches: [SchemaTypes.Mixed]
 });

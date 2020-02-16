@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Div100vh from 'react-div-100vh';
 import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
@@ -41,7 +40,7 @@ const App: React.FC<RouteComponentProps> = ({ history }) => {
   }, [dispatch]);
 
   return (
-    <Div100vh>
+    <div>
       { loggedIn === LOGIN_STATUS.CHECKING_LOGIN_STATUS && <span>Loading...</span> }
       { loggedIn === LOGIN_STATUS.LOGGED_OUT && <Login /> }
       { loggedIn === LOGIN_STATUS.LOGGED_IN &&
@@ -58,7 +57,7 @@ const App: React.FC<RouteComponentProps> = ({ history }) => {
           </RouterViewContainer>
         </>
       }
-    </Div100vh>
+    </div>
   );
 };
 

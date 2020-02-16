@@ -14,4 +14,5 @@ export const initializeRoutes = (app: Application) => {
   app.post('/api/login', handleLogin);
   app.get('/api/checklogin', checkAuth,  handleTestAuth);
   app.post('/api/profile/updateveikkaus', checkAuth, controllers.usersController.handleVLoginUpdate);
+  app.get('/api/veikkaus', checkAuth, controllers.veikkausController.handleVeikkausCheckup);
 };

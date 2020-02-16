@@ -63,7 +63,7 @@ export const PlayerStandingsPanel: React.FC<PlayerStandingsPanelProps> = ({ play
                 </StandingsContainer>
             </PlayerStandingsListContainer>
             <PlayerStandingsListContainer gridRow='2 / 2' gridColumn='2 / 2'>
-                <BoxHeaderLink to="stats/finnishPlayers">Finnish players</BoxHeaderLink>
+                <BoxHeader>Finnish players</BoxHeader>
                 <StandingsContainer rows={7}>
                     {renderPlayerList(playerStandings.finnishPlayers, 'points', false)}
                 </StandingsContainer>
@@ -89,7 +89,6 @@ const StandingsContainer = styled.div<{ rows: number}>`
     min-width: 100%;
     display: flex;
     flex-direction: column;
-    max-height: calc( ${(props) => props.rows} * 19px);
 `;
 
 const PlayerStandingsListContainer = styled.div<{ gridRow: string, gridColumn: string}>`
@@ -101,6 +100,10 @@ const PlayerStandingsListContainer = styled.div<{ gridRow: string, gridColumn: s
 const PlayerStandingsPanelContainer = styled.div`
     display: grid;
     grid-template-columns: 50% 50%;
+    @media screen and (max-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+    }
     height: calc(100% - 5em);
     grid-template-rows: 33% 33% 33%;
     grid-row-gap: 1em;
