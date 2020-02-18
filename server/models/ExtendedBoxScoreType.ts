@@ -1,3 +1,5 @@
+import { GameOddsAndResults } from '../db/mongo/GameOddsAndResultsSchema';
+
 export interface ExtendedBoxScore {
     copyright: string;
     gamePk: number;
@@ -19,11 +21,11 @@ export interface ExtendedBoxScore {
             /**
              * timestamp of game start
              */
-            dateTime: string;
+            dateTime: Date;
             /**
              * timestamp of game end
              */
-            endDateTime: string;
+            endDateTime: Date;
         };
         status: {
             /**
@@ -234,7 +236,7 @@ export interface ExtendedBoxScore {
             };
         };
     };
-
+    odds?: GameOddsAndResults;
 }
 
 export interface LineScoreTeam {

@@ -1,11 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
-import { DaySchedule } from '../models/DaySchedule';
-import { NhlApiService } from '../services/NHLApiService/NhlApiService';
+import ExtendedBoxScoreSchema from '../db/mongo/ExtendedBoxScoreSchema';
+import logger from '../logger';
 
 export const handleCurrentDayScheduleRoute = async (req: Request, res: Response, next: NextFunction) => {
-    const response = await NhlApiService.fetchCurrentDaySchedule();
-    const resObj: DaySchedule = {
-        ...response.dates[0],
-    };
-    res.send(resObj);
+    try {
+        const response = await ExtendedBoxScoreSchema.find({ 'gameData.status.abstractGameState': 'Preview', 'gameData.datetime.dateTime': { $gt: new Date(new Date().getTime() - 1000 * 60 * 60 *  3), $lt: new Date(new Date().getTime() + 1000  * 60 * 60 * 24 ) }}).sort({ gamePk: 1})
+        res.send(response);
+    } catch (err) {
+        logger.error(err);
+        res.status(500).send('uh oh')
+    }
 };

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import logger from '../../logger';
 import ExtendedBoxScoreSchema, { ExtendedBoxScoreSchemaType } from '../mongo/ExtendedBoxScoreSchema';
-import { ExtendedBoxScore } from '../mongo/ExtendedBoxScoreType';
+import { ExtendedBoxScore } from '../../models/ExtendedBoxScoreType';
 import fs from 'fs';
 import { spawnSync } from 'child_process';
 

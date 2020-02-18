@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { DaySchedule } from '../../../server/models/DaySchedule';
 import { RootState } from '../../state/rootReducer';
+import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
+import styled from 'styled-components';
 
 interface NextGamesPanelProps {
 
@@ -10,26 +12,33 @@ interface NextGamesPanelProps {
 
 export const NextGamesPanel: React.FC<NextGamesPanelProps> = () => {
 
-    const [daySchedule, setDaySchedule] = useState(null as DaySchedule | null);
+    const [daySchedule, setDaySchedule] = useState([] as ExtendedBoxScore[]);
     const teams = useSelector((state: RootState) => state.baseData.teams.teamObject);
 
     useEffect(() => {
         const fetchSchedule = async () => {
-            const response = await axios.request<DaySchedule>({ url: '/api/schedule' });
+            const response = await axios.request<ExtendedBoxScore[]>({ url: '/api/schedule' });
             setDaySchedule(response.data);
         };
         fetchSchedule();
     }, []);
 
+   
+
     return (
         <div>
-            {/* {daySchedule &&
-                daySchedule.games.map((g) => (
+            {daySchedule &&
+                daySchedule.map((g) => (
                     <div key={g.gamePk}>
-                        {teams[g.teams.home.team.id].name} vs {teams[g.teams.away.team.id].name}
+                        {new Date(g.gameData.datetime.dateTime).toLocaleDateString('fi-FI')} - {new Date(g.gameData.datetime.dateTime).toLocaleTimeString('fi-FI')} - {g.gameData.teams.away.name} @ {g.gameData.teams.home.name}
+                        {g.odds && <><Sep>{g.odds.awayOdds}</Sep><Sep>{g.odds.drawOdds}</Sep><Sep>{g.odds.homeOdds}</Sep></>}
                     </div>
                 ))
-            } */}
+            }
         </div>
     );
 };
+
+const Sep = styled.div`
+
+`  

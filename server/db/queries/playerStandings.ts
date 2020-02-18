@@ -49,9 +49,8 @@ const getSkatersOrderedByStatAndWhereClause = async (stat: keyof SkaterSingleSea
 };
 
 const getGoaliesOrderedByStat = async (stat: keyof GoalieSingleSeasonStats, reverse: boolean): Promise<string[]> => {
-    const sql = `SELECT "playerId" FROM goalie_single_season_stats_entity WHERE season = '20192020' ORDER BY -${stat} ${reverse ? 'ASC' : 'DESC'} LIMIT 100;`;
+    const sql = `SELECT "playerId" FROM goalie_single_season_stats_entity WHERE season = '20192020' AND games > 20 ORDER BY ${stat} ${reverse ? 'ASC' : 'DESC'} LIMIT 100;`;
     const res = await getManager().query(sql);
-    logger.info(sql);
     return Promise.resolve(res.map((e: { playerId: string }) => e.playerId));
 };
 

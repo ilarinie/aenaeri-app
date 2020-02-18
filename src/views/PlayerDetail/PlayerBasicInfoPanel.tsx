@@ -73,7 +73,7 @@ const NameContainer = styled.div`
 
 const MetaBackgroundContainer = styled.div<{ url: string; }>`
     width: 100%;
-    height: 15em;
+    height: 30em;
     padding: 2em 5em;
     background: url(${(props) => props.url});
     background-size: cover;

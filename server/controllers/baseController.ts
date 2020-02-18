@@ -55,6 +55,6 @@ export const handleRefreshCheckRoute = async (req: Request, res: Response, next:
     if (!lastRefresh[0] || !clientLastRefresh || lastRefresh[0].refreshTime > clientLastRefresh) {
         res.send({ doRefresh: true });
     } else {
-        res.send({ doRefresh: false });
+        res.send({ doRefresh: true });
     }
 };

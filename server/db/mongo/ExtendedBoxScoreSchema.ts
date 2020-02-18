@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 import { BoxScoreTeamSchema } from './BoxScoreTeamSchema';
-import { GameDataTeam, LineScoreTeam, BoxScoreTeam, GameDataPlayer } from './ExtendedBoxScoreType';
+import { GameDataTeam, LineScoreTeam, BoxScoreTeam, GameDataPlayer } from '../../models/ExtendedBoxScoreType';
 import { GameDataPlayerSchema } from './GameDataPlayerSchema';
 import { GameDataTeamSchema } from './GameDataTeamSchema';
 import { LineScorePeriodSchema } from './LineScorePeriodSchema';
