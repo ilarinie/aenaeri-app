@@ -15,6 +15,7 @@ import { Dashboard } from './views/Dashboard/Dashboard';
 import { PlayerDetail } from './views/PlayerDetail/PlayerDetail';
 import { TeamDetail } from './views/TeamDetail/TeamDetail';
 import { StatsDetail } from './views/StatsDetail/StatsDetail';
+import { BettingDashboard } from './views/BettingDashboard/BettingDashboard';
 
 const RouterViewContainer = styled.div`
   width: 100%;
@@ -48,7 +49,8 @@ const App: React.FC<RouteComponentProps> = ({ history }) => {
           <TopBar navigate={navigate} players={baseData.players} teams={baseData.teams} />
           <RouterViewContainer>
             <Switch>
-              <Route exact path={[ROOT_ROUTE, '/nhl-stats']} component={Dashboard} />
+              <Route exact path={ROOT_ROUTE} component={BettingDashboard} />
+              <Route exact path={'/nhl-stats'} component={Dashboard} />
               <Route path={PLAYERS_ROUTE + ':id'} component={PlayerDetail} />
               <Route path={TEAMS_ROUTE + ':id'} component={TeamDetail} />
               <Route path={STATS_ROUTE + ':stat'} component={StatsDetail} />

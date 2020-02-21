@@ -4,7 +4,6 @@ import { RouteComponentProps } from 'react-router';
 import styled from 'styled-components';
 import { BoxHeader } from '../../components/BoxHeader';
 import { RootState } from '../../state/rootReducer';
-import { NextGamesPanel } from './NextGames';
 import { PlayerStandingsPanel } from './PlayerStandingsPanel';
 import { TeamStandingsPanel } from './TeamStandingsPanel';
 
@@ -14,7 +13,7 @@ export const Dashboard: React.FC<RouteComponentProps> = () => {
 
     return (
         <DashboardContainer>
-            <DashboardGridItem gridRow='1 / 1' gridColumn='1 / 7'>
+            <DashboardGridItem gridRow='1 / 3' gridColumn='1 / 7'>
                 <BoxHeader>Player standings</BoxHeader>
                 <PlayerStandingsPanel
                     playerStandings={baseData.playerStandings}
@@ -22,10 +21,6 @@ export const Dashboard: React.FC<RouteComponentProps> = () => {
                     skaterStats={baseData.skaterStats}
                     playerObject={baseData.players.playerObject}
                 />
-            </DashboardGridItem>
-            <DashboardGridItem gridRow='2 / 2' gridColumn='1 / 7'>
-                <BoxHeader>Next games</BoxHeader>
-                <NextGamesPanel />
             </DashboardGridItem>
             <DashboardGridItem gridRow='1 / 3' gridColumn='7 / 13'>
                 <BoxHeader>NHL STANDINGS</BoxHeader>

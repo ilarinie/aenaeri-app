@@ -6,8 +6,8 @@ import mongoose from 'mongoose';
 import logger from '../../logger';
 
 export const populateDatabase = async () => {
+    await mongoose.connect(process.env.MONGO_URI as string);
     // const lastRefresh = await PlayerDataRefresh.find({ order: { id: 'DESC' }, take: 1 });
-    // await mongoose.connect(process.env.MONGO_URI as string);
     // let doRefresh = true;
     // if (lastRefresh[0]) {
     //     doRefresh = (parseInt(lastRefresh[0].refreshTime, 10) + (1000 * 60 * 60) < new Date().getTime());

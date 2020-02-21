@@ -58,30 +58,24 @@ const generateIdsToBeFetched = async (season: string) => {
         logger.info(`Generating game ids for current season ${season}`);
         // Find any saved games that are in preview state
         const previewGames = await ExtendedBoxScoreSchema.find({ "gamePk": { $gt: parseInt(season + '000000') }, 'gameData.status.abstractGameState': 'Preview'}).sort({ gamePk: 1 });
-        if (previewGames.length === 0) {
+        if (previewGames && previewGames.length === 0) {
             logger.info('Found no games for current season, fetching all games');
             return Promise.resolve(generateRange(season));
         } else {
             logger.info(`Found ${previewGames.length} games with preview status, fetching the rest.`);
-            const fromIndex = parseInt(previewGames[0].gamePk.toString().substr(6));
+            const ids = previewGames.map((game) => game.gamePk.toString());
             await Promise.all([
                 ...previewGames.map((game) => {
                     logger.info(`Removed game id ${game.gamePk}`);
                     return game.remove();
             }) ]);
-            return Promise.resolve(generateRange(season, fromIndex));
+            return Promise.resolve(ids);
         }
     } else {
         logger.info(`Generating game ids for season ${season}`);
-        let gamePkRange = { from: 0, to : 0} ;
+        const gamePkRange = { from: parseInt(season + '000000'), to: parseInt(season + '999999')};
         try {
-            gamePkRange = { from: parseInt(season + '000000'), to: parseInt(season + '999999')};
-            logger.info(`${gamePkRange.from}`);
-        } catch (err) {
-            logger.error('COuld not parse int')
-        }
-        try {
-            const gamesFromSeason: any[] = [];  //await ExtendedBoxScoreSchema.find({ gamePk: { $gt: gamePkRange.from, $lt: gamePkRange.to }});
+            const gamesFromSeason = await ExtendedBoxScoreSchema.find({ gamePk: { $gt: gamePkRange.from, $lt: gamePkRange.to }});
             logger.info('asdasdasdasd');
             if (gamesFromSeason.length >= 1270) {
                 logger.info(`Found that season is already fetched, skipping ${season}`);
@@ -106,11 +100,12 @@ const generateIdsToBeFetched = async (season: string) => {
 };
 
 const populateOdds = () => {
-    // const ads = spawnSync('python3', ['op.py'], { cwd: 'odds-scraper'});
-    // if (ads.stderr) {
-    //     logger.error('Following errors reported when scraping odds:');
-    //     logger.error(ads.stderr.toString());
-    // }
+    logger.info('Starting to scrape odds from oddsportal. This will take a while.');
+    const ads = spawnSync('python3', ['op.py'], { cwd: 'odds-scraper'});
+    if (ads.stderr) {
+        logger.error('Following errors reported when scraping odds:');
+        logger.error(ads.stderr.toString());
+    }
     odds = JSON.parse(fs.readFileSync('odds-scraper/output/nhl/NHL.json').toString());
 };
 
@@ -162,7 +157,7 @@ const fetchAndCreateBoxScore = async (gameId: string): Promise<any> => {
         const res = await  ExtendedBoxScoreSchema.create(generatedBoxScore);
         const odd = getOddsTypeFromOdds(res.gameData.datetime.dateTime, res.gameData.teams.home.name, res.gamePk);
         if (odd) {
-            res.odds =  { homeOdds: parseFloat(odd.odds_home), awayOdds: parseFloat(odd.odds_away), drawOdds: parseFloat(odd.odds_draw) };
+            res.odds =  { homeOdds: parseFloat(odd.odds_home), awayOdds: parseFloat(odd.odds_away), drawOdds: parseFloat(odd.odds_draw), updatedAt: new Date().getTime(), source: 'oddsPortal' };
             await res.save();
         }
         return Promise.resolve(res);

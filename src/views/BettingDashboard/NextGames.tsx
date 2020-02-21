@@ -5,6 +5,7 @@ import { DaySchedule } from '../../../server/models/DaySchedule';
 import { RootState } from '../../state/rootReducer';
 import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
 import styled from 'styled-components';
+import { NextGameItem } from './NextGameItem';
 
 interface NextGamesPanelProps {
 
@@ -13,7 +14,7 @@ interface NextGamesPanelProps {
 export const NextGamesPanel: React.FC<NextGamesPanelProps> = () => {
 
     const [daySchedule, setDaySchedule] = useState([] as ExtendedBoxScore[]);
-    const teams = useSelector((state: RootState) => state.baseData.teams.teamObject);
+    const teams = useSelector((state: RootState) => state.baseData.teamStats);
 
     useEffect(() => {
         const fetchSchedule = async () => {
@@ -26,19 +27,17 @@ export const NextGamesPanel: React.FC<NextGamesPanelProps> = () => {
    
 
     return (
-        <div>
+        <Container>
             {daySchedule &&
                 daySchedule.map((g) => (
-                    <div key={g.gamePk}>
-                        {new Date(g.gameData.datetime.dateTime).toLocaleDateString('fi-FI')} - {new Date(g.gameData.datetime.dateTime).toLocaleTimeString('fi-FI')} - {g.gameData.teams.away.name} @ {g.gameData.teams.home.name}
-                        {g.odds && <><Sep>{g.odds.awayOdds}</Sep><Sep>{g.odds.drawOdds}</Sep><Sep>{g.odds.homeOdds}</Sep></>}
-                    </div>
+                    <NextGameItem width="400px" key={g.gamePk} game={g} teamsStats={teams} />
                 ))
             }
-        </div>
+        </Container>
     );
 };
 
-const Sep = styled.div`
-
+const Container = styled.div`
+    display: flex;
+    flex-wrap: wrap;
 `  

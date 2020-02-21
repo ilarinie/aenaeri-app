@@ -2,6 +2,9 @@ import axios from 'axios';
 import logger from '../../logger';
 import { ExtendedBoxScore } from '../../models/ExtendedBoxScoreType';
 import { VeikkausAccountBalance } from '../../models/VeikkausAccountBalance';
+import { ExtendedBoxScoreSchemaType, ExtendedBoxScoreSchemaDocumentType } from '../../db/mongo/ExtendedBoxScoreSchema';
+import fs from 'fs';
+import { VeikkausEventsResponse } from './VeikkausEventsResponse';
 
 const getEventAddress = (ids: string[]): string => {
   return `https://www.veikkaus.fi/api/v1/sport-games/draws?game-names=EBET&lang=fi&event-ids=${ids.join(',')}`;
@@ -24,107 +27,56 @@ export namespace VeikkausService {
         }
     };
 
-    export const getVeikkausOdds = async (games: ExtendedBoxScore[]) => {
+    export const getVeikkausOdds = async (games: ExtendedBoxScoreSchemaDocumentType[]) => {
         let newGames = games;
         try {
-            const response = await axios.request<Array<{
-                id: string;
-                name: string;
-                date: number; }>>({ url: `${BASE_URL}/v1/sports/3/categories/2/tournaments/1?lang=fi`, headers: { 'X-ESA-API-Key': 'ROBOT' }});
+            const response = await axios.request<{
+                events: Array<{
+                    id: string;
+                    name: string;
+                    date: number; 
+                }>
+            }>({ url: `${BASE_URL}/v1/sports/3/categories/2/tournaments/1?lang=fi`, headers: { 'X-ESA-API-Key': 'ROBOT' }});
+            fs.writeFileSync('events.json', JSON.stringify(response.data, null , 2));
             const events = [] as string[];
 
+            const gameEventMap: {
+                [eventId: string]: ExtendedBoxScoreSchemaDocumentType
+            } = {
+
+            };
+
             games.forEach((game) => {
-                const event = response.data.filter((d) => new Date(d.date).getTime() === game.gameData.datetime.dateTime.getTime() && d.name.includes(game.gameData.teams.home.locationName))[0];
+                const event = response.data.events.filter((d) => new Date(d.date).getTime() === game.gameData.datetime.dateTime.getTime() && d.name.includes(game.gameData.teams.home.locationName))[0];
                 if (event) {
+                    gameEventMap[event.id] = game;
                     events.push(event.id);
                 }
             });
+            logger.info('Events fetched: ' + events.toString())
 
-                    /**
-                     *  {
-    "id": "97395866",
-    "name": "Philadelphia - Columbus",
-    "date": 1582070400000
-  },
-  {
-    "id": "97395867",
-    "name": "Pittsburgh - Toronto",
-    "date": 1582070400000
-  },
+            const oddsData = await axios.get(getEventAddress(events), { headers: { 'X-ESA-API-Key': 'ROBOT'}});
+            const oneXtwoOdds: VeikkausEventsResponse[] = oddsData.data.draws.filter((a:any) => a.rows[0].shortName === '1X2');
 
-  {
-    "draws": [
-        {
-            "gameName": "EBET",
-            "brandName": "6778",
-            "id": "1936767",
-            "name": "SINGLE",
-            "status": "OPEN",
-            "openTime": 1581998400000,
-            "closeTime": 1582070280000,
-            "drawTime": 1582070400000,
-            "resultsAvailableTime": 1582149599000,
-            "gameRuleSet": {
-                "basePrice": 100,
-                "maxPrice": 1000000,
-                "minStake": 10,
-                "maxStake": 100000,
-                "minSystemLevel": 1,
-                "maxSystemLevel": 10,
-                "oddsType": "FIXED"
-            },
-            "rows": [
-                {
-                    "id": "1",
-                    "status": "OPEN",
-                    "includedRowCount": 21,
-                    "name": "",
-                    "shortName": "1X2",
-                    "description": "",
-                    "detailedDescription": "",
-                    "tvChannel": "Viasat",
-                    "competitors": [
-                        {
-                            "id": "1",
-                            "name": "Philadelphia",
-                            "number": 5,
-                            "odds": {
-                                "odds": 213
-                            },
-                            "status": "ACTIVE",
-                            "handicap": "0.00"
-                        },
-                        {
-                            "id": "2",
-                            "name": "Columbus",
-                            "number": 30,
-                            "odds": {
-                                "odds": 290
-                            },
-                            "status": "ACTIVE"
-                        },
-                        {
-                            "id": "3",
-                            "name": "Tasapeli",
-                            "odds": {
-                                "odds": 390
-                            },
-                            "status": "ACTIVE"
-                        }
-                    ],
-                    "eventId": "97395866",
-                    "excludedEvents": [
-                        "97395866"
-                    ]
+            const games2 = await Promise.all([ ...Object.keys(gameEventMap).map(key => {
+                const oddsForGame = oneXtwoOdds.filter(a => a.rows[0].eventId == key)[0];
+                if (oddsForGame) {
+                    gameEventMap[key].odds = {
+                        homeOdds: oddsForGame.rows[0].competitors[0].odds.odds,
+                        awayOdds: oddsForGame.rows[0].competitors[1].odds.odds,
+                        drawOdds: oddsForGame.rows[0].competitors[2].odds.odds,
+                        updatedAt: new Date().getTime(),
+                        source: 'veikkaus'
+                    }
+
+                    return gameEventMap[key].save();
                 }
-            ]
-        },
-                     */
-
-            return Promise.resolve('asd');
+            })
+            ]);
+            return Promise.resolve(games2.filter(g => g != null));
 
         } catch (err) {
-            logger.error('Something went wrong');
+            logger.error('Something went wrong ' + err);
         }
 
     };

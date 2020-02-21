@@ -4,7 +4,7 @@ export interface ExtendedBoxScore {
     copyright: string;
     gamePk: number;
     link: string;
-    metadata: {
+    metadata?: {
         wait: number;
         /**
          * ex. "20181005_182112"
@@ -25,7 +25,7 @@ export interface ExtendedBoxScore {
             /**
              * timestamp of game end
              */
-            endDateTime: Date;
+            endDateTime?: Date;
         };
         status: {
             /**
@@ -144,11 +144,11 @@ export interface ExtendedBoxScore {
                 endIndex: number;
             }>
         };
-        lineScore: {
+        lineScore?: {
             currentPeriod: number;
             currentPeriodOrdinal: string;
             currentPeriodTimeRemaining: string;
-            periods: Array<{
+            periods?: Array<{
                 periodType: string;
                 /** real timestamp */
                 startTime: string;
@@ -208,7 +208,7 @@ export interface ExtendedBoxScore {
                   officialType: string;
             }>;
         };
-        decisions: {
+        decisions?: {
             winner: {
                 id: number;
                 fullName: string;

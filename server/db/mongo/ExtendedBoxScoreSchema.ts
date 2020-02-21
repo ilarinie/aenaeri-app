@@ -39,7 +39,7 @@ const ExtendedBoxScoreSchema = new mongoose.Schema<ExtendedBoxScoreSchemaType>({
             /**
              * Final for finished games
              */
-            abstractGameState: String,
+            abstractGameState: { type: String, index : true },
             codedGameState: String,
             detailedState: String,
             statusCode: String,
@@ -139,7 +139,7 @@ const ExtendedBoxScoreSchema = new mongoose.Schema<ExtendedBoxScoreSchemaType>({
 
 });
 
-interface ExtendedBoxScoreSchemaDocumentType extends ExtendedBoxScoreSchemaType, mongoose.Document {};
+export interface ExtendedBoxScoreSchemaDocumentType extends ExtendedBoxScoreSchemaType, mongoose.Document {};
 
 export interface ExtendedBoxScoreSchemaType {
     copyright: string;

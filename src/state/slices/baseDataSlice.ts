@@ -2,37 +2,37 @@ import { createSlice, PayloadAction } from 'redux-starter-kit';
 import { BaseDataResponse } from '../../../server/models/BaseDataResponse';
 
 const initialState: BaseDataResponse = {
-        refreshTime: '',
-        teams: {
-            teamList: [],
-            teamObject: {},
-          },
-          players: {
-            playerList: [],
-            playerObject: {},
-          },
-          skaterStats: {},
-          goalieStats: {},
-          playerStandings: {
-            goals: [],
-            assists: [],
-            points: [],
-            finnishPlayers: [],
-            savePct: [],
-            gaa: [],
-            gpg: [],
-            ppg: [],
-          },
-          teamStats: {},
-          teamStandings: {
-            metropolitan: [],
-            atlantic: [],
-            central: [],
-            western: [],
-            eastern: [],
-            pacific: [],
-            nhl: [],
-          },
+  refreshTime: '',
+  teams: {
+  teamList: [],
+  teamObject: {},
+  },
+  players: {
+  playerList: [],
+  playerObject: {},
+  },
+  skaterStats: {},
+  goalieStats: {},
+  playerStandings: {
+  goals: [],
+  assists: [],
+  points: [],
+  finnishPlayers: [],
+  savePct: [],
+  gaa: [],
+  gpg: [],
+  ppg: [],
+  },
+  teamStats: {},
+  teamStandings: {
+  metropolitan: [],
+  atlantic: [],
+  central: [],
+  western: [],
+  eastern: [],
+  pacific: [],
+  nhl: [],
+  },
 };
 
 const baseDataSlice = createSlice({
