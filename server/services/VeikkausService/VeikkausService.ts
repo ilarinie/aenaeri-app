@@ -1,8 +1,11 @@
 import axios from 'axios';
 import logger from '../../logger';
-import { VeikkausAccountBalance } from '../../models/VeikkausAccountBalance';
 import { ExtendedBoxScore } from '../../models/ExtendedBoxScoreType';
+import { VeikkausAccountBalance } from '../../models/VeikkausAccountBalance';
 
+const getEventAddress = (ids: string[]): string => {
+  return `https://www.veikkaus.fi/api/v1/sport-games/draws?game-names=EBET&lang=fi&event-ids=${ids.join(',')}`;
+};
 
 export namespace VeikkausService {
 
@@ -13,7 +16,7 @@ export namespace VeikkausService {
         const axiosInstance = axios.create({ withCredentials: true });
         try {
             const loginResponse = await axiosInstance.request({ url: `${BASE_URL}bff/v1/sessions`, method: 'POST', data: loginReq });
-            const accountBalanceResponse = await axiosInstance.request<VeikkausAccountBalance>({ url: `${BASE_URL}/v1/players/self/account`, method: 'GET', headers: { 'Cookie': loginResponse.headers['set-cookie'][0].split(";")[0] + ';' + loginResponse.headers['set-cookie'][1].split(";")[0], 'X-ESA-API-Key': 'ROBOT'} })
+            const accountBalanceResponse = await axiosInstance.request<VeikkausAccountBalance>({ url: `${BASE_URL}/v1/players/self/account`, method: 'GET', headers: { 'Cookie': loginResponse.headers['set-cookie'][0].split(';')[0] + ';' + loginResponse.headers['set-cookie'][1].split(';')[0], 'X-ESA-API-Key': 'ROBOT'} });
             return Promise.resolve(accountBalanceResponse.data);
         } catch (err) {
             logger.error(JSON.stringify(err, null, 2));
@@ -24,16 +27,19 @@ export namespace VeikkausService {
     export const getVeikkausOdds = async (games: ExtendedBoxScore[]) => {
         let newGames = games;
         try {
-            const response = await axios.request<{
+            const response = await axios.request<Array<{
                 id: string;
                 name: string;
-                date: number; }[]>({ url: `${BASE_URL}/v1/sports/3/categories/2/tournaments/1?lang=fi`, headers: { 'X-ESA-API-Key': 'ROBOT' }})
-            const events = [] as any[];
-            
+                date: number; }>>({ url: `${BASE_URL}/v1/sports/3/categories/2/tournaments/1?lang=fi`, headers: { 'X-ESA-API-Key': 'ROBOT' }});
+            const events = [] as string[];
+
             games.forEach((game) => {
-                const events = response.data.filter(d => new Date(d.date).getTime() === game.gameData.datetime.dateTime.getTime() && d.name.includes(game.gameData.teams.home.locationName));
-                if (events[0]) {
-                  
+                const event = response.data.filter((d) => new Date(d.date).getTime() === game.gameData.datetime.dateTime.getTime() && d.name.includes(game.gameData.teams.home.locationName))[0];
+                if (event) {
+                    events.push(event.id);
+                }
+            });
+
                     /**
                      *  {
     "id": "97395866",
@@ -45,8 +51,6 @@ export namespace VeikkausService {
     "name": "Pittsburgh - Toronto",
     "date": 1582070400000
   },
-
-
 
   {
     "draws": [
@@ -117,18 +121,12 @@ export namespace VeikkausService {
         },
                      */
 
-
-                }
-            })
-
-
             return Promise.resolve('asd');
 
         } catch (err) {
             logger.error('Something went wrong');
         }
 
-
-    }
+    };
 
 }

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import logger from '../../logger';
-import ExtendedBoxScoreSchema, { ExtendedBoxScoreSchemaType } from '../mongo/ExtendedBoxScoreSchema';
-import { ExtendedBoxScore } from '../../models/ExtendedBoxScoreType';
-import fs from 'fs';
 import { spawnSync } from 'child_process';
+import fs from 'fs';
+import logger from '../../logger';
+import { ExtendedBoxScore } from '../../models/ExtendedBoxScoreType';
+import ExtendedBoxScoreSchema, { ExtendedBoxScoreSchemaType } from '../mongo/ExtendedBoxScoreSchema';
 
 const errors: string[] = [];
 let currentSeason: string;
@@ -15,7 +15,7 @@ interface OddsType {
             name: '2017/2018' | '2018/2019' | '2019/2020',
             games: GameOdds[];
         }>;
-    }
+    };
 }
 
 interface GameOdds {
@@ -36,79 +36,100 @@ interface GameOdds {
 
 let odds: OddsType;
 
-
 const getCurrentSeason = async (): Promise<string> => {
     if (!currentSeason) {
         const currentSeasonResponse = await axios.get('https://statsapi.web.nhl.com/api/v1/seasons/current');
         currentSeason = currentSeasonResponse.data.seasons[0].seasonId.substr(0, 4);
     }
     return Promise.resolve(currentSeason);
-}
+};
 
 const getOddsTypeFromOdds = (gameStartTime: Date, homeTeamName: string, gamePk: number): GameOdds | undefined => {
     const seasonStr = gamePk < 2019000000 ? gamePk < 2018000000 ? '2017/2018' : '2018/2019' : '2019/2020';
-    const season = odds.league.seasons.filter(a => a.name === seasonStr)[0];
+    const season = odds.league.seasons.filter((a) => a.name === seasonStr)[0];
     if (!season) {
         return undefined;
     }
-    return season.games.filter(a => new Date(a.game_datetime).getTime() === gameStartTime.getTime() && a.team_home === homeTeamName)[0];
-}
-
+    return season.games.filter((a) => new Date(a.game_datetime).getTime() === gameStartTime.getTime() && a.team_home === homeTeamName)[0];
+};
 
 const generateIdsToBeFetched = async (season: string) => {
     if (season === await getCurrentSeason()) {
-        logger.info(`Generating game ids for current season ${season}`)
+        logger.info(`Generating game ids for current season ${season}`);
         // Find any saved games that are in preview state
-        const previewGames = await ExtendedBoxScoreSchema.find({ gamePk: { $gt: parseInt(season + '000000') }, 'gameData.status.abstractGameState': 'Preview'}).sort({ gamePk: 1 });
+        const previewGames = await ExtendedBoxScoreSchema.find({ "gamePk": { $gt: parseInt(season + '000000') }, 'gameData.status.abstractGameState': 'Preview'}).sort({ gamePk: 1 });
         if (previewGames.length === 0) {
             logger.info('Found no games for current season, fetching all games');
             return Promise.resolve(generateRange(season));
         } else {
             logger.info(`Found ${previewGames.length} games with preview status, fetching the rest.`);
             const fromIndex = parseInt(previewGames[0].gamePk.toString().substr(6));
-            for (let i = 0; i < previewGames.length; i++) {
-                await previewGames[i].remove();
-            }
+            await Promise.all([
+                ...previewGames.map((game) => {
+                    logger.info(`Removed game id ${game.gamePk}`);
+                    return game.remove();
+            }) ]);
             return Promise.resolve(generateRange(season, fromIndex));
         }
     } else {
-        logger.info(`Generating game ids for season ${season}`)
-        const gamePkRange = { from: parseInt(season + '000000'), to: parseInt(season + '999999')};
-        const gamesFromSeason = await ExtendedBoxScoreSchema.find({ gamePk: { $gt: gamePkRange.from, $lt: gamePkRange.to }});
-        if (gamesFromSeason.length >= 1270) {
-            logger.info(`Found that season is already fetched, skipping ${season}`)
-            // all games fetches
-            return Promise.resolve([]);
-        } else {
-            logger.info(`Found ${gamesFromSeason.length} games for season ${season}, deleting and re-fetching.`)
-            for (let i = 0; i < gamesFromSeason.length; i++) {
-                await gamesFromSeason[i].remove();
+        logger.info(`Generating game ids for season ${season}`);
+        let gamePkRange = { from: 0, to : 0} ;
+        try {
+            gamePkRange = { from: parseInt(season + '000000'), to: parseInt(season + '999999')};
+            logger.info(`${gamePkRange.from}`);
+        } catch (err) {
+            logger.error('COuld not parse int')
+        }
+        try {
+            const gamesFromSeason: any[] = [];  //await ExtendedBoxScoreSchema.find({ gamePk: { $gt: gamePkRange.from, $lt: gamePkRange.to }});
+            logger.info('asdasdasdasd');
+            if (gamesFromSeason.length >= 1270) {
+                logger.info(`Found that season is already fetched, skipping ${season}`);
+                // all games fetches
+                return Promise.resolve([]);
+            } else {
+                logger.info(`Found ${gamesFromSeason.length} games for season ${season}, deleting and re-fetching.`);
+                for (let i = 0; i < gamesFromSeason.length; i++) {
+                    await gamesFromSeason[i].remove();
+                }
+                return Promise.resolve(generateRange(season));
             }
-            return Promise.resolve(generateRange(season));
+        } catch (err) {
+            console.log('fuck');
+            logger.info('err');
+
+            logger.info(err);
+            return Promise.resolve([]);
         }
     }
 
-
-}
-
+};
 
 const populateOdds = () => {
-    const ads = spawnSync('python3', ['op.py'], { cwd: 'odds-scraper'});
-    if (ads.stderr) {
-        logger.error('Following errors reported when scraping odds:');
-        logger.error(ads.stderr.toString());
-    }
+    // const ads = spawnSync('python3', ['op.py'], { cwd: 'odds-scraper'});
+    // if (ads.stderr) {
+    //     logger.error('Following errors reported when scraping odds:');
+    //     logger.error(ads.stderr.toString());
+    // }
     odds = JSON.parse(fs.readFileSync('odds-scraper/output/nhl/NHL.json').toString());
-}
-
-
+};
 
 export const populateBoxScores = async () => {
     populateOdds();
 
     const gameIds: string[] = [];
+    try {
+        const seventeen = await generateIdsToBeFetched('2017');
+        const eighteen = await generateIdsToBeFetched('2018');
+        const nineteen = await generateIdsToBeFetched('2019');
+        gameIds.push(...seventeen, ...eighteen, ...nineteen);
+    } catch (err) {
+        logger.error('could not generate ids')
+    }
 
-    gameIds.push(...await generateIdsToBeFetched('2017'), ...await generateIdsToBeFetched('2018'), ...await generateIdsToBeFetched('2019'));
+
+
+
 
     for (let i = 0; i < gameIds.length; i++) {
         logger.info('Fetching game id ' + gameIds[i]);
@@ -116,13 +137,13 @@ export const populateBoxScores = async () => {
     }
 
     logger.info('Box scores populated');
-    logger.info(`${errors.length} errors detected.`)
+    logger.info(`${errors.length} errors detected.`);
 };
 
 const fetchAndCreateBoxScore = async (gameId: string): Promise<any> => {
 
     const url = `https://statsapi.web.nhl.com/api/v1/game/${gameId}/feed/live`;
-    let response : any;
+    let response: any;
     try {
         response = await axios.request<ExtendedBoxScore>({ method: 'GET', url });
 
