@@ -57,7 +57,7 @@ const generateIdsToBeFetched = async (season: string) => {
     if (season === await getCurrentSeason()) {
         logger.info(`Generating game ids for current season ${season}`);
         // Find any saved games that are in preview state
-        const previewGames = await ExtendedBoxScoreSchema.find({ "gamePk": { $gt: parseInt(season + '000000') }, 'gameData.status.abstractGameState': 'Preview'}).sort({ gamePk: 1 });
+        const previewGames = await ExtendedBoxScoreSchema.find({ 'gamePk': { $gt: parseInt(season + '000000') }, 'gameData.status.abstractGameState': 'Preview'}).sort({ gamePk: 1 });
         if (previewGames && previewGames.length === 0) {
             logger.info('Found no games for current season, fetching all games');
             return Promise.resolve(generateRange(season));
@@ -119,12 +119,8 @@ export const populateBoxScores = async () => {
         const nineteen = await generateIdsToBeFetched('2019');
         gameIds.push(...seventeen, ...eighteen, ...nineteen);
     } catch (err) {
-        logger.error('could not generate ids')
+        logger.error('could not generate ids');
     }
-
-
-
-
 
     for (let i = 0; i < gameIds.length; i++) {
         logger.info('Fetching game id ' + gameIds[i]);
@@ -157,7 +153,13 @@ const fetchAndCreateBoxScore = async (gameId: string): Promise<any> => {
         const res = await  ExtendedBoxScoreSchema.create(generatedBoxScore);
         const odd = getOddsTypeFromOdds(res.gameData.datetime.dateTime, res.gameData.teams.home.name, res.gamePk);
         if (odd) {
-            res.odds =  { homeOdds: parseFloat(odd.odds_home), awayOdds: parseFloat(odd.odds_away), drawOdds: parseFloat(odd.odds_draw), updatedAt: new Date().getTime(), source: 'oddsPortal' };
+            res.odds.push({
+                gameName: '1X2',
+                source: 'oddsPortal',
+                homeOdds: parseFloat(odd.odds_home),
+                awayOdds: parseFloat(odd.odds_away),
+                drawOdds: parseFloat(odd.odds_draw),
+                updatedAt: new Date().getTime() });
             await res.save();
         }
         return Promise.resolve(res);
