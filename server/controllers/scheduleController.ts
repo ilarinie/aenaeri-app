@@ -6,7 +6,7 @@ import { VeikkausService } from '../services/VeikkausService/VeikkausService';
 export const handleCurrentDayScheduleRoute = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const response = await ExtendedBoxScoreSchema.find({ 'gameData.status.abstractGameState': 'Preview', 'gameData.datetime.dateTime': { $gt: new Date(new Date().getTime() - 1000 * 60 * 60 *  3), $lt: new Date(new Date().getTime() + 1000  * 60 * 60 * 24 ) }}).sort({ gamePk: 1})
-        const responseWithOdds = await VeikkausService.getVeikkausOdds(response);
+        const responseWithOdds = await VeikkausService.getInstance().getVeikkausOdds(response);
 
         res.send(responseWithOdds);
     } catch (err) {

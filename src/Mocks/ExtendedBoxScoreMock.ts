@@ -48,5 +48,6 @@ export const ExtendedBoxScoreMock: ExtendedBoxScore = {
         }
     },
     "copyright": "NHL and the NHL Shield are registered trademarks of the National Hockey League. NHL and NHL team marks are the property of the NHL and its teams. © NHL 2020. All Rights Reserved.",
-    "gamePk": 2019020942, "link": "/api/v1/game/2019020942/feed/live", "odds": { "homeOdds": 200, "drawOdds": 420, "awayOdds": 295, "updatedAt": 1582299344550, "source": "veikkaus" }
+    "gamePk": 2019020942, "link": "/api/v1/game/2019020942/feed/live", 
+    "odds": [ { "homeOdds": 200, "drawOdds": 420, "awayOdds": 295, "updatedAt": 1582299344550, "source": "veikkaus", gameName: '1X2' } ],
 }

@@ -236,7 +236,7 @@ export interface ExtendedBoxScore {
             };
         };
     };
-    odds?: GameOddsAndResults;
+    odds: GameOddsAndResults[];
 }
 
 export interface LineScoreTeam {

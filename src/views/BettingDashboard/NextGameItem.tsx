@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
 import styled from 'styled-components';
 import { getTeamLogoUri } from '../../utils/teamLogoUri';
@@ -11,51 +11,61 @@ import { TeamSingleSeasonStats } from '../../../server/models/TeamSingleSeasonSt
 
 export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: SeasonStatsObject<TeamSingleSeasonStats>, width?: string }> = ({ game, teamsStats, width = '300px' }) => {
     
-    let homeRecord = '10-20-23';
-    const homeStats = teamsStats ? teamsStats[game.gameData.teams.home.id].statObject['20192020'] : null;
-    if (homeStats) {
-        homeRecord = `${homeStats.wins}-${homeStats.losses}-${homeStats.ot}`
-    }
+    const [ records, setRecords ] = useState({ home: '', away: ''});
 
-    let awayRecord = '30-23-12';
-    const awayStats = teamsStats ? teamsStats[game.gameData.teams.away.id].statObject['20192020'] : null;
-    if (awayStats) {
-        awayRecord = `${awayStats.wins}-${awayStats.losses}-${awayStats.ot}`
-    }
+
+    useEffect(() => {
+        let record = records;
+        const homeStats = teamsStats ? teamsStats[game.gameData.teams.home.id].statObject['20192020'] : null;
+        if (homeStats) {
+            record.home = `${homeStats.wins}-${homeStats.losses}-${homeStats.ot}`
+        }
+        const awayStats = teamsStats ? teamsStats[game.gameData.teams.away.id].statObject['20192020'] : null;
+        if (awayStats) {
+            record.away = `${awayStats.wins}-${awayStats.losses}-${awayStats.ot}`
+        }
+        setRecords({
+            home: record.home,
+            away: record.away
+        });
+    }, [teamsStats]);
+    
+
+    const oneXTwoOdds = game.odds.filter(o => o.gameName="1X2")[0];
     
     
     return (
         <Container style={{ width }}>
             <GameDatePanel date={new Date(game.gameData.datetime.dateTime)} />
-            <TeamLogo column="1 / 1" src={getTeamLogoUri(game.gameData.teams.away.id.toString())} />
+            <TeamLogo column="1 / 1" src={getTeamLogoUri(game.gameData.teams.home.id.toString())} />
             <VSDiv>VS</VSDiv>
-            <TeamLogo column="3 / 3" src={getTeamLogoUri(game.gameData.teams.home.id.toString())} />
-            <Odds>
-                <StatContainer style={{ gridColumn: '1 /1', gridRow: '3 / 3' }}>
-                    {homeRecord}
+            <TeamLogo column="3 / 3" src={getTeamLogoUri(game.gameData.teams.away.id.toString())} />
+            <Odds gridRow="3 / 3">
+                <StatContainer style={{ gridColumn: '1 /1' }}>
+                    {records.home}
                 </StatContainer>
-                <StatContainer style={{ gridColumn: '2 /2', gridRow: '3 / 3' }}>
+                <StatContainer style={{ gridColumn: '2 /2' }}>
                     
                 </StatContainer>
-                <StatContainer style={{ gridColumn: '3 /3', gridRow: '3 / 3' }}>
-                    {awayRecord}
+                <StatContainer style={{ gridColumn: '3 /3' }}>
+                    {records.away}
                 </StatContainer>
             </Odds>
-            {game.odds &&
-                <Odds>
-                    <OddContainer style={{ gridColumn: '1 /1', gridRow: '3 / 3' }}>
+            {oneXTwoOdds &&
+                <Odds gridRow="4 / 4">
+                    <OddContainer style={{ gridColumn: '1 /1' }}>
                         <div>1</div>
-                        {(game.odds.awayOdds / 100).toFixed(2)}
+                        {(oneXTwoOdds.homeOdds / 100).toFixed(2)}
                     </OddContainer>
-                    <OddContainer style={{ gridColumn: '2 /2', gridRow: '3 / 3' }}>
+                    <OddContainer style={{ gridColumn: '2 /2' }}>
                         <div>
                             X
                         </div>
-                        {(game.odds.drawOdds / 100).toFixed(2) }
+                        {oneXTwoOdds.drawOdds && (oneXTwoOdds.drawOdds / 100).toFixed(2) }
                     </OddContainer>
-                    <OddContainer style={{ gridColumn: '3 /3', gridRow: '3 / 3' }}>
+                    <OddContainer style={{ gridColumn: '3 /3' }}>
                         <div>2</div>
-                        {(game.odds.homeOdds / 100).toFixed(2)}
+                        {(oneXTwoOdds.awayOdds / 100).toFixed(2)}
                     </OddContainer>
                 </Odds>
             }
@@ -81,11 +91,13 @@ const OddContainer = styled.div`
 
 `
 
-const Odds = styled.div`
+const Odds = styled.div<{ gridRow: string }>`
     grid-column: 1 / 5;
     text-align: center;
     grid-template-columns: 1fr 1fr 1fr;
     display: grid;
+    grid-row: ${props => props.gridRow};
+
 ` 
 
 

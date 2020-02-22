@@ -5,21 +5,45 @@ import { VeikkausAccountBalance } from '../../models/VeikkausAccountBalance';
 import { ExtendedBoxScoreSchemaType, ExtendedBoxScoreSchemaDocumentType } from '../../db/mongo/ExtendedBoxScoreSchema';
 import fs from 'fs';
 import { VeikkausEventsResponse } from './VeikkausEventsResponse';
+import { OddsService, OddsType } from '../OddsService';
 
-const getEventAddress = (ids: string[]): string => {
-  return `https://www.veikkaus.fi/api/v1/sport-games/draws?game-names=EBET&lang=fi&event-ids=${ids.join(',')}`;
-};
+type VeikkausEventsResponseType = {
+    events: Array<{
+        id: string;
+        name: string;
+        date: number;
+    }>
+}
 
-export namespace VeikkausService {
+let veikkausService: VeikkausService;
 
-    const BASE_URL = 'https://www.veikkaus.fi/api/';
+export class VeikkausService implements OddsService {
 
-    export const getVeikkausAccountBalance = async (vLogin: string, vPass: string): Promise<VeikkausAccountBalance> => {
-        const loginReq = { type: 'STANDARD_LOGIN', login: vLogin, password: vPass};
+    BASE_URL = 'https://www.veikkaus.fi/api/';
+
+
+    static getInstance = (): VeikkausService => {
+        if (!veikkausService) {
+            veikkausService = new VeikkausService();
+        }
+        return veikkausService;
+    }
+
+    getOddsForGames = async (games: ExtendedBoxScoreSchemaDocumentType[]): Promise<OddsType[]> => {
+
+
+        return Promise.resolve([]);
+    }
+
+
+
+
+    getVeikkausAccountBalance = async (vLogin: string, vPass: string): Promise<VeikkausAccountBalance> => {
+        const loginReq = { type: 'STANDARD_LOGIN', login: vLogin, password: vPass };
         const axiosInstance = axios.create({ withCredentials: true });
         try {
-            const loginResponse = await axiosInstance.request({ url: `${BASE_URL}bff/v1/sessions`, method: 'POST', data: loginReq });
-            const accountBalanceResponse = await axiosInstance.request<VeikkausAccountBalance>({ url: `${BASE_URL}/v1/players/self/account`, method: 'GET', headers: { 'Cookie': loginResponse.headers['set-cookie'][0].split(';')[0] + ';' + loginResponse.headers['set-cookie'][1].split(';')[0], 'X-ESA-API-Key': 'ROBOT'} });
+            const loginResponse = await axiosInstance.request({ url: `${this.BASE_URL}bff/v1/sessions`, method: 'POST', data: loginReq });
+            const accountBalanceResponse = await axiosInstance.request<VeikkausAccountBalance>({ url: `${this.BASE_URL}/v1/players/self/account`, method: 'GET', headers: { 'Cookie': loginResponse.headers['set-cookie'][0].split(';')[0] + ';' + loginResponse.headers['set-cookie'][1].split(';')[0], 'X-ESA-API-Key': 'ROBOT' } });
             return Promise.resolve(accountBalanceResponse.data);
         } catch (err) {
             logger.error(JSON.stringify(err, null, 2));
@@ -27,50 +51,38 @@ export namespace VeikkausService {
         }
     };
 
-    export const getVeikkausOdds = async (games: ExtendedBoxScoreSchemaDocumentType[]) => {
+
+
+    getVeikkausOdds = async (games: ExtendedBoxScoreSchemaDocumentType[]) => {
         let newGames = games;
         try {
-            const response = await axios.request<{
-                events: Array<{
-                    id: string;
-                    name: string;
-                    date: number; 
-                }>
-            }>({ url: `${BASE_URL}/v1/sports/3/categories/2/tournaments/1?lang=fi`, headers: { 'X-ESA-API-Key': 'ROBOT' }});
-            fs.writeFileSync('events.json', JSON.stringify(response.data, null , 2));
-            const events = [] as string[];
+            const gameEventMap = await this.getVeikkausHockeyEventsList(games);
 
-            const gameEventMap: {
-                [eventId: string]: ExtendedBoxScoreSchemaDocumentType
-            } = {
+            const oddsResponse = await axios.get(this.getEventAddress(Object.keys(gameEventMap)), { headers: { 'X-ESA-API-Key': 'ROBOT' } });
+            const oddsData: VeikkausEventsResponse[] = oddsResponse.data.draws;
 
-            };
-
-            games.forEach((game) => {
-                const event = response.data.events.filter((d) => new Date(d.date).getTime() === game.gameData.datetime.dateTime.getTime() && d.name.includes(game.gameData.teams.home.locationName))[0];
-                if (event) {
-                    gameEventMap[event.id] = game;
-                    events.push(event.id);
+            const games2 = await Promise.all([...Object.keys(gameEventMap).map(key => {
+                const oddsForGame = oddsData.filter(a => a.rows[0].eventId == key);
+                if (!gameEventMap[key].odds) {
+                    gameEventMap[key].odds = [];
+                } else {
+                    gameEventMap[key].odds = gameEventMap[key].odds?.filter(s => s.source !== 'veikkaus');
                 }
-            });
-            logger.info('Events fetched: ' + events.toString())
 
-            const oddsData = await axios.get(getEventAddress(events), { headers: { 'X-ESA-API-Key': 'ROBOT'}});
-            const oneXtwoOdds: VeikkausEventsResponse[] = oddsData.data.draws.filter((a:any) => a.rows[0].shortName === '1X2');
-
-            const games2 = await Promise.all([ ...Object.keys(gameEventMap).map(key => {
-                const oddsForGame = oneXtwoOdds.filter(a => a.rows[0].eventId == key)[0];
-                if (oddsForGame) {
-                    gameEventMap[key].odds = {
-                        homeOdds: oddsForGame.rows[0].competitors[0].odds.odds,
-                        awayOdds: oddsForGame.rows[0].competitors[1].odds.odds,
-                        drawOdds: oddsForGame.rows[0].competitors[2].odds.odds,
+            
+                oddsForGame.map((odds) => {
+                    gameEventMap[key].odds?.push({
+                        homeOdds: odds.rows[0].competitors[0].odds.odds,
+                        awayOdds: odds.rows[0].competitors[1].odds.odds,
+                        drawOdds: odds.rows[0].competitors[2]?.odds.odds,
+                        gameName: odds.rows[0].shortName,
                         updatedAt: new Date().getTime(),
                         source: 'veikkaus'
-                    }
+                    });
+                });
+                
+                return gameEventMap[key].save();
 
-                    return gameEventMap[key].save();
-                }
             })
             ]);
             return Promise.resolve(games2.filter(g => g != null));
@@ -79,6 +91,31 @@ export namespace VeikkausService {
             logger.error('Something went wrong ' + err);
         }
 
+    };
+
+    private getVeikkausHockeyEventsList = async (games: ExtendedBoxScoreSchemaDocumentType[]): Promise<{ [eventId: string]: ExtendedBoxScoreSchemaDocumentType }> => {
+        const response = await axios.request<VeikkausEventsResponseType>({ url: `${this.BASE_URL}/v1/sports/3/categories/2/tournaments/1?lang=fi`, headers: { 'X-ESA-API-Key': 'ROBOT' } });
+        const events = [] as string[];
+
+        const gameEventMap: {
+            [eventId: string]: ExtendedBoxScoreSchemaDocumentType
+        } = {};
+
+        games.forEach((game) => {
+            const event = response.data.events.filter((d) => new Date(d.date).getTime() === game.gameData.datetime.dateTime.getTime() && d.name.includes(game.gameData.teams.home.locationName))[0];
+            if (event) {
+                gameEventMap[event.id] = game;
+                events.push(event.id);
+            }
+        });
+        return Promise.resolve(gameEventMap);
+    }
+
+
+
+
+    private getEventAddress = (ids: string[]): string => {
+        return `https://www.veikkaus.fi/api/v1/sport-games/draws?game-names=EBET&lang=fi&event-ids=${ids.join(',')}`;
     };
 
 }

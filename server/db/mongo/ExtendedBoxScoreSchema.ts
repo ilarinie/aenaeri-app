@@ -135,7 +135,7 @@ const ExtendedBoxScoreSchema = new mongoose.Schema<ExtendedBoxScoreSchemaType>({
             },
         },
     },
-    odds: { type: GameOddsAndResultsSchema, nullable: true },
+    odds: [{ type: GameOddsAndResultsSchema, nullable: true }],
 
 });
 
@@ -268,7 +268,7 @@ export interface ExtendedBoxScoreSchemaType {
             },
         },
     };
-    odds?: GameOddsAndResults;
+    odds?: GameOddsAndResults[];
 }
 
 export default mongoose.model<ExtendedBoxScoreSchemaDocumentType>('ExtendedBoxScore', ExtendedBoxScoreSchema);
