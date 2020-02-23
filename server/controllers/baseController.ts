@@ -42,6 +42,8 @@ export const handleBaseRoute = async (req: Request, res: Response, next: NextFun
             teamStandings,
         };
 
+        logger.debug(JSON.stringify(req.session) || 'no s ession');
+
         res.status(200).send(response);
     } catch (err) {
         logger.error(`Could not read database or something: ${err}.`);

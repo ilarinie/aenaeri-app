@@ -20,6 +20,12 @@ export class UserEntity extends BaseEntity implements User {
     @Column({ nullable: true })
     public vPass: string;
 
+    @Column({ nullable: true})
+    public pinnacleLogin: string;
+
+    @Column({ nullable: true })
+    public pinnaclePass: string;
+
     @Column()
     public password: string;
 

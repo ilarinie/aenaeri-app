@@ -1,7 +1,8 @@
 import { ExtendedBoxScoreSchemaDocumentType } from '../db/mongo/ExtendedBoxScoreSchema';
+import { UserEntity } from '../db/entities/User';
 
 export interface OddsService {
-    getOddsForGames: (games: ExtendedBoxScoreSchemaDocumentType[]) => Promise<OddsType[]>;
+    getOddsForGames: (games: ExtendedBoxScoreSchemaDocumentType[], user: UserEntity) => Promise<OddsType[]>;
 }
 
 

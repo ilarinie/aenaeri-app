@@ -18,6 +18,7 @@ services:
       - DATABASE_URL=postgresql://aenaeri-app:password123@postgres/aenaeri-app
       - MONGO_URI=mongodb://aenaeri-app:password123@mongo/aenaeri-app
       - SECRET=acdcabbacd
+      - DEV_USER_NAME=ile
     networks:
       - backend
     command: npm run dev

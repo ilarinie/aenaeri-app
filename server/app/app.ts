@@ -6,6 +6,7 @@ import passport from '../auth/passport';
 import { loggerMiddleWare } from '../logger/middleware';
 import { handleError } from './errorHandler';
 import { initializeRoutes } from './routes';
+import cookieSession from 'cookie-session';
 
 const app = express();
 
@@ -16,7 +17,13 @@ const corsOptions: CorsOptions = {
 
 app.use(loggerMiddleWare);
 app.use(bodyParser.json());
+app.use(cookieSession({
+    name: 'sessioncookie',
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [process.env.SECRET as string]
+}))
 app.use(passport.initialize());
+app.use(passport.session());
 app.use(cors(corsOptions));
 
 initializeRoutes(app);
