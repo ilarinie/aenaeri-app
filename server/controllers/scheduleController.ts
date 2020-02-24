@@ -9,8 +9,8 @@ export const handleCurrentDayScheduleRoute = async (req: Request, res: Response,
     try {
         const response = await todaysGames();
         const responseWithOdds = await VeikkausService.getInstance().addOddsForGames(response);
-        const pinnacleRes = await PinnacleService.getInstance().addOddsForGames(response, req.user as UserEntity);
-        res.send(responseWithOdds);
+        const pinnacleRes = await PinnacleService.getInstance().addOddsForGames(responseWithOdds, req.user as UserEntity);
+        res.send(pinnacleRes);
     } catch (err) {
         logger.error(err);
         res.status(500).send('uh oh')

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import fs from 'fs';
 import { ExtendedBoxScoreSchemaDocumentType } from '../../db/mongo/ExtendedBoxScoreSchema';
 import logger from '../../logger';
 import { VeikkausAccountBalance } from '../../models/VeikkausAccountBalance';
@@ -74,11 +73,11 @@ export class VeikkausService implements OddsService {
 
     public getGameType = (oddsEvent: any): OddsGameType | null => {
         const row = oddsEvent.rows[0];
-        if (row.shortName = '1X2') {
+        if (row.shortName === '1X2') {
             return '1X2';
-        } else if (row.shortName = '12') {
+        } else if (row.shortName === '12') {
             return '12';
-        } else if (row.shortName = 'AWAY_HANDICAP') {
+        } else if (row.shortName === 'AWAY_HANDICAP') {
             const { description } = row;
             if (description.includes('+1')) {
                 return 'AWAY_HANDICAP+1';
@@ -91,7 +90,7 @@ export class VeikkausService implements OddsService {
             } else if  (description.includes('+5')) {
                 return 'AWAY_HANDICAP+5';
             }
-        } else if (row.shortName = 'HOME_HANDICAP') {
+        } else if (row.shortName === 'HOME_HANDICAP') {
             const { description } = row;
             if (description.includes('+1')) {
                 return 'HOME_HANDICAP+1';

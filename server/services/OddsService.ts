@@ -36,5 +36,6 @@ export interface OddsType {
     source: OddsSource;
     homeOdds: number;
     awayOdds: number;
-    drawOdds: number;
+    drawOdds?: number;
+    bookMakerId: string;
 }
