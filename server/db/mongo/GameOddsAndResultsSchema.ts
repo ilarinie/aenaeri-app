@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { OddsSource, OddsGameType } from '../../services/OddsService';
 
 export const GameOddsAndResultsSchema = new mongoose.Schema<GameOddsAndResults>({
     homeOdds: Number,
@@ -7,12 +8,14 @@ export const GameOddsAndResultsSchema = new mongoose.Schema<GameOddsAndResults>(
     gameName: String,
     updatedAt: { type: Number, nullable: true },
     source: String,
+    bookMakerId: String,
 });
 export interface GameOddsAndResults {
     homeOdds: number;
     awayOdds: number;
     drawOdds: number | undefined;
     updatedAt?: number;
-    gameName: String,
-    source?: 'oddsPortal' | 'veikkaus'
+    gameName: OddsGameType,
+    source: OddsSource,
+    bookMakerId: string;
 }

@@ -23,7 +23,7 @@ initializeDB().then(() => {
             UserEntity.findOneOrFail({ username: process.env.DEV_USER_NAME }).then((user) =>  {
                 todaysGames().then((games) => {
                     OddsServices.forEach((service) => {
-                        service.getOddsForGames(games, user);
+                        service.addOddsForGames(games, user);
                     })
                 })
             })

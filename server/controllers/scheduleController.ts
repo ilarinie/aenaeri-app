@@ -8,8 +8,8 @@ import { todaysGames } from '../db/queries/nextGames';
 export const handleCurrentDayScheduleRoute = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const response = await todaysGames();
-        const responseWithOdds = await VeikkausService.getInstance().getVeikkausOdds(response);
-        const pinnacleRes = await PinnacleService.getInstance().getOddsForGames(response, req.user as UserEntity);
+        const responseWithOdds = await VeikkausService.getInstance().addOddsForGames(response);
+        const pinnacleRes = await PinnacleService.getInstance().addOddsForGames(response, req.user as UserEntity);
         res.send(responseWithOdds);
     } catch (err) {
         logger.error(err);

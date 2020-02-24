@@ -166,6 +166,7 @@ const fetchAndCreateBoxScore = async (gameId: string): Promise<any> => {
         if (odd) {
             res.odds.push({
                 gameName: '1X2',
+                bookMakerId: 'BACKFILLED_NOT_APPLICABLE',
                 source: 'oddsPortal',
                 homeOdds: parseFloat(odd.odds_home),
                 awayOdds: parseFloat(odd.odds_away),
