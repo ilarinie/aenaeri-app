@@ -1,0 +1,1783 @@
+[
+  {
+    "gameName": "EBET",
+    "brandName": "7556",
+    "id": "1950463",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "includedRowCount": 21,
+        "name": "",
+        "shortName": "1X2",
+        "description": "",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Columbus",
+            "number": 30,
+            "odds": {
+              "odds": 165
+            },
+            "status": "ACTIVE",
+            "handicap": "0.00"
+          },
+          {
+            "id": "2",
+            "name": "Ottawa",
+            "number": 12,
+            "odds": {
+              "odds": 410
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "3",
+            "name": "Tasapeli",
+            "odds": {
+              "odds": 450
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4021",
+    "id": "1959617",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "",
+        "shortName": "12",
+        "description": "",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Columbus",
+            "odds": {
+              "odds": 138
+            },
+            "status": "ACTIVE",
+            "handicap": "0.00"
+          },
+          {
+            "id": "2",
+            "name": "Ottawa",
+            "odds": {
+              "odds": 285
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4022",
+    "id": "1959618",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "AWAY_HANDICAP",
+        "description": "Vierastasoitus +1",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Columbus -1",
+            "number": 30,
+            "odds": {
+              "odds": 205
+            },
+            "status": "ACTIVE",
+            "handicap": "1.00"
+          },
+          {
+            "id": "2",
+            "name": "Ottawa +1",
+            "number": 12,
+            "odds": {
+              "odds": 208
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "3",
+            "name": "X",
+            "odds": {
+              "odds": 640
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4023",
+    "id": "1959619",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "AWAY_HANDICAP",
+        "description": "Vierastasoitus +2",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Columbus -2",
+            "number": 30,
+            "odds": {
+              "odds": 300
+            },
+            "status": "ACTIVE",
+            "handicap": "2.00"
+          },
+          {
+            "id": "2",
+            "name": "Ottawa +2",
+            "number": 12,
+            "odds": {
+              "odds": 160
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "3",
+            "name": "X",
+            "odds": {
+              "odds": 600
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4024",
+    "id": "1959620",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "HOME_HANDICAP",
+        "description": "Kotitasoitus +1",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Columbus +1",
+            "number": 30,
+            "odds": {
+              "odds": 117
+            },
+            "status": "ACTIVE",
+            "handicap": "1.00"
+          },
+          {
+            "id": "2",
+            "name": "Ottawa -1",
+            "number": 12,
+            "odds": {
+              "odds": 580
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "3",
+            "name": "X",
+            "odds": {
+              "odds": 1050
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4025",
+    "id": "1959621",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "HOME_HANDICAP",
+        "description": "Kotitasoitus +2",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Columbus +2",
+            "number": 30,
+            "odds": {
+              "odds": 106
+            },
+            "status": "ACTIVE",
+            "handicap": "2.00"
+          },
+          {
+            "id": "2",
+            "name": "Ottawa -2",
+            "number": 12,
+            "odds": {
+              "odds": 960
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "3",
+            "name": "X",
+            "odds": {
+              "odds": 1300
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4026",
+    "id": "1959622",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "OVER_UNDER",
+        "description": "",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Yli 4,5 maalia",
+            "odds": {
+              "odds": 137
+            },
+            "status": "ACTIVE",
+            "handicap": "4.50"
+          },
+          {
+            "id": "2",
+            "name": "Alle 4,5 maalia",
+            "odds": {
+              "odds": 285
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4027",
+    "id": "1959623",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "OVER_UNDER",
+        "description": "",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Yli 5,5 maalia",
+            "odds": {
+              "odds": 183
+            },
+            "status": "ACTIVE",
+            "handicap": "5.50"
+          },
+          {
+            "id": "2",
+            "name": "Alle 5,5 maalia",
+            "odds": {
+              "odds": 188
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4028",
+    "id": "1959624",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "OVER_UNDER",
+        "description": "",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Yli 6,5 maalia",
+            "odds": {
+              "odds": 275
+            },
+            "status": "ACTIVE",
+            "handicap": "6.50"
+          },
+          {
+            "id": "2",
+            "name": "Alle 6,5 maalia",
+            "odds": {
+              "odds": 140
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4029",
+    "id": "1959625",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "HOME_OVER_UNDER",
+        "description": "Columbus yli/alle 1,5",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Yli 1,5 maalia",
+            "odds": {
+              "odds": 107
+            },
+            "status": "ACTIVE",
+            "handicap": "1.50"
+          },
+          {
+            "id": "2",
+            "name": "Alle 1,5 maalia",
+            "odds": {
+              "odds": 620
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4030",
+    "id": "1959626",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "HOME_OVER_UNDER",
+        "description": "Columbus yli/alle 2,5",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Yli 2,5 maalia",
+            "odds": {
+              "odds": 140
+            },
+            "status": "ACTIVE",
+            "handicap": "2.50"
+          },
+          {
+            "id": "2",
+            "name": "Alle 2,5 maalia",
+            "odds": {
+              "odds": 265
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4031",
+    "id": "1959627",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "HOME_OVER_UNDER",
+        "description": "Columbus yli/alle 3,5",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Yli 3,5 maalia",
+            "odds": {
+              "odds": 210
+            },
+            "status": "ACTIVE",
+            "handicap": "3.50"
+          },
+          {
+            "id": "2",
+            "name": "Alle 3,5 maalia",
+            "odds": {
+              "odds": 163
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4032",
+    "id": "1959628",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "AWAY_OVER_UNDER",
+        "description": "Ottawa yli/alle 1,5",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Yli 1,5 maalia",
+            "odds": {
+              "odds": 134
+            },
+            "status": "ACTIVE",
+            "handicap": "1.50"
+          },
+          {
+            "id": "2",
+            "name": "Alle 1,5 maalia",
+            "odds": {
+              "odds": 290
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4033",
+    "id": "1959629",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "AWAY_OVER_UNDER",
+        "description": "Ottawa yli/alle 2,5",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Yli 2,5 maalia",
+            "odds": {
+              "odds": 225
+            },
+            "status": "ACTIVE",
+            "handicap": "2.50"
+          },
+          {
+            "id": "2",
+            "name": "Alle 2,5 maalia",
+            "odds": {
+              "odds": 155
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4034",
+    "id": "1959630",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "AWAY_OVER_UNDER",
+        "description": "Ottawa yli/alle 3,5",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Yli 3,5 maalia",
+            "odds": {
+              "odds": 440
+            },
+            "status": "ACTIVE",
+            "handicap": "3.50"
+          },
+          {
+            "id": "2",
+            "name": "Alle 3,5 maalia",
+            "odds": {
+              "odds": 115
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4035",
+    "id": "1959631",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "ODD_OR_EVEN_GOALS",
+        "description": "Pariton/parillinen",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Pariton",
+            "odds": {
+              "odds": 195
+            },
+            "status": "ACTIVE",
+            "handicap": "0.00"
+          },
+          {
+            "id": "2",
+            "name": "Parillinen",
+            "odds": {
+              "odds": 175
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4036",
+    "id": "1959632",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "CORRECT_SCORE",
+        "description": "Lopputulos",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Muu tulos",
+            "odds": {
+              "odds": 355
+            },
+            "status": "ACTIVE",
+            "handicap": "0.00"
+          },
+          {
+            "id": "2",
+            "name": "1-0",
+            "odds": {
+              "odds": 7600
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "3",
+            "name": "2-0",
+            "odds": {
+              "odds": 4200
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "4",
+            "name": "2-1",
+            "odds": {
+              "odds": 2200
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "5",
+            "name": "3-0",
+            "odds": {
+              "odds": 3400
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "6",
+            "name": "3-1",
+            "odds": {
+              "odds": 1600
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "7",
+            "name": "3-2",
+            "odds": {
+              "odds": 1500
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "8",
+            "name": "4-0",
+            "odds": {
+              "odds": 4600
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "9",
+            "name": "4-1",
+            "odds": {
+              "odds": 1350
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "10",
+            "name": "4-2",
+            "odds": {
+              "odds": 1550
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "11",
+            "name": "4-3",
+            "odds": {
+              "odds": 2600
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "12",
+            "name": "5-0",
+            "odds": {
+              "odds": 7600
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "13",
+            "name": "5-1",
+            "odds": {
+              "odds": 2900
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "14",
+            "name": "5-2",
+            "odds": {
+              "odds": 1600
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "15",
+            "name": "6-0",
+            "odds": {
+              "odds": 14000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "16",
+            "name": "6-1",
+            "odds": {
+              "odds": 6000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "17",
+            "name": "7-0",
+            "odds": {
+              "odds": 29000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "18",
+            "name": "0-0",
+            "odds": {
+              "odds": 15000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "19",
+            "name": "1-1",
+            "odds": {
+              "odds": 2200
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "20",
+            "name": "2-2",
+            "odds": {
+              "odds": 1050
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "21",
+            "name": "3-3",
+            "odds": {
+              "odds": 1300
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "22",
+            "name": "0-1",
+            "odds": {
+              "odds": 13000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "23",
+            "name": "0-2",
+            "odds": {
+              "odds": 9000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "24",
+            "name": "1-2",
+            "odds": {
+              "odds": 3400
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "25",
+            "name": "0-3",
+            "odds": {
+              "odds": 9400
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "26",
+            "name": "1-3",
+            "odds": {
+              "odds": 3600
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "27",
+            "name": "2-3",
+            "odds": {
+              "odds": 2400
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "28",
+            "name": "0-4",
+            "odds": {
+              "odds": 22000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "29",
+            "name": "1-4",
+            "odds": {
+              "odds": 4000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "30",
+            "name": "2-4",
+            "odds": {
+              "odds": 3200
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "31",
+            "name": "3-4",
+            "odds": {
+              "odds": 4200
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "32",
+            "name": "0-5",
+            "odds": {
+              "odds": 44000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "33",
+            "name": "1-5",
+            "odds": {
+              "odds": 14000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "34",
+            "name": "2-5",
+            "odds": {
+              "odds": 5000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "35",
+            "name": "0-6",
+            "odds": {
+              "odds": 65000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "36",
+            "name": "1-6",
+            "odds": {
+              "odds": 34000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "37",
+            "name": "0-7",
+            "odds": {
+              "odds": 65000
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4037",
+    "id": "1959633",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "MATCHBET_AND_TOTALS",
+        "description": "1X2 ja yli/alle 5,5 maalia",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "1 ja yli 5,5",
+            "odds": {
+              "odds": 265
+            },
+            "status": "ACTIVE",
+            "handicap": "5.50"
+          },
+          {
+            "id": "2",
+            "name": "X ja yli 5,5",
+            "odds": {
+              "odds": 820
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "3",
+            "name": "2 ja yli 5,5",
+            "odds": {
+              "odds": 740
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "4",
+            "name": "1 ja alle 5,5",
+            "odds": {
+              "odds": 305
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "5",
+            "name": "X ja alle 5,5",
+            "odds": {
+              "odds": 720
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "6",
+            "name": "2 ja alle 5,5",
+            "odds": {
+              "odds": 660
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4040",
+    "id": "1959636",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "TRIPLEHEAD",
+        "description": "Pierre-Luc Duboisin maalimäärä",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "0 maalia",
+            "number": 30,
+            "odds": {
+              "odds": 129
+            },
+            "status": "ACTIVE",
+            "handicap": "0.00"
+          },
+          {
+            "id": "2",
+            "name": "yli 1 maali",
+            "number": 12,
+            "odds": {
+              "odds": 1300
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "3",
+            "name": "1 maali",
+            "odds": {
+              "odds": 370
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "960",
+    "id": "1962664",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "TRIPLEHEAD",
+        "description": "Brady Tkachukin maalimäärä",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "0 maalia",
+            "number": 30,
+            "odds": {
+              "odds": 113
+            },
+            "status": "ACTIVE",
+            "handicap": "0.00"
+          },
+          {
+            "id": "2",
+            "name": "yli 1 maali",
+            "number": 12,
+            "odds": {
+              "odds": 2135
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "3",
+            "name": "1 maali",
+            "odds": {
+              "odds": 520
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4038",
+    "id": "1959634",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "HALFTIME_1X2",
+        "description": "1. erä 1X2",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "Columbus",
+            "number": 30,
+            "odds": {
+              "odds": 220
+            },
+            "status": "ACTIVE",
+            "handicap": "0.00"
+          },
+          {
+            "id": "2",
+            "name": "Ottawa",
+            "number": 12,
+            "odds": {
+              "odds": 375
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "3",
+            "name": "Tasapeli",
+            "odds": {
+              "odds": 250
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  },
+  {
+    "gameName": "EBET",
+    "brandName": "4039",
+    "id": "1959635",
+    "name": "SINGLE",
+    "status": "OPEN",
+    "openTime": 1582516800000,
+    "closeTime": 1582588680000,
+    "drawTime": 1582588800000,
+    "resultsAvailableTime": 1582667999000,
+    "gameRuleSet": {
+      "basePrice": 100,
+      "maxPrice": 1000000,
+      "minStake": 10,
+      "maxStake": 100000,
+      "minSystemLevel": 1,
+      "maxSystemLevel": 10,
+      "oddsType": "FIXED"
+    },
+    "rows": [
+      {
+        "id": "1",
+        "status": "OPEN",
+        "name": "Columbus - Ottawa",
+        "shortName": "P1_1X2_P2_1X2_P3_1X2",
+        "description": "Tilanne erien jälkeen",
+        "detailedDescription": "",
+        "tvChannel": "Viasat",
+        "competitors": [
+          {
+            "id": "1",
+            "name": "1/1/1",
+            "odds": {
+              "odds": 230
+            },
+            "status": "ACTIVE",
+            "handicap": "0.00"
+          },
+          {
+            "id": "2",
+            "name": "1/1/X",
+            "odds": {
+              "odds": 2300
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "3",
+            "name": "1/1/2",
+            "odds": {
+              "odds": 7400
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "4",
+            "name": "1/X/1",
+            "odds": {
+              "odds": 2700
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "5",
+            "name": "1/X/X",
+            "odds": {
+              "odds": 3000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "6",
+            "name": "1/X/2",
+            "odds": {
+              "odds": 5200
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "7",
+            "name": "1/2/1",
+            "odds": {
+              "odds": 19000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "8",
+            "name": "1/2/X",
+            "odds": {
+              "odds": 10000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "9",
+            "name": "1/2/2",
+            "odds": {
+              "odds": 4200
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "10",
+            "name": "X/1/1",
+            "odds": {
+              "odds": 500
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "11",
+            "name": "X/1/X",
+            "odds": {
+              "odds": 3200
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "12",
+            "name": "X/1/2",
+            "odds": {
+              "odds": 9600
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "13",
+            "name": "X/X/1",
+            "odds": {
+              "odds": 1400
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "14",
+            "name": "X/X/X",
+            "odds": {
+              "odds": 1550
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "15",
+            "name": "X/X/2",
+            "odds": {
+              "odds": 2700
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "16",
+            "name": "X/2/1",
+            "odds": {
+              "odds": 5800
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "17",
+            "name": "X/2/X",
+            "odds": {
+              "odds": 3200
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "18",
+            "name": "X/2/2",
+            "odds": {
+              "odds": 1200
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "19",
+            "name": "2/1/1",
+            "odds": {
+              "odds": 2200
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "20",
+            "name": "2/1/X",
+            "odds": {
+              "odds": 12000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "21",
+            "name": "2/1/2",
+            "odds": {
+              "odds": 37000
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "22",
+            "name": "2/X/1",
+            "odds": {
+              "odds": 2900
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "23",
+            "name": "2/X/X",
+            "odds": {
+              "odds": 3200
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "24",
+            "name": "2/X/2",
+            "odds": {
+              "odds": 5600
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "25",
+            "name": "2/2/1",
+            "odds": {
+              "odds": 4400
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "26",
+            "name": "2/2/X",
+            "odds": {
+              "odds": 2300
+            },
+            "status": "ACTIVE"
+          },
+          {
+            "id": "27",
+            "name": "2/2/2",
+            "odds": {
+              "odds": 620
+            },
+            "status": "ACTIVE"
+          }
+        ],
+        "eventId": "97448788",
+        "excludedEvents": [
+          "97448788"
+        ]
+      }
+    ]
+  }
+]

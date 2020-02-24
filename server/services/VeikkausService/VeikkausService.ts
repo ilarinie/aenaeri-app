@@ -54,7 +54,6 @@ export class VeikkausService implements OddsService {
 
 
     getVeikkausOdds = async (games: ExtendedBoxScoreSchemaDocumentType[]) => {
-        let newGames = games;
         try {
             const gameEventMap = await this.getVeikkausHockeyEventsList(games);
 
@@ -65,11 +64,11 @@ export class VeikkausService implements OddsService {
                 const oddsForGame = oddsData.filter(a => a.rows[0].eventId == key);
                 if (!gameEventMap[key].odds) {
                     gameEventMap[key].odds = [];
-                } else {
+                } else if (oddsForGame.length !== 0) {
                     gameEventMap[key].odds = gameEventMap[key].odds?.filter(s => s.source !== 'veikkaus');
                 }
 
-            
+                fs.writeFileSync('veikkausOdds.json', JSON.stringify(oddsForGame, null, 2))
                 oddsForGame.map((odds) => {
                     gameEventMap[key].odds?.push({
                         homeOdds: odds.rows[0].competitors[0].odds.odds,
