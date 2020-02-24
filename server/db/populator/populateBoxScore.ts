@@ -4,6 +4,7 @@ import fs from 'fs';
 import logger from '../../logger';
 import { ExtendedBoxScore } from '../../models/ExtendedBoxScoreType';
 import ExtendedBoxScoreSchema, { ExtendedBoxScoreSchemaType } from '../mongo/ExtendedBoxScoreSchema';
+import { GameOddsAndResults } from '../mongo/GameOddsAndResultsSchema';
 
 const errors: string[] = [];
 let currentSeason: string;
@@ -36,6 +37,10 @@ interface GameOdds {
 
 let odds: OddsType;
 
+let previousOdds: {
+    [gamePk: number]: GameOddsAndResults[]
+} = {};
+
 const getCurrentSeason = async (): Promise<string> => {
     if (!currentSeason) {
         const currentSeasonResponse = await axios.get('https://statsapi.web.nhl.com/api/v1/seasons/current');
@@ -67,6 +72,9 @@ const generateIdsToBeFetched = async (season: string) => {
             await Promise.all([
                 ...previewGames.map((game) => {
                     logger.info(`Removed game id ${game.gamePk}`);
+                    if (game.odds.length != 0) {
+                        previousOdds[game.gamePk] = game.odds;
+                    }
                     return game.remove();
             }) ]);
             return Promise.resolve(ids);
@@ -84,6 +92,9 @@ const generateIdsToBeFetched = async (season: string) => {
             } else {
                 logger.info(`Found ${gamesFromSeason.length} games for season ${season}, deleting and re-fetching.`);
                 for (let i = 0; i < gamesFromSeason.length; i++) {
+                    if (gamesFromSeason[i].odds.length != 0) {
+                        previousOdds[gamesFromSeason[i].gamePk] = gamesFromSeason[i].odds;
+                    }
                     await gamesFromSeason[i].remove();
                 }
                 return Promise.resolve(generateRange(season));
@@ -160,8 +171,11 @@ const fetchAndCreateBoxScore = async (gameId: string): Promise<any> => {
                 awayOdds: parseFloat(odd.odds_away),
                 drawOdds: parseFloat(odd.odds_draw),
                 updatedAt: new Date().getTime() });
-            await res.save();
         }
+        if (previousOdds[res.gamePk]) {
+            res.odds.push(...previousOdds[res.gamePk])
+        }
+        await res.save();
         return Promise.resolve(res);
     } catch (err) {
         logger.error('Error saving: ' + err);

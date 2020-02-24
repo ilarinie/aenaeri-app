@@ -7,8 +7,6 @@ import { PlayerEntity } from '../entities/Player';
 import { SkaterGameStatsEntity } from '../entities/SkaterGameStats';
 import { SkaterSingleSeasonStatsEntity } from '../entities/SkaterSingleSeasonStats';
 
-declare function assert(value: unknown): 'asserts value';
-
 const CURRENT_SEASON = '20192020';
 
 export const populatePlayers = async (playerIds: number[]) => {
@@ -28,7 +26,7 @@ export const populatePlayers = async (playerIds: number[]) => {
         // const index = i;
         const start = new Date().getTime();
         const playerResponse = await NhlApiService.fetchPlayer(id);
-        let player = null;
+        let player: PlayerEntity | null  = null;
         try {
             player = await PlayerEntity.fromNHLApiResponse(playerResponse).save();
         } catch (err) {
