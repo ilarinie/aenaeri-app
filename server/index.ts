@@ -1,12 +1,12 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 import app from './app/app';
 import { initializeDB } from './db';
-import logger from './logger';
 import { UserEntity } from './db/entities/User';
-import { OddsServices } from './services/OddsService';
 import { todaysGames } from './db/queries/nextGames';
+import logger from './logger';
+import { OddsServices } from './services/OddsService';
 
 const PORT = process.env.PORT || 3001;
 
@@ -24,13 +24,19 @@ initializeDB().then(() => {
                 todaysGames().then((games) => {
                     OddsServices.forEach((service) => {
                         service.addOddsForGames(games, user);
-                    })
-                })
-            })
-        }, 1000 * 60 * 30);
+                    });
+                });
+            });
+        }, 1000 * 60 * 10);
+        logger.info('Updating todays odds..');
+        UserEntity.findOneOrFail({ username: process.env.DEV_USER_NAME }).then((user) =>  {
+            todaysGames().then(async (games) => {
+                for (const service of OddsServices) {
+                    await service.addOddsForGames(games, user);
+                }
+            });
+        });
     }
-
-
 
 }).catch((err) => {
     logger.error(`Application startup failed ${err}`);

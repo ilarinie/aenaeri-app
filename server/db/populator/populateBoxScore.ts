@@ -37,8 +37,8 @@ interface GameOdds {
 
 let odds: OddsType;
 
-let previousOdds: {
-    [gamePk: number]: GameOddsAndResults[]
+const previousOdds: {
+    [gamePk: number]: GameOddsAndResults[],
 } = {};
 
 const getCurrentSeason = async (): Promise<string> => {
@@ -76,7 +76,7 @@ const generateIdsToBeFetched = async (season: string) => {
                         previousOdds[game.gamePk] = game.odds;
                     }
                     return game.remove();
-            }) ]);
+                }) ]);
             return Promise.resolve(ids);
         }
     } else {
@@ -174,7 +174,7 @@ const fetchAndCreateBoxScore = async (gameId: string): Promise<any> => {
                 updatedAt: new Date().getTime() });
         }
         if (previousOdds[res.gamePk]) {
-            res.odds.push(...previousOdds[res.gamePk])
+            res.odds.push(...previousOdds[res.gamePk]);
         }
         await res.save();
         return Promise.resolve(res);

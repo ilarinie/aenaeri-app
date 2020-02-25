@@ -1,112 +1,81 @@
 import React, { useEffect, useState } from 'react';
-import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
 import styled from 'styled-components';
+import { SeasonStatsObject } from '../../../server/models/BaseDataResponse';
+import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
+import { TeamSingleSeasonStats } from '../../../server/models/TeamSingleSeasonStats';
 import { getTeamLogoUri } from '../../utils/teamLogoUri';
 import { GameDatePanel } from './GameDatePanel';
-import { useSelector } from 'react-redux';
-import { Team } from '../../../server/models/Team';
-import { SeasonStatsObject } from '../../../server/models/BaseDataResponse';
-import { TeamSingleSeasonStats } from '../../../server/models/TeamSingleSeasonStats';
-
+import { OddsRow } from './OddsRow';
 
 export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: SeasonStatsObject<TeamSingleSeasonStats>, width?: string }> = ({ game, teamsStats, width = '300px' }) => {
-    
+
     const [ records, setRecords ] = useState({ home: '', away: ''});
 
-
     useEffect(() => {
-        let record = records;
+        const record = { home: '', away: '' };
         const homeStats = teamsStats ? teamsStats[game.gameData.teams.home.id].statObject['20192020'] : null;
         if (homeStats) {
-            record.home = `${homeStats.wins}-${homeStats.losses}-${homeStats.ot}`
+            record.home = `${homeStats.wins}-${homeStats.losses}-${homeStats.ot}`;
         }
         const awayStats = teamsStats ? teamsStats[game.gameData.teams.away.id].statObject['20192020'] : null;
         if (awayStats) {
-            record.away = `${awayStats.wins}-${awayStats.losses}-${awayStats.ot}`
+            record.away = `${awayStats.wins}-${awayStats.losses}-${awayStats.ot}`;
         }
         setRecords({
-            home: record.home,
-            away: record.away
+            home: record.home || '12-32-23',
+            away: record.away || '12-43-34',
         });
-    }, [teamsStats]);
-    
+    }, [teamsStats, game]);
 
-    const oneXTwoOdds = game.odds.filter(o => o.gameName="1X2")[0];
-    
-    
+    const oneXTwoOdds = game.odds.filter((o) => o.gameName === '1X2');
+
+    const oneTwoOdds = game.odds.filter((o) => o.gameName === '12');
+
     return (
         <Container style={{ width }}>
-            <GameDatePanel date={new Date(game.gameData.datetime.dateTime)} />
-            <TeamLogo column="1 / 1" src={getTeamLogoUri(game.gameData.teams.home.id.toString())} />
-            <VSDiv>VS</VSDiv>
-            <TeamLogo column="3 / 3" src={getTeamLogoUri(game.gameData.teams.away.id.toString())} />
-            <Odds gridRow="3 / 3">
-                <StatContainer style={{ gridColumn: '1 /1' }}>
-                    {records.home}
-                </StatContainer>
-                <StatContainer style={{ gridColumn: '2 /2' }}>
-                    
-                </StatContainer>
-                <StatContainer style={{ gridColumn: '3 /3' }}>
-                    {records.away}
-                </StatContainer>
-            </Odds>
-            {oneXTwoOdds &&
-                <Odds gridRow="4 / 4">
-                    <OddContainer style={{ gridColumn: '1 /1' }}>
-                        <div>1</div>
-                        {(oneXTwoOdds.homeOdds / 100).toFixed(2)}
-                    </OddContainer>
-                    <OddContainer style={{ gridColumn: '2 /2' }}>
-                        <div>
-                            X
-                        </div>
-                        {oneXTwoOdds.drawOdds && (oneXTwoOdds.drawOdds / 100).toFixed(2) }
-                    </OddContainer>
-                    <OddContainer style={{ gridColumn: '3 /3' }}>
-                        <div>2</div>
-                        {(oneXTwoOdds.awayOdds / 100).toFixed(2)}
-                    </OddContainer>
-                </Odds>
-            }
+            <div>
+                <GameDatePanel date={new Date(game.gameData.datetime.dateTime)} />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                <div style={{ display: 'flex', flexDirection: 'column'}}>
+                    <TeamLogo src={getTeamLogoUri(game.gameData.teams.home.id.toString())} />
+                    <StatContainer >
+                        {records.home}
+                    </StatContainer>
+                </div>
+                <VSDiv>VS</VSDiv>
+                <div>
+                    <TeamLogo src={getTeamLogoUri(game.gameData.teams.away.id.toString())} />
+                    <StatContainer>
+                        {records.away}
+                    </StatContainer>
+                </div>
+            </div>
+            <h3>1X2</h3>
+            {oneXTwoOdds.map((odds) => (
+                <OddsRow odds={odds} />
+            ))}
+            <h3>12</h3>
+            {oneTwoOdds.map((odds) => (
+                <OddsRow odds={odds} />
+            ))}
         </Container>
 
-    )
+    );
 
-}
+};
 
 const StatContainer = styled.div`
     font-size: 0.8rem;
+    height: 20px;
+    color: white;
+    margin-top: 0.1em;
 `;
 
-const OddContainer = styled.div`
-    div {
-        font-size: 0.5rem;
-    }
-    border: 1px solid white;
-    width: 50%;
-    margin: 0 auto;
-    padding: 0.5em 0.5em;
-    text-aling: center;
-
-`
-
-const Odds = styled.div<{ gridRow: string }>`
-    grid-column: 1 / 5;
-    text-align: center;
-    grid-template-columns: 1fr 1fr 1fr;
-    display: grid;
-    grid-row: ${props => props.gridRow};
-
-` 
-
-
-
-const TeamLogo = styled.img<{ column: string }>`
-    grid-column: ${props => props.column};
-    grid-row: 2 / 2;
-`
-
+const TeamLogo = styled.img`
+    display: block;
+    min-width: 125px;
+`;
 
 const VSDiv = styled.div`
     text-align: center;
@@ -116,12 +85,14 @@ const VSDiv = styled.div`
     font-weight: 700;
     font-size: 2rem;
     grid-row: 2 / 2 ;
-`
+`;
 
 const Container = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    border-bottom: 1px solid white;
-    padding: 1em;
-
-`
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+   box-sizing: border-box;
+   background: var(--semi-dark-gray);
+   margin: 0.5em 0.5em;
+   padding: 0.5em;
+`;

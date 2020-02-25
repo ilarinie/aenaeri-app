@@ -58,9 +58,8 @@ export class PinnacleService implements OddsService {
             const odds = await axios.get('https://api.pinnacle.com/v1/odds?sportId=19&oddsFormat=Decimal&eventIds=' + parentIds.join(',') , { headers: { Accept: 'application/json', ...this.createAuthHeader(user) } });
 
             const gamePkOddsMap: {
-                [gamePk: number]: OddsType[]
+                [gamePk: number]: OddsType[],
             } = {};
-
 
             odds.data.leagues.forEach((league) => {
                 league.events.forEach((event) => {
@@ -74,13 +73,13 @@ export class PinnacleService implements OddsService {
                             const period = event.periods.filter((p) => p.number === 0)[0];
                             if (period) {
                                 gamePkOddsMap[relatedGame.gamePk].push({
-                                    awayOdds: period.moneyline.away,
-                                    homeOdds: period.moneyline.home,
+                                    awayOdds: period.moneyline.away * 100,
+                                    homeOdds: period.moneyline.home * 100,
                                     source: 'pinnacle',
                                     bookMakerId: event.id,
                                     gamePk: relatedGame.gamePk,
                                     gameName: '12',
-                                })
+                                });
                             }
                         }
                         // REGULAR ONLY
@@ -88,31 +87,31 @@ export class PinnacleService implements OddsService {
                             const period = event.periods.filter((p) => p.number === 0)[0];
                             if (period) {
                                 gamePkOddsMap[relatedGame.gamePk].push({
-                                    awayOdds: period.moneyline.away,
-                                    homeOdds: period.moneyline.home,
-                                    drawOdds: period.moneyline.draw,
+                                    awayOdds: period.moneyline.away * 100,
+                                    homeOdds: period.moneyline.home * 100,
+                                    drawOdds: period.moneyline.draw * 100,
                                     source: 'pinnacle',
                                     bookMakerId: event.id,
                                     gamePk: relatedGame.gamePk,
                                     gameName: '1X2',
-                                })
+                                });
                             }
-        
+
                         }
                     }
-                })
+                });
 
-            })
+            });
 
             await Promise.all([
                 ... Object.keys(gamePkOddsMap).map(async (key) => {
-                    const game = games.filter(g => g.gamePk.toString() === key)[0];
+                    const game = games.filter((g) => g.gamePk.toString() === key)[0];
                     if (game) {
-                        game.odds = game.odds.filter(s => s.source !== 'pinnacle');
-                        game.odds.push(...gamePkOddsMap[key])
+                        game.odds = game.odds.filter((s) => s.source !== 'pinnacle');
+                        game.odds.push(...gamePkOddsMap[key]);
                     }
                     return game.save();
-                })
+                }),
             ]);
             return Promise.resolve(games);
 

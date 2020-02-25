@@ -4,7 +4,7 @@ import { PlayerStandings, SeasonStatsObject } from '../../../server/models/BaseD
 import { GoalieSingleSeasonStats } from '../../../server/models/GoalieSingleSeasonStats';
 import { Player } from '../../../server/models/Player';
 import { SkaterSingleSeasonStats } from '../../../server/models/SkaterSingleSeasonStats';
-import { BoxHeader, BoxHeaderLink } from '../../components/BoxHeader';
+import { BoxHeader } from '../../components/BoxHeader';
 import { SmallTeamRow } from '../../components/SmallTeamRow';
 import { PLAYERS_ROUTE } from '../../routes';
 import { playerThumbnailUrlFromPlayerId } from '../../utils/playerThumbnailUrl';
@@ -25,9 +25,9 @@ export const PlayerStandingsPanel: React.FC<PlayerStandingsPanelProps> = ({ play
             const player = playerObject[playerId.toString()];
             let stat;
             if (!goalie) {
-                 stat = skaterStats[playerId.toString()].statObject['20192020'][statName as keyof SkaterSingleSeasonStats] as number;
+                stat = skaterStats[playerId.toString()].statObject['20192020'][statName as keyof SkaterSingleSeasonStats] as number;
             } else {
-                 stat = goalieStats[playerId.toString()].statObject['20192020'][statName as keyof GoalieSingleSeasonStats] as number;
+                stat = goalieStats[playerId.toString()].statObject['20192020'][statName as keyof GoalieSingleSeasonStats] as number;
             }
             return (
                 <SmallTeamRow

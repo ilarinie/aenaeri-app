@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { OddsGameType } from "../../models/OddsGameType";
-import { OddsSource } from "../../models/OddsSource";
+import { OddsGameType } from '../../models/OddsGameType';
+import { OddsSource } from '../../models/OddsSource';
 
 export const GameOddsAndResultsSchema = new mongoose.Schema<GameOddsAndResults>({
     homeOdds: Number,
@@ -14,9 +14,9 @@ export const GameOddsAndResultsSchema = new mongoose.Schema<GameOddsAndResults>(
 export interface GameOddsAndResults {
     homeOdds: number;
     awayOdds: number;
-    drawOdds: number | undefined;
+    drawOdds?: number | undefined;
     updatedAt?: number;
-    gameName: OddsGameType,
-    source: OddsSource,
+    gameName: OddsGameType;
+    source: OddsSource;
     bookMakerId: string;
 }

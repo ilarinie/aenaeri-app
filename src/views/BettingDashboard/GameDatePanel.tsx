@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 export const GameDatePanel = React.memo<{ date: Date }>(({date}) => (
     <Container>
         <DatePanel >
@@ -12,22 +11,22 @@ export const GameDatePanel = React.memo<{ date: Date }>(({date}) => (
             {date.toLocaleTimeString('fi-FI')}
         </TimePanel>
     </Container>
-))
+));
 
 const DatePanel = styled.div`
     text-align: right;
     padding-right: 1em;
- 
-`
+
+`;
 
 const TimePanel = styled.div`
     padding-left: 1em;
-` 
+`;
 
 const VerticalDivider = styled.div<{ today?: boolean}>`
     width: 1px;
     border: 0.5px solid white;
-    ${props => props.today && `
+    ${(props) => props.today && `
         &:after {
 
             content: "today"
@@ -47,4 +46,5 @@ const Container = styled.div`
     width: 100%;
     grid-template-columns: 49% 1px 49%;
     justify-content: center;
+    padding: 0.2em 0;
 `;

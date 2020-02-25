@@ -18,7 +18,7 @@ const Container = styled.div`
 export const single = () => (
     <OuterContainer>
         <Container>
-           <NextGameItem game={ExtendedBoxScoreMock} />
+           <NextGameItem width='100%' game={ExtendedBoxScoreMock} />
         </Container>
     </OuterContainer>
 );

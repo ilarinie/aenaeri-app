@@ -1,12 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { DaySchedule } from '../../../server/models/DaySchedule';
-import { RootState } from '../../state/rootReducer';
-import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
-import styled from 'styled-components';
-import { NextGameItem } from './NextGameItem';
 import { PulseLoader, RingLoader} from 'react-spinners';
+import styled from 'styled-components';
+import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
+import { RootState } from '../../state/rootReducer';
+import { NextGameItem } from './NextGameItem';
 
 interface NextGamesPanelProps {
 
@@ -28,22 +27,18 @@ export const NextGamesPanel: React.FC<NextGamesPanelProps> = () => {
         fetchSchedule();
     }, []);
 
-
     const onRefresh = () => {
         setRefreshDisabled(true);
         fetchSchedule().then(() => {
             setRefreshDisabled(false);
-        })
+        });
     };
-    
-
-   
 
     return (
         <Container>
             <RefreshButton disabled={refreshDisabled} onClick={onRefresh}>
-                { refreshDisabled ? 
-                <RingLoader size="1rem" color="white" />
+                { refreshDisabled ?
+                <RingLoader size='1rem' color='white' />
                 :
                 'Refresh'}
             </RefreshButton>
@@ -53,11 +48,11 @@ export const NextGamesPanel: React.FC<NextGamesPanelProps> = () => {
             <ScheduleContainer>
                 {daySchedule.length > 0 ?
                     daySchedule.map((g) => (
-                        <NextGameItem width="400px" key={g.gamePk} game={g} teamsStats={teams} />
+                        <NextGameItem width='400px' key={g.gamePk} game={g} teamsStats={teams} />
                     ))
                     :
                     <LoadingContainer>
-                        <PulseLoader size={50} color="white" />
+                        <PulseLoader size={50} color='white' />
                     </LoadingContainer>
                 }
             </ScheduleContainer>
@@ -79,7 +74,7 @@ const RefreshButton = styled.button`
     &:disabled {
         cursor: progress;
     }
-`
+`;
 
 const LoadingContainer = styled.div`
    width: 100%;
@@ -87,13 +82,13 @@ const LoadingContainer = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
-`  
+`;
 
 const Container = styled.div`
-   
-`  
+
+`;
 
 const ScheduleContainer = styled.div`
 display: flex;
 flex-wrap: wrap;
-` 
+`;
