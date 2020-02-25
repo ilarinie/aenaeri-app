@@ -3,11 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 import { NextGamesPanel } from './NextGames';
 
-
-
 export const BettingDashboard: React.FC<RouteComponentProps> = () => {
-
-
 
     return (
         <Container>
@@ -15,9 +11,8 @@ export const BettingDashboard: React.FC<RouteComponentProps> = () => {
             <NextGamesPanel />
         </Container>
     );
-}
-
+};
 
 const Container = styled.div`
     padding: 2em;
-`
+`;

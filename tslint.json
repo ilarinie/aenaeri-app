@@ -2,7 +2,8 @@
     "defaultSeverity": "error",
     "extends": [
         "tslint:recommended",
-        "tslint-etc"
+        "tslint-etc",
+        "tslint-eslint-rules"
     ],
     "jsRules": {},
     "rules": {
@@ -10,6 +11,7 @@
             true,
             "always"
         ],
+        "ter-indent": [ true, 4, { "SwitchCase": 1 }],
         "quotemark": [
             true,
             "single"

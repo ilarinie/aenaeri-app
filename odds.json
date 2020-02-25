@@ -1,0 +1,304 @@
+{
+  "sportId": 19,
+  "last": 967855755,
+  "leagues": [
+    {
+      "id": 5445,
+      "events": [
+        {
+          "id": 1104783411,
+          "periods": [
+            {
+              "lineId": 967855745,
+              "number": 0,
+              "cutoff": "2020-02-25T00:08:00Z",
+              "maxSpread": 2000,
+              "maxTotal": 2000,
+              "status": 1,
+              "spreads": [
+                {
+                  "hdp": 1.5,
+                  "home": 1.167,
+                  "away": 5.5
+                }
+              ],
+              "totals": [
+                {
+                  "points": 8.5,
+                  "over": 5,
+                  "under": 1.175
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1461,
+      "events": [
+        {
+          "id": 1104783418,
+          "periods": [
+            {
+              "lineId": 967855755,
+              "number": 0,
+              "cutoff": "2020-02-25T00:08:00Z",
+              "maxSpread": 4000,
+              "maxMoneyline": 4000,
+              "maxTotal": 4000,
+              "status": 1,
+              "spreads": [
+                {
+                  "hdp": -1,
+                  "home": 1.9,
+                  "away": 2
+                },
+                {
+                  "altLineId": 12498061053,
+                  "hdp": 0,
+                  "home": 1.355,
+                  "away": 3.33
+                },
+                {
+                  "altLineId": 12498061055,
+                  "hdp": -0.5,
+                  "home": 1.68,
+                  "away": 2.3
+                }
+              ],
+              "moneyline": {
+                "home": 1.684,
+                "away": 4.12,
+                "draw": 4.72
+              },
+              "totals": [
+                {
+                  "points": 6,
+                  "over": 2.24,
+                  "under": 1.714
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1460,
+      "events": [
+        {
+          "id": 1104455203,
+          "periods": [
+            {
+              "lineId": 967855747,
+              "number": 0,
+              "cutoff": "2020-02-25T00:08:00Z",
+              "maxSpread": 4000,
+              "maxMoneyline": 8000,
+              "maxTotal": 4000,
+              "maxTeamTotal": 1000,
+              "status": 1,
+              "spreads": [
+                {
+                  "hdp": -1.5,
+                  "home": 2.15,
+                  "away": 1.781
+                },
+                {
+                  "altLineId": 12498060925,
+                  "hdp": -1,
+                  "home": 1.689,
+                  "away": 2.28
+                },
+                {
+                  "altLineId": 12498060927,
+                  "hdp": -2,
+                  "home": 2.59,
+                  "away": 1.549
+                },
+                {
+                  "altLineId": 12498060929,
+                  "hdp": -2.5,
+                  "home": 3.07,
+                  "away": 1.408
+                },
+                {
+                  "altLineId": 12498060931,
+                  "hdp": -3,
+                  "home": 4.49,
+                  "away": 1.218
+                },
+                {
+                  "altLineId": 12498060933,
+                  "hdp": -3.5,
+                  "home": 5.06,
+                  "away": 1.171
+                }
+              ],
+              "moneyline": {
+                "home": 1.465,
+                "away": 2.9
+              },
+              "totals": [
+                {
+                  "points": 5.5,
+                  "over": 1.869,
+                  "under": 2.02
+                },
+                {
+                  "altLineId": 12498060920,
+                  "points": 3.5,
+                  "over": 1.171,
+                  "under": 4.91
+                },
+                {
+                  "altLineId": 12498060922,
+                  "points": 4,
+                  "over": 1.2,
+                  "under": 4.61
+                },
+                {
+                  "altLineId": 12498060924,
+                  "points": 4.5,
+                  "over": 1.324,
+                  "under": 3.46
+                },
+                {
+                  "altLineId": 12498060926,
+                  "points": 5,
+                  "over": 1.471,
+                  "under": 2.8
+                },
+                {
+                  "altLineId": 12498060928,
+                  "points": 6,
+                  "over": 2.07,
+                  "under": 1.813
+                },
+                {
+                  "altLineId": 12498060930,
+                  "points": 6.5,
+                  "over": 2.28,
+                  "under": 1.671
+                },
+                {
+                  "altLineId": 12498060932,
+                  "points": 7,
+                  "over": 3.19,
+                  "under": 1.367
+                },
+                {
+                  "altLineId": 12498060934,
+                  "points": 7.5,
+                  "over": 3.75,
+                  "under": 1.27
+                }
+              ],
+              "teamTotal": {
+                "home": {
+                  "points": 3.5,
+                  "over": 2,
+                  "under": 1.869
+                },
+                "away": {
+                  "points": 2.5,
+                  "over": 2.2,
+                  "under": 1.724
+                }
+              }
+            },
+            {
+              "lineId": 967855752,
+              "number": 1,
+              "cutoff": "2020-02-25T00:08:00Z",
+              "maxSpread": 1000,
+              "maxMoneyline": 1000,
+              "maxTotal": 1000,
+              "maxTeamTotal": 500,
+              "status": 1,
+              "spreads": [
+                {
+                  "hdp": -0.5,
+                  "home": 2.3,
+                  "away": 1.694
+                },
+                {
+                  "altLineId": 12498061007,
+                  "hdp": 0.5,
+                  "home": 1.296,
+                  "away": 3.78
+                },
+                {
+                  "altLineId": 12498061009,
+                  "hdp": -1,
+                  "home": 4.1,
+                  "away": 1.261
+                },
+                {
+                  "altLineId": 12498061011,
+                  "hdp": -1.5,
+                  "home": 5.25,
+                  "away": 1.174
+                }
+              ],
+              "moneyline": {
+                "home": 1.549,
+                "away": 2.63
+              },
+              "totals": [
+                {
+                  "points": 1.5,
+                  "over": 1.833,
+                  "under": 2.07
+                },
+                {
+                  "altLineId": 12498061006,
+                  "points": 0.5,
+                  "over": 1.176,
+                  "under": 5.05
+                },
+                {
+                  "altLineId": 12498061008,
+                  "points": 1,
+                  "over": 1.289,
+                  "under": 3.76
+                },
+                {
+                  "altLineId": 12498061010,
+                  "points": 2,
+                  "over": 2.67,
+                  "under": 1.51
+                },
+                {
+                  "altLineId": 12498061012,
+                  "points": 2.5,
+                  "over": 3.53,
+                  "under": 1.314
+                },
+                {
+                  "altLineId": 12498061014,
+                  "points": 3,
+                  "over": 6.58,
+                  "under": 1.111
+                }
+              ],
+              "teamTotal": {
+                "home": {
+                  "points": 0.5,
+                  "over": 1.502,
+                  "under": 2.77
+                },
+                "away": {
+                  "points": 0.5,
+                  "over": 1.884,
+                  "under": 2.02
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

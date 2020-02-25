@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import { OddsSource, OddsGameType } from '../../services/OddsService';
+import { OddsGameType } from "../../models/OddsGameType";
+import { OddsSource } from "../../models/OddsSource";
 
 export const GameOddsAndResultsSchema = new mongoose.Schema<GameOddsAndResults>({
     homeOdds: Number,

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SmallPlayerRow } from '../components/SmallPlayerRow';
 import { ExtendedBoxScoreMock } from '../Mocks/ExtendedBoxScoreMock';
 import { NextGameItem } from '../views/BettingDashboard/NextGameItem';
 

@@ -2,8 +2,9 @@ import axios from 'axios';
 import { ExtendedBoxScoreSchemaDocumentType } from '../../db/mongo/ExtendedBoxScoreSchema';
 import logger from '../../logger';
 import { VeikkausAccountBalance } from '../../models/VeikkausAccountBalance';
-import { OddsGameType, OddsService, OddsType } from '../OddsService';
+import { OddsService } from '../OddsService';
 import { VeikkausEventsResponse } from './VeikkausEventsResponse';
+import { OddsGameType } from '../../models/OddsGameType';
 
 interface VeikkausEventsResponseType {
     events: Array<{
