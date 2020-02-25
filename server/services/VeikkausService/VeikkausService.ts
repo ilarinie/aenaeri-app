@@ -14,6 +14,18 @@ interface VeikkausEventsResponseType {
     }>;
 }
 
+export const getNormalizedLocationName = (locationName: string): string => {
+    switch (locationName) {
+        case 'Montréal':
+            return 'Montreal';
+        case 'St. Louis':
+            return 'St.Louis';
+        default:
+            return locationName;
+    }
+
+}
+
 let veikkausService: VeikkausService;
 
 export class VeikkausService implements OddsService {
@@ -130,7 +142,10 @@ export class VeikkausService implements OddsService {
         } = {};
 
         games.forEach((game) => {
-            const event = response.data.events.filter((d) => new Date(d.date).getTime() === game.gameData.datetime.dateTime.getTime() && d.name.includes(game.gameData.teams.home.locationName))[0];
+            const event = response.data.events.filter((d) => {
+                return new Date(d.date).getTime() === game.gameData.datetime.dateTime.getTime()
+                && d.name.includes(getNormalizedLocationName(game.gameData.teams.home.locationName))
+            })[0];
             if (event) {
                 gameEventMap[event.id] = game;
                 events.push(event.id);

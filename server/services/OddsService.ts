@@ -11,8 +11,7 @@ export interface OddsService {
 
 export const OddsServices: OddsService[] =  [
     VeikkausService.getInstance(),
-    // TODO: Uncomment after PinnacleService Finished
-    //PinnacleService.getInstance(),
+    PinnacleService.getInstance(),
 ]
 
 

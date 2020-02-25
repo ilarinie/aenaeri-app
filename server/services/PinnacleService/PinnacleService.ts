@@ -4,8 +4,20 @@ import { UserEntity } from '../../db/entities/User';
 import { ExtendedBoxScoreSchemaDocumentType } from '../../db/mongo/ExtendedBoxScoreSchema';
 import logger from '../../logger';
 import { OddsService, OddsType } from '../OddsService';
+import { GameOddsAndResults } from '../../db/mongo/GameOddsAndResultsSchema';
 
 let pinnacleService;
+
+export const getNormalizedTeamName = (teamName: string): string => {
+    switch (teamName) {
+        case 'Montréal Canadiens':
+            return 'Montreal Canadiens';
+        case 'St. Louis Blues':
+            return 'St.Louis Blues';
+        default:
+            return teamName;
+    }
+}
 
 export class PinnacleService implements OddsService {
 
@@ -43,7 +55,7 @@ export class PinnacleService implements OddsService {
             req.data.league.forEach((league) => {
                 league.events.forEach((event) => {
                     const relatedGame = games.filter((game) => {
-                        return game.gameData.datetime.dateTime.getTime() === subMinutes(new Date(event.starts), 8).getTime() && game.gameData.teams.home.name === event.home;
+                        return game.gameData.datetime.dateTime.getTime() === subMinutes(new Date(event.starts), 8).getTime() && getNormalizedTeamName(game.gameData.teams.home.name) === event.home;
                     })[0];
 
                     if (relatedGame) {
@@ -58,7 +70,7 @@ export class PinnacleService implements OddsService {
             const odds = await axios.get('https://api.pinnacle.com/v1/odds?sportId=19&oddsFormat=Decimal&eventIds=' + parentIds.join(',') , { headers: { Accept: 'application/json', ...this.createAuthHeader(user) } });
 
             const gamePkOddsMap: {
-                [gamePk: number]: OddsType[],
+                [gamePk: number]: GameOddsAndResults[],
             } = {};
 
             odds.data.leagues.forEach((league) => {
@@ -77,7 +89,7 @@ export class PinnacleService implements OddsService {
                                     homeOdds: period.moneyline.home * 100,
                                     source: 'pinnacle',
                                     bookMakerId: event.id,
-                                    gamePk: relatedGame.gamePk,
+                                    updatedAt: new Date().getTime(),
                                     gameName: '12',
                                 });
                             }
@@ -92,7 +104,7 @@ export class PinnacleService implements OddsService {
                                     drawOdds: period.moneyline.draw * 100,
                                     source: 'pinnacle',
                                     bookMakerId: event.id,
-                                    gamePk: relatedGame.gamePk,
+                                    updatedAt: new Date().getTime(),
                                     gameName: '1X2',
                                 });
                             }

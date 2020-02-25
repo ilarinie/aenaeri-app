@@ -33,11 +33,11 @@ export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: Seaso
 
     return (
         <Container style={{ width }}>
-            <div>
+            <div style={{ marginBottom: '0.5em'}}>
                 <GameDatePanel date={new Date(game.gameData.datetime.dateTime)} />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <div style={{ display: 'flex', flexDirection: 'column'}}>
+            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                <div>
                     <TeamLogo src={getTeamLogoUri(game.gameData.teams.home.id.toString())} />
                     <StatContainer >
                         {records.home}
@@ -53,11 +53,11 @@ export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: Seaso
             </div>
             <h3>1X2</h3>
             {oneXTwoOdds.map((odds) => (
-                <OddsRow odds={odds} />
+                <OddsRow key={odds.bookMakerId} odds={odds} />
             ))}
             <h3>12</h3>
             {oneTwoOdds.map((odds) => (
-                <OddsRow odds={odds} />
+                <OddsRow key={odds.bookMakerId} odds={odds} />
             ))}
         </Container>
 
@@ -69,12 +69,13 @@ const StatContainer = styled.div`
     font-size: 0.8rem;
     height: 20px;
     color: white;
-    margin-top: 0.1em;
+    margin-top: 0.2em;
 `;
 
 const TeamLogo = styled.img`
     display: block;
     min-width: 125px;
+    max-height: 125px;
 `;
 
 const VSDiv = styled.div`
