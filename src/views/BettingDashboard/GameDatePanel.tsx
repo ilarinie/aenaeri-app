@@ -1,6 +1,7 @@
 import { formatDistanceStrict } from 'date-fns';
 import React from 'react';
 import { Box, Flex, Text } from 'rebass';
+import { format } from 'date-fns';
 
 export const GameDatePanel = React.memo<{ date: Date }>(({date}) => (
     <Flex
@@ -14,7 +15,7 @@ export const GameDatePanel = React.memo<{ date: Date }>(({date}) => (
         </Text>
         <Box mx={2} sx={{ borderLeft: '1px solid white'}} />
         <Text mx={2} fontSize='1.3em'>
-            {date.toLocaleTimeString('fi-FI')}
+            {format(date, 'HH:mm')}
         </Text>
     </Flex>
 ));

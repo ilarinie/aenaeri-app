@@ -15,6 +15,7 @@ export const TopBar: React.FC<TopBarProps> = ({ players, teams, navigate }) => {
     return (
         <Flex
             height='3em'
+            minHeight='3em'
             alignItems='center'
             px={4}
             bg='level1'

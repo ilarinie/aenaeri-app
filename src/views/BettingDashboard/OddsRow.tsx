@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Text } from 'rebass';
 import { GameOddsAndResults } from '../../../server/db/mongo/GameOddsAndResultsSchema';
 
 export const OddsRow = React.memo<{ odds: GameOddsAndResults }>(({ odds }) => {
 
     return (
         <Odds>
-            <h5 style={{ margin: '0.3em 0', fontVariant: 'small-caps'}}>{odds.source}</h5>
+            <Text as='h4' color='secondaryAccent' style={{ margin: '0.3em 0', fontVariant: 'small-caps'}}>{odds.source}</Text>
             <OddsContent>
                 <OddContainer>
                     <div>1</div>

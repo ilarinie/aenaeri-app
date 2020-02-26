@@ -11,9 +11,10 @@ interface SmallTeamRowProps {
     logoUri: string;
     link: string;
     finnish?: boolean;
+    customColor?: string;
 }
 
-export const SmallTeamRow = React.memo<SmallTeamRowProps>(({ logoUri, mainText, statistic, index, link, statisticNominator, finnish = false}) => {
+export const SmallTeamRow = React.memo<SmallTeamRowProps>(({ logoUri, mainText, statistic, index, link, statisticNominator, finnish = false, customColor = 'white'}) => {
 
     return (
         <Flex
@@ -38,8 +39,10 @@ export const SmallTeamRow = React.memo<SmallTeamRowProps>(({ logoUri, mainText, 
                 alignItems='center'
                 sx={{ flexGrow: 1, fontVariant: 'small-caps', textOverflow: 'ellipsis', whiteSpace: 'nowrap', textTransform: 'lowercase'}}
                 overflow='hidden'
+                color={customColor}
             >
                 <RebassLink
+                    color={customColor}
                     as={Link}
                     // @ts-ignore
                     to={link}

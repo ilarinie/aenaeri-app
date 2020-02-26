@@ -16,6 +16,7 @@ const theme =  {
         text: 'white',
         secondaryText: '#FFFFFF70',
         primaryAccent: '#BB86FC',
+        secondaryAccent: '#03DAC5',
     },
     space: [
         0, 4, 8, 16, 32, 64, 128, 256,

@@ -26,6 +26,7 @@ export const TeamStandingsPanel = React.memo<TeamStandingsPanelProps>(({ teamSta
                 mainText={teams.teamObject[teamId].name}
                 statistic={teamStats[teamId].statObject['20192020'].pts.toFixed(0)}
                 statisticNominator={teamStats[teamId].statObject['20192020'].gamesPlayed + 'gp'}
+                customColor={ index < 3 ? 'primaryAccent' : 'white'}
             />
         ))
     );
@@ -41,6 +42,7 @@ export const TeamStandingsPanel = React.memo<TeamStandingsPanelProps>(({ teamSta
         >
             <Box
                sx={{
+                   flexGrow: 1,
                    [mq[1]]: {
                        flexDirection: 'column',
                        paddingRight: 0,
@@ -67,12 +69,13 @@ export const TeamStandingsPanel = React.memo<TeamStandingsPanelProps>(({ teamSta
             </Box>
             <Box
                 sx={{
+                    flexGrow: 1,
                     [mq[1]]: {
                         flexDirection: 'column',
                         paddingLeft: 0,
                     },
                 }}
-                paddingRight={2}
+                paddingLeft={2}
             >
                 <StandingList header='Metropolitan' >
                     <Box>

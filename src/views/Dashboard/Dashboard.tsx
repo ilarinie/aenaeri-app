@@ -12,7 +12,7 @@ export const Dashboard: React.FC<RouteComponentProps> = () => {
     const baseData = useSelector((state: RootState) => state.baseData);
 
     return (
-        <Flex px={3} justifyContent='space-around'
+        <Flex px={3}
             sx={{
                 [mq[1]]: {
                     flexDirection: 'column',
@@ -79,3 +79,5 @@ export const Dashboard: React.FC<RouteComponentProps> = () => {
             </Flex>
     );
 };
+
+export default Dashboard;

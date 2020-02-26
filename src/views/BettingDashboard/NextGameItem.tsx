@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box } from 'rebass';
+import { Box, Text } from 'rebass';
 import styled from 'styled-components';
 import { SeasonStatsObject } from '../../../server/models/BaseDataResponse';
 import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
@@ -38,6 +38,9 @@ export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: Seaso
             backgroundColor='level1'
             p={2}
             marginRight={2}
+            sx={{
+                textAlign: 'center'
+            }}
         >
             <GameDatePanel date={new Date(game.gameData.datetime.dateTime)} />
             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
@@ -47,7 +50,7 @@ export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: Seaso
                         {records.home}
                     </StatContainer>
                 </div>
-                <VSDiv>VS</VSDiv>
+                <Text color='secondaryText' fontSize='2em'>VS</Text>
                 <div>
                     <TeamLogo src={getTeamLogoUri(game.gameData.teams.away.id.toString())} />
                     <StatContainer>
@@ -55,11 +58,11 @@ export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: Seaso
                     </StatContainer>
                 </div>
             </div>
-            <h3>1X2</h3>
+            <Text as='h3' color='primaryAccent' my={2}>1X2</Text>
             {oneXTwoOdds.map((odds) => (
                 <OddsRow key={odds.bookMakerId} odds={odds} />
             ))}
-            <h3>12</h3>
+            <Text as='h3' color='primaryAccent' my={2}>12</Text>
             {oneTwoOdds.map((odds) => (
                 <OddsRow key={odds.bookMakerId} odds={odds} />
             ))}

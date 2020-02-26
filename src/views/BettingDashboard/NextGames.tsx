@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
 import { RootState } from '../../state/rootReducer';
 import { NextGameItem } from './NextGameItem';
+import { format } from 'date-fns';
+
 
 interface NextGamesPanelProps {
 
@@ -45,7 +47,7 @@ export const NextGamesPanel: React.FC<NextGamesPanelProps> = () => {
                 'Refresh'}
             </RefreshButton>
             {
-                daySchedule[0] && <div>Last refresh {new Date(daySchedule[0].odds[0].updatedAt || '').toLocaleTimeString('fi-FI')}</div>
+                daySchedule[0] && <div>Last refresh {format(new Date(daySchedule[0].odds[0].updatedAt || ''), 'HH:mm')}</div>
             }
             <ScheduleContainer>
                 {daySchedule.length > 0 ?

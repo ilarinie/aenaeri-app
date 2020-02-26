@@ -32,6 +32,10 @@ body, html {
   overscroll-behavior: none;
 }
 
+#root {
+  height: 100%;
+}
+
 :root {
   --main-bg-color: #121212;
   --semi-dark-gray: #12121280;

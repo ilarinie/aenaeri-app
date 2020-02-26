@@ -69,7 +69,7 @@ export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) =>
 
     const renderLines = useMemo(() => (
         Object.keys(data).map((key) => (
-            <Line key={key} dataKey={key} name={players[key.substr(0, 7)].fullName + ' - ' + key.substr(8, 8)} stroke={key.includes('20192020') ? 'blue' : 'red'} connectNulls dot={false} />
+            <Line key={key} dataKey={key} name={players[key.substr(0, 7)].fullName + ' - ' + key.substr(8, 8)} stroke={key.includes('20192020') ? '#BB86FC' : '#03DAC5'} connectNulls dot={false} />
         ))
     ), [data, players]);
 
