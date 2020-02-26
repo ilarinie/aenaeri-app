@@ -161,6 +161,7 @@ const fetchAndCreateBoxScore = async (gameId: string): Promise<any> => {
         },
     };
     try {
+        ExtendedBoxScoreSchema.find({ gamePk: { $gt: 2019020700 } }).remove();
         const res = await  ExtendedBoxScoreSchema.create(generatedBoxScore);
         const odd = getOddsTypeFromOdds(res.gameData.datetime.dateTime, res.gameData.teams.home.name, res.gamePk);
         if (odd) {

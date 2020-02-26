@@ -48,7 +48,6 @@ const ModalCloseButton = styled.button`
     top: 0;
     background: var(--semi-dark-gray);
     transition: all .2s ease-in;
-    color: #eee;
     border: none;
     cursor: pointer;
     &:hover {

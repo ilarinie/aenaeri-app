@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Box } from 'rebass';
 import styled from 'styled-components';
 import { SeasonStatsObject } from '../../../server/models/BaseDataResponse';
 import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
@@ -32,10 +33,13 @@ export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: Seaso
     const oneTwoOdds = game.odds.filter((o) => o.gameName === '12');
 
     return (
-        <Container style={{ width }}>
-            <div style={{ marginBottom: '0.5em'}}>
-                <GameDatePanel date={new Date(game.gameData.datetime.dateTime)} />
-            </div>
+        <Box
+            width={width}
+            backgroundColor='level1'
+            p={2}
+            marginRight={2}
+        >
+            <GameDatePanel date={new Date(game.gameData.datetime.dateTime)} />
             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                 <div>
                     <TeamLogo src={getTeamLogoUri(game.gameData.teams.home.id.toString())} />
@@ -59,7 +63,7 @@ export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: Seaso
             {oneTwoOdds.map((odds) => (
                 <OddsRow key={odds.bookMakerId} odds={odds} />
             ))}
-        </Container>
+        </Box>
 
     );
 
@@ -68,7 +72,6 @@ export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: Seaso
 const StatContainer = styled.div`
     font-size: 0.8rem;
     height: 20px;
-    color: white;
     margin-top: 0.2em;
 `;
 

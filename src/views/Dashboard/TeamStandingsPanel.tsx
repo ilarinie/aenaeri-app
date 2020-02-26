@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Box, Flex } from 'rebass';
 import { SeasonStatsObject, TeamBaseDataResponse, TeamStandings } from '../../../server/models/BaseDataResponse';
 import { TeamSingleSeasonStats } from '../../../server/models/TeamSingleSeasonStats';
-import { BoxHeader } from '../../components/BoxHeader';
 import { SmallTeamRow } from '../../components/SmallTeamRow';
 import { TEAMS_ROUTE } from '../../routes';
+import { mq } from '../../theme';
 import { getTeamLogoUri } from '../../utils/teamLogoUri';
+import { StandingList } from './StandingList';
 
 interface TeamStandingsPanelProps {
     teamStandings: TeamStandings;
@@ -30,72 +31,65 @@ export const TeamStandingsPanel = React.memo<TeamStandingsPanelProps>(({ teamSta
     );
 
     return (
-        <TeamStandingsPanelContainer>
-            <GridContainer gridRow='1 / 1' gridColumn='1 / 1' >
-                <BoxHeader>Central</BoxHeader>
-                <StandingsContainer rows={8}>
-                    {renderTeams(teamStandings.central)}
-                </StandingsContainer>
-            </GridContainer>
-            <GridContainer gridRow='1 / 1' gridColumn='2 / 2' >
-                <BoxHeader>Atlantic</BoxHeader>
-                <StandingsContainer rows={8}>
-                    {renderTeams(teamStandings.atlantic)}
-                </StandingsContainer>
-            </GridContainer>
-            <GridContainer gridRow='2 / 2' gridColumn='1 / 1' >
-                <BoxHeader>Pacific</BoxHeader>
-                <StandingsContainer rows={8}>
-                    {renderTeams(teamStandings.pacific)}
-                </StandingsContainer>
-            </GridContainer>
-            <GridContainer gridRow='2 / 2' gridColumn='2 / 2' >
-                <BoxHeader>Metropolitan</BoxHeader>
-                <StandingsContainer rows={8}>
-                    {renderTeams(teamStandings.metropolitan)}
-                </StandingsContainer>
-            </GridContainer>
-            <GridContainer gridRow='3 / 3' gridColumn='1 / 1' >
-                <BoxHeader>Western confrence</BoxHeader>
-                <StandingsContainer rows={8}>
-                    {renderTeams(teamStandings.western)}
-                </StandingsContainer>
-            </GridContainer>
-            <GridContainer gridRow='3 / 3' gridColumn='2 / 2' >
-                <BoxHeader>Eastern Confrence</BoxHeader>
-                <StandingsContainer rows={8}>
-                    {renderTeams(teamStandings.eastern)}
-                </StandingsContainer>
-            </GridContainer>
-        </TeamStandingsPanelContainer>
+        <Flex
+            sx={{
+                [mq[1]]: {
+                    flexDirection: 'column',
+                    width: '100%',
+                },
+            }}
+        >
+            <Box
+               sx={{
+                   [mq[1]]: {
+                       flexDirection: 'column',
+                       paddingRight: 0,
+                   },
+               }}
+                paddingRight={2}
+            >
+                <StandingList header='Central' minHeight={'14.55em'}>
+                    <Box>
+                        {renderTeams(teamStandings.central)}
+                    </Box>
+                </StandingList>
+                <StandingList header='Pacific' >
+                    <Box>
+                        {renderTeams(teamStandings.pacific)}
+                    </Box>
+                </StandingList>
+                <StandingList header='Western' >
+                    <Box>
+                        {renderTeams(teamStandings.western)}
+                    </Box>
+                </StandingList>
+
+            </Box>
+            <Box
+                sx={{
+                    [mq[1]]: {
+                        flexDirection: 'column',
+                        paddingLeft: 0,
+                    },
+                }}
+                paddingRight={2}
+            >
+                <StandingList header='Metropolitan' >
+                    <Box>
+                        {renderTeams(teamStandings.metropolitan)}
+                    </Box>
+                </StandingList>
+                <StandingList header='Atlantic' >
+                    <Box>
+                        {renderTeams(teamStandings.atlantic)}
+                    </Box>
+                </StandingList>
+                <StandingList header='Eastern' >
+                    <Box>
+                        {renderTeams(teamStandings.eastern)}
+                    </Box>
+                </StandingList>
+            </Box>
+        </Flex>
     );
 });
-
-const StandingsContainer = styled.div<{ rows: number}>`
-    min-height: calc( ${(props) => props.rows} * 20px);
-    min-width: 100%;
-`;
-
-const GridContainer = styled.div<{ gridRow: string, gridColumn: string}>`
-    grid-column: ${(props) => props.gridColumn};
-    grid-row: ${(props) => props.gridRow};
-    width: 100%;
-    height: 100%;
-    padding: 0 0.5em;
-`;
-
-const TeamStandingsPanelContainer = styled.div`
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 27% 27% 46%;
-    grid-column-gap: 0.5em;
-    grid-row-gap: 0.5em;
-    @media screen and (max-width: 1000px) {
-        display: flex;
-        flex-direction: column;
-    }
-    overflow: hidden;
-    height: calc(1005 - 3em);
-    width: 100%;
-    padding: 0.5em;
-`;

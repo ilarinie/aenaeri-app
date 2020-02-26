@@ -1,18 +1,13 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import styled from 'styled-components';
+import { Flex } from 'rebass';
 import { NextGamesPanel } from './NextGames';
 
 export const BettingDashboard: React.FC<RouteComponentProps> = () => {
 
     return (
-        <Container>
-            <h1>Betting</h1>
+        <Flex>
             <NextGamesPanel />
-        </Container>
+        </Flex>
     );
 };
-
-const Container = styled.div`
-    padding: 2em;
-`;

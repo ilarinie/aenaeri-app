@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { PulseLoader, RingLoader} from 'react-spinners';
+import { Box, Text } from 'rebass';
 import styled from 'styled-components';
 import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
 import { RootState } from '../../state/rootReducer';
@@ -35,7 +36,8 @@ export const NextGamesPanel: React.FC<NextGamesPanelProps> = () => {
     };
 
     return (
-        <Container>
+        <Box p={2}>
+            <Text my={2} as='h1'>Betting</Text>
             <RefreshButton disabled={refreshDisabled} onClick={onRefresh}>
                 { refreshDisabled ?
                 <RingLoader size='1rem' color='white' />
@@ -56,7 +58,7 @@ export const NextGamesPanel: React.FC<NextGamesPanelProps> = () => {
                     </LoadingContainer>
                 }
             </ScheduleContainer>
-        </Container>
+        </Box>
     );
 };
 
@@ -65,7 +67,6 @@ const RefreshButton = styled.button`
     background: black;
     border: 1px solid white;
     height: 2rem;
-    color: white;
     margin-bottom: 1em;
     text-align: center;
     &:hover {

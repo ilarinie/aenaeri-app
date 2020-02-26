@@ -1,11 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=EB+Garamond|Paytone+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 @import-normalize;
-@import url('https://fonts.googleapis.com/css?family=Francois+One|Josefin+Sans&display=swap');
 
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Francois One', sans-serif;
-}
 
 html {
   -webkit-box-sizing: border-box;
@@ -23,7 +19,6 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Josefin Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -31,16 +26,15 @@ body {
 body, html {
   margin: 0;
   width: 100%;
-  background-color: var(--main-bg-color);
-  color: var(--main-text-color);
-
+  height: 100%;
+  background: #212121;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: none;
 }
 
 :root {
   --main-bg-color: #121212;
-  --semi-dark-gray: #1e1e1e;
+  --semi-dark-gray: #12121280;
   --semi-light-gray: #333;
   --main-text-color: #CCCCCC;
 }
