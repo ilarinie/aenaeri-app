@@ -11,7 +11,6 @@ interface TopBarProps {
 }
 export const TopBar: React.FC<TopBarProps> = ({ players, teams, navigate }) => {
 
-    // @ts-ignore
     return (
         <Flex
             height='3em'
@@ -42,6 +41,11 @@ export const TopBar: React.FC<TopBarProps> = ({ players, teams, navigate }) => {
                 // @ts-ignore
                 to='/nhl-stats' selected={window.location.href.includes('/nhl-stats')}>
                 nhl standings
+            </RebassLink>
+            <RebassLink
+                href='/api/muuu'
+            >
+                logout
             </RebassLink>
         </Flex>
     );

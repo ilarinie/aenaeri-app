@@ -1,7 +1,7 @@
 import { formatDistanceStrict } from 'date-fns';
+import { format } from 'date-fns';
 import React from 'react';
 import { Box, Flex, Text } from 'rebass';
-import { format } from 'date-fns';
 
 export const GameDatePanel = React.memo<{ date: Date }>(({date}) => (
     <Flex

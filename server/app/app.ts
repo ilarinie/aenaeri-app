@@ -1,4 +1,5 @@
 import bodyParser from 'body-parser';
+import cookieSession from 'cookie-session';
 import cors, { CorsOptions } from 'cors';
 import express from 'express';
 import path from 'path';
@@ -6,7 +7,6 @@ import passport from '../auth/passport';
 import { loggerMiddleWare } from '../logger/middleware';
 import { handleError } from './errorHandler';
 import { initializeRoutes } from './routes';
-import cookieSession from 'cookie-session';
 
 const app = express();
 
@@ -20,8 +20,8 @@ app.use(bodyParser.json());
 app.use(cookieSession({
     name: 'sessioncookie',
     maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [process.env.SECRET as string]
-}))
+    keys: [process.env.SECRET as string],
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors(corsOptions));

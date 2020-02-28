@@ -60,8 +60,8 @@ const theme =  {
     },
     buttons: {
         primary: {
-            color: 'white',
-            bg: 'primary',
+            color: 'primary',
+            bg: 'secondaryAccent',
         },
     },
 };
