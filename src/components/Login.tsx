@@ -2,7 +2,6 @@ import { Input, Label } from '@rebass/forms';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Box, Button, Flex, Text } from 'rebass';
-import styled from 'styled-components';
 import { doLogin } from '../state/thunks/LoginThunks';
 
 export const Login: React.FC = () => {
@@ -51,22 +50,3 @@ export const Login: React.FC = () => {
         </Flex>
     );
 };
-
-const LoginButton = styled.button`
-    margin-top: 1em;
-`;
-
-const LoginContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 2em;
-`;
-
-const InputContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-top: 1em;
-`;

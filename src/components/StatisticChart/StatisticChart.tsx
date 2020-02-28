@@ -16,15 +16,6 @@ interface StatisticChartDataObject {
     [playerId: string]: GameDataSeason | null;
 }
 
-// interface ChartDataItem {
-//     time: number;
-//     [playerId: string]: number;
-// }
-
-// const isSkaterGameStats = (x: GameStats): x is SkaterGameStats => {
-//     return x !== null && x !== undefined && x.hasOwnProperty('goals');
-// };
-
 export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) => {
 
     const [selectedStat, setSelectedStat] = useState(stat);
@@ -78,7 +69,7 @@ export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) =>
     return (
         <>
             <ResponsiveContainer height={300}>
-                <LineChart data={formattedData.data}>
+                <LineChart data={formattedData.data} margin={{ left: 0 }}>
                     <XAxis
                         dataKey='time'
                         scale='time'
@@ -87,7 +78,7 @@ export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) =>
                         tick={CustomTick}
                     />
                     {renderLines}
-                    <YAxis domain={[0, formattedData.projected + 20]}  />
+                    <YAxis domain={[0, formattedData.projected + 20]} mirror />
                     <CartesianAxis  />
                     <Legend />
                     <Tooltip labelFormatter={(props: any) => <span>{new Date(props).toLocaleDateString()}</span>}/>

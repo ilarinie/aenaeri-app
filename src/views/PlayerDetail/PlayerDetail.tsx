@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
+import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 import { StatisticChart } from '../../components/StatisticChart/StatisticChart';
 import { RootState } from '../../state/rootReducer';
@@ -21,8 +22,12 @@ export const PlayerDetail: React.FC<RouteComponentProps<{ id: string; }>> = ({ m
     }, [dispatch, match.params.id]);
 
     return (
-        <PlayerDetailsContainer>
-            <Content>
+        <Flex
+            width='100%'
+            maxWidth='90vw'
+            mx='auto'
+        >
+            <Box width='100%' maxWidth='90vw'>
                 {player && <PlayerBasicInfoPanel player={player} />}
                 {gameData &&
                     <>
@@ -30,8 +35,8 @@ export const PlayerDetail: React.FC<RouteComponentProps<{ id: string; }>> = ({ m
                         <StatisticChart data={{ [match.params.id + '-20192020']: gameData as GameDataSeason, [match.params.id + '-20182019']: gameDataLastSeason as GameDataSeason }} stat='goals' />
                     </>
                 }
-            </Content>
-        </PlayerDetailsContainer>
+            </Box>
+        </Flex>
     );
 
 };

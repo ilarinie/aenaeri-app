@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { PulseLoader, RingLoader} from 'react-spinners';
@@ -7,8 +8,6 @@ import styled from 'styled-components';
 import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
 import { RootState } from '../../state/rootReducer';
 import { NextGameItem } from './NextGameItem';
-import { format } from 'date-fns';
-
 
 interface NextGamesPanelProps {
 

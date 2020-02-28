@@ -1,3 +1,4 @@
+import { Select } from '@rebass/forms'
 import React from 'react';
 import styled from 'styled-components';
 import { SkaterNumericGameStats } from '../../../server/models/SkaterGameStats';
@@ -30,13 +31,13 @@ export const SkaterStatSelector: React.FC<SkaterStatSelectorProps> = ({ value, o
 
     return (
         <Container>
-            <select value={value} onChange={(event: any) => onChange(event.target.value)}>
+            <Select value={value} onChange={(event: any) => onChange(event.target.value)}>
                 {
                     Object.keys(EmptySkaterNumericGameStats).map((key) => (
                         <option key={key}>{key}</option>
                     ))
                 }
-            </select>
+            </Select>
         </Container >
     );
 };

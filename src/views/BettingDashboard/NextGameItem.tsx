@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { SeasonStatsObject } from '../../../server/models/BaseDataResponse';
 import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
 import { TeamSingleSeasonStats } from '../../../server/models/TeamSingleSeasonStats';
+import { mq } from '../../theme';
 import { getTeamLogoUri } from '../../utils/teamLogoUri';
 import { GameDatePanel } from './GameDatePanel';
 import { OddsRow } from './OddsRow';
@@ -39,7 +40,10 @@ export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: Seaso
             p={2}
             marginRight={2}
             sx={{
-                textAlign: 'center'
+                textAlign: 'center',
+                [mq[1]]: {
+                    margin: '0.5em auto',
+                },
             }}
         >
             <GameDatePanel date={new Date(game.gameData.datetime.dateTime)} />

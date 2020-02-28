@@ -9,6 +9,7 @@ const theme =  {
     colors: {
         background: '#212121',
         level1: '#303030',
+        level1Transparent: '#30303040',
         level2: '#424242',
         blue: '#07c',
         lightgray: '#f6f6ff',
