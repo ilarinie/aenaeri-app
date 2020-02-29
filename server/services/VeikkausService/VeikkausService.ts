@@ -15,12 +15,18 @@ interface VeikkausEventsResponseType {
     }>;
 }
 
-export const getNormalizedLocationName = (locationName: string): string => {
+export const getNormalizedLocationName = (locationName: string, teamName: string): string => {
     switch (locationName) {
         case 'Montréal':
             return 'Montreal';
         case 'St. Louis':
             return 'St.Louis';
+        case 'New York':
+            if (teamName === 'New York Rangers') {
+                return 'NY Rangers';
+            } else {
+                return 'NY Islanders';
+            }
         default:
             return locationName;
     }
@@ -145,7 +151,7 @@ export class VeikkausService implements OddsService {
         games.forEach((game) => {
             const event = response.data.events.filter((d) => {
                 return new Date(d.date).getTime() === game.gameData.datetime.dateTime.getTime()
-                && d.name.includes(getNormalizedLocationName(game.gameData.teams.home.locationName));
+                && d.name.includes(getNormalizedLocationName(game.gameData.teams.home.locationName, game.gameData.teams.home.name))
             })[0];
             if (event) {
                 gameEventMap[event.id] = game;
