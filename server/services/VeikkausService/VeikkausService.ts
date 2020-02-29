@@ -1,5 +1,4 @@
 import axios from 'axios';
-import fs from 'fs';
 import { ExtendedBoxScoreSchemaDocumentType } from '../../db/mongo/ExtendedBoxScoreSchema';
 import logger from '../../logger';
 import { OddsGameType } from '../../models/OddsGameType';
@@ -142,7 +141,6 @@ export class VeikkausService implements OddsService {
     private getVeikkausHockeyEventsList = async (games: ExtendedBoxScoreSchemaDocumentType[]): Promise<{ [eventId: string]: ExtendedBoxScoreSchemaDocumentType }> => {
         const response = await axios.request<VeikkausEventsResponseType>({ url: `${this.BASE_URL}/v1/sports/3/categories/2/tournaments/1?lang=fi`, headers: { 'X-ESA-API-Key': 'ROBOT' } });
         const events = [] as string[];
-        fs.writeFileSync('veikkausEvents.json', JSON.stringify(response.data, null, 2));
 
         const gameEventMap: {
             [eventId: string]: ExtendedBoxScoreSchemaDocumentType,
