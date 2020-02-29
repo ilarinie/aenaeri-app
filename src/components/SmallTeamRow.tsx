@@ -12,20 +12,23 @@ interface SmallTeamRowProps {
     link: string;
     finnish?: boolean;
     customColor?: string;
+    bg?: string;
 }
 
-export const SmallTeamRow = React.memo<SmallTeamRowProps>(({ logoUri, mainText, statistic, index, link, statisticNominator, finnish = false, customColor = 'white'}) => {
+export const SmallTeamRow = React.memo<SmallTeamRowProps>(({ logoUri, mainText, statistic, index, link, statisticNominator, finnish = false, customColor = 'white', bg = ''}) => {
 
     return (
         <Flex
-            py={1}
+            py={2}
+            px={2}
             alignItems='center'
             justifyContent='flex-start'
             width='100%'
             height='1.3em'
             sx={{
-                letterSpacing: '1px'
+                letterSpacing: '1px',
             }}
+            bg={bg}
         >
             <Box
                 sx={{ minWidth: '1em'}}
@@ -34,7 +37,7 @@ export const SmallTeamRow = React.memo<SmallTeamRowProps>(({ logoUri, mainText, 
                     {index}.
                 </Text>
             </Box>
-            <Image mx={1} sx={{ minWidth: '1em'}} src={logoUri} variant='avatar' height='100%' />
+            <Image mx={1} sx={{ minWidth: '1em'}} src={logoUri} variant='avatar' height='200%' />
             <Flex
                 alignItems='center'
                 sx={{ flexGrow: 1, fontVariant: 'small-caps', textOverflow: 'ellipsis', whiteSpace: 'nowrap', textTransform: 'lowercase'}}

@@ -1,56 +1,67 @@
-import axios from 'axios';
-import { format } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
+import { addDays, format, subDays } from 'date-fns';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { PulseLoader, RingLoader} from 'react-spinners';
+import { PulseLoader} from 'react-spinners';
 import { Box, Text } from 'rebass';
 import styled from 'styled-components';
-import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
+import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType/index';
 import { RootState } from '../../state/rootReducer';
 import { NextGameItem } from './NextGameItem';
+import { mq } from '../../theme';
 
 interface NextGamesPanelProps {
 
 }
 
+const nextGameDates = () => {
+    const currentDate   = new Date();
+
+    let todayMorning;
+    let tomorrowAfternoon;
+
+    if (currentDate.getHours() < 3) {
+        todayMorning = subDays(currentDate, 1);
+        todayMorning.setHours(8);
+        tomorrowAfternoon = addDays(currentDate, 0);
+
+    } else {
+        todayMorning = currentDate;
+        tomorrowAfternoon = addDays(currentDate, 1);
+    }
+    todayMorning.setHours(8);
+    tomorrowAfternoon.setHours(15);
+
+    return { todayMorning, tomorrowAfternoon };
+};
+
+const { todayMorning, tomorrowAfternoon } = nextGameDates();
+
 export const NextGamesPanel: React.FC<NextGamesPanelProps> = () => {
 
-    const [daySchedule, setDaySchedule] = useState([] as ExtendedBoxScore[]);
     const teams = useSelector((state: RootState) => state.baseData.teamStats);
-    const [ refreshDisabled, setRefreshDisabled ] = useState(false);
 
-    const fetchSchedule = async () => {
-        setDaySchedule([]);
-        const response = await axios.request<ExtendedBoxScore[]>({ url: '/api/schedule' });
-        setDaySchedule(response.data);
-    };
-
-    useEffect(() => {
-        fetchSchedule();
-    }, []);
-
-    const onRefresh = () => {
-        setRefreshDisabled(true);
-        fetchSchedule().then(() => {
-            setRefreshDisabled(false);
-        });
-    };
+    const { data, loading, error } = useQuery<{ boxScores: ExtendedBoxScore[] }>(query(todayMorning.getTime().toString(), tomorrowAfternoon.getTime().toString()), {
+        pollInterval: 5000,
+    });
 
     return (
-        <Box p={2}>
+        <Box
+            p={4}
+            sx={{
+                [mq[1]]: {
+                    padding: '0.2em'
+                }
+            }}
+        >
             <Text my={2} as='h1'>Betting</Text>
-            <RefreshButton disabled={refreshDisabled} onClick={onRefresh}>
-                { refreshDisabled ?
-                <RingLoader size='1rem' color='white' />
-                :
-                'Refresh'}
-            </RefreshButton>
             {
-                daySchedule[0] && <div>Last refresh {format(new Date(daySchedule[0].odds[0].updatedAt || ''), 'HH:mm')}</div>
+                data && data.boxScores[0] && data.boxScores[0].odds[0] && <div>Last refresh  {format(new Date(parseInt(data.boxScores[0].odds[0].updatedAt.toString()) || ''), 'HH:mm')}</div>
             }
             <ScheduleContainer>
-                {daySchedule.length > 0 ?
-                    daySchedule.map((g) => (
+                {data ?
+                    data.boxScores.map((g) => (
                         <NextGameItem width='400px' key={g.gamePk} game={g} teamsStats={teams} />
                     ))
                     :
@@ -63,19 +74,35 @@ export const NextGamesPanel: React.FC<NextGamesPanelProps> = () => {
     );
 };
 
-const RefreshButton = styled.button`
-    width: 100px;
-    background: black;
-    border: 1px solid white;
-    height: 2rem;
-    margin-bottom: 1em;
-    text-align: center;
-    &:hover {
-        cursor: pointer;
-    }
-    &:disabled {
-        cursor: progress;
-    }
+const query = (from: string,  to: string) => gql`
+    query {
+        boxScores(from: ${'"' + from + '"'}, to: ${'"' + to + '"'}) {
+            gamePk
+            gameData {
+                datetime {
+                    dateTime
+                }
+                teams {
+                    away {
+                        id
+                    }
+                    home {
+                        id
+                    }
+                }
+            }
+            odds(gameNames: ["1X2", "12"]) {
+                homeOdds
+                gameName
+                awayOdds
+                drawOdds
+                source
+                bookMakerId
+                updatedAt
+            }
+        }
+}
+
 `;
 
 const LoadingContainer = styled.div`
@@ -86,11 +113,7 @@ const LoadingContainer = styled.div`
    align-items: center;
 `;
 
-const Container = styled.div`
-
-`;
-
 const ScheduleContainer = styled.div`
-display: flex;
-flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 `;

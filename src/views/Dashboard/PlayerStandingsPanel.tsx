@@ -42,6 +42,7 @@ export const PlayerStandingsPanel: React.FC<PlayerStandingsPanelProps> = ({ play
                     mainText={player.fullName}
                     index={index + 1}
                     finnish={player.nationality === 'FIN'}
+                    bg={index % 2 != 0  ? 'level1' : 'level2'}
                 />
             );
         });
@@ -89,7 +90,7 @@ export const PlayerStandingsPanel: React.FC<PlayerStandingsPanelProps> = ({ play
                 }}
                 paddingLeft={2}
             >
-                <StandingList header='Finnish skaters'>
+                <StandingList header='Finnish skaters' to='finnish'>
                     <Box>
                         {renderPlayerList(playerStandings.finnishPlayers, 'points', false)}
                     </Box>

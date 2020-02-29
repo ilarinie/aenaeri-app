@@ -64,7 +64,7 @@ export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) =>
         ))
     ), [data, players]);
 
-    const formattedData = useMemo(() => computeCumulativeData(data), [data, selectedStat]);
+    const formattedData = useMemo(() => computeCumulativeData(data), [data, selectedStat]); // eslint-disable-line
 
     return (
         <>

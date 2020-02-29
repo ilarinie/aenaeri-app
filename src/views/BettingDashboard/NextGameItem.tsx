@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Text } from 'rebass';
 import styled from 'styled-components';
 import { SeasonStatsObject } from '../../../server/models/BaseDataResponse';
-import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType';
+import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType/index';
 import { TeamSingleSeasonStats } from '../../../server/models/TeamSingleSeasonStats';
 import { mq } from '../../theme';
 import { getTeamLogoUri } from '../../utils/teamLogoUri';
@@ -39,6 +39,7 @@ export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: Seaso
             backgroundColor='level1'
             p={2}
             marginRight={2}
+            my={1}
             sx={{
                 textAlign: 'center',
                 [mq[1]]: {
@@ -46,7 +47,7 @@ export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: Seaso
                 },
             }}
         >
-            <GameDatePanel date={new Date(game.gameData.datetime.dateTime)} />
+            <GameDatePanel date={new Date(parseInt(game.gameData.datetime.dateTime.toString()))} />
             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                 <div>
                     <TeamLogo src={getTeamLogoUri(game.gameData.teams.home.id.toString())} />
@@ -86,24 +87,4 @@ const TeamLogo = styled.img`
     display: block;
     min-width: 125px;
     max-height: 125px;
-`;
-
-const VSDiv = styled.div`
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-    font-size: 2rem;
-    grid-row: 2 / 2 ;
-`;
-
-const Container = styled.div`
-   display: flex;
-   flex-direction: column;
-   text-align: center;
-   box-sizing: border-box;
-   background: var(--semi-dark-gray);
-   margin: 0.5em 0.5em;
-   padding: 0.5em;
 `;

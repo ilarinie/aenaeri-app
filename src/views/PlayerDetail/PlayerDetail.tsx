@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Box, Flex } from 'rebass';
-import styled from 'styled-components';
 import { StatisticChart } from '../../components/StatisticChart/StatisticChart';
 import { RootState } from '../../state/rootReducer';
 import { GameDataSeason } from '../../state/slices/gameStatsSlice';
@@ -40,15 +39,3 @@ export const PlayerDetail: React.FC<RouteComponentProps<{ id: string; }>> = ({ m
     );
 
 };
-
-const PlayerDetailsContainer = styled.div`
-    overflow: auto;
-    height: 100%;
-    padding-left: 2em;
-    padding-right: 2em;
-`;
-
-const Content = styled.div`
-    background: var(--semi-dark-gray);
-    padding: 2em;
-`;

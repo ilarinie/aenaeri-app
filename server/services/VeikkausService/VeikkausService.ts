@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { ExtendedBoxScoreSchemaDocumentType } from '../../db/mongo/ExtendedBoxScoreSchema';
 import logger from '../../logger';
+import { OddsGameType } from '../../models/OddsGameType';
 import { VeikkausAccountBalance } from '../../models/VeikkausAccountBalance';
 import { OddsService } from '../OddsService';
 import { VeikkausEventsResponse } from './VeikkausEventsResponse';
-import { OddsGameType } from '../../models/OddsGameType';
 
 interface VeikkausEventsResponseType {
     events: Array<{
@@ -24,7 +24,7 @@ export const getNormalizedLocationName = (locationName: string): string => {
             return locationName;
     }
 
-}
+};
 
 let veikkausService: VeikkausService;
 
@@ -53,7 +53,6 @@ export class VeikkausService implements OddsService {
                 } else if (oddsForGame.length !== 0) {
                     gameEventMap[key].odds = gameEventMap[key].odds?.filter((s) => s.source !== 'veikkaus');
                 }
-
 
                 oddsForGame.forEach((odds) => {
                     const gameType = this.getGameType(odds);
@@ -144,7 +143,7 @@ export class VeikkausService implements OddsService {
         games.forEach((game) => {
             const event = response.data.events.filter((d) => {
                 return new Date(d.date).getTime() === game.gameData.datetime.dateTime.getTime()
-                && d.name.includes(getNormalizedLocationName(game.gameData.teams.home.locationName))
+                && d.name.includes(getNormalizedLocationName(game.gameData.teams.home.locationName));
             })[0];
             if (event) {
                 gameEventMap[event.id] = game;
@@ -152,6 +151,7 @@ export class VeikkausService implements OddsService {
             }
         });
         return Promise.resolve(gameEventMap);
+
     }
 
     private getEventAddress = (ids: string[]): string => {

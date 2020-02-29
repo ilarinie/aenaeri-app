@@ -1,11 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Box, Flex, Image } from 'rebass';
+import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 import { Player } from '../../../server/models/Player';
 import { RootState } from '../../state/rootReducer';
 import { banneUrlFromPlayerId } from '../../utils/playerBannerUrl';
-import { playerThumbnailUrlFromPlayerId } from '../../utils/playerThumbnailUrl';
 import { PlayerBasicInfoHeaderValue } from './PlayerBasicInfoHeaderValue';
 
 interface PlayerBasicInfoPanelProps {

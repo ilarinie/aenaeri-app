@@ -16,7 +16,7 @@ export interface VeikkausEventsResponse {
         minSystemLevel: number;
         maxSystemLevel: number;
         oddsType: string;
-    },
+    };
     rows: Array<
         {
             id: string;

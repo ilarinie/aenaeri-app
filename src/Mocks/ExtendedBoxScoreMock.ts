@@ -1,4 +1,4 @@
-import { ExtendedBoxScore } from '../../server/models/ExtendedBoxScoreType';
+import { ExtendedBoxScore } from '../../server/models/ExtendedBoxScoreType/index';
 
 export const ExtendedBoxScoreMock: ExtendedBoxScore = {
     gameData: {
@@ -267,6 +267,7 @@ export const ExtendedBoxScoreMock: ExtendedBoxScore = {
             source: 'pinnacle',
             bookMakerId: '1105689854',
             gameName: '1X2',
+            updatedAt: 1123,
         },
         {
             awayOdds: 201,
@@ -274,6 +275,7 @@ export const ExtendedBoxScoreMock: ExtendedBoxScore = {
             source: 'pinnacle',
             bookMakerId: '1105331441',
             gameName: '12',
+            updatedAt: 2323,
         },
     ],
 

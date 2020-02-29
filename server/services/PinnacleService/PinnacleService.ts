@@ -2,9 +2,9 @@ import axios from 'axios';
 import { subMinutes } from 'date-fns';
 import { UserEntity } from '../../db/entities/User';
 import { ExtendedBoxScoreSchemaDocumentType } from '../../db/mongo/ExtendedBoxScoreSchema';
-import logger from '../../logger';
-import { OddsService, OddsType } from '../OddsService';
 import { GameOddsAndResults } from '../../db/mongo/GameOddsAndResultsSchema';
+import logger from '../../logger';
+import { OddsService } from '../OddsService';
 
 let pinnacleService;
 
@@ -17,7 +17,7 @@ export const getNormalizedTeamName = (teamName: string): string => {
         default:
             return teamName;
     }
-}
+};
 
 export class PinnacleService implements OddsService {
 
@@ -45,7 +45,6 @@ export class PinnacleService implements OddsService {
 
     public addOddsForGames = async (games: ExtendedBoxScoreSchemaDocumentType[], user: UserEntity): Promise<ExtendedBoxScoreSchemaDocumentType[]> => {
         try {
-            logger.info(JSON.stringify(this.createAuthHeader(user), null, 2));
             const req = await axios.get('https://api.pinnacle.com/v1/fixtures?sportId=19&leagueIds=' + this.NHL_LEAGUE_IDS.map((l) => l.id).join(','), { headers: { Accept: 'application/json', ...this.createAuthHeader(user) } });
             const parentIds: number[] = [];
             const eventIdGameMap: {
@@ -65,7 +64,6 @@ export class PinnacleService implements OddsService {
                     }
                 });
             });
-            logger.info('https://api.pinnacle.com/v1/odds?sportId=19&oddsFormat=Decimal&eventIds=' + parentIds.join(','));
 
             const odds = await axios.get('https://api.pinnacle.com/v1/odds?sportId=19&oddsFormat=Decimal&eventIds=' + parentIds.join(',') , { headers: { Accept: 'application/json', ...this.createAuthHeader(user) } });
 
@@ -136,7 +134,7 @@ export class PinnacleService implements OddsService {
 
     private createAuthHeader = (user: UserEntity) => {
         return {
-            Authorization: `Basic ${new Buffer(user.pinnacleLogin + ':' + user.pinnaclePass).toString('base64')}`,
+            Authorization: `Basic ${Buffer.from(user.pinnacleLogin + ':' + user.pinnaclePass).toString('base64')}`,
         };
     }
 

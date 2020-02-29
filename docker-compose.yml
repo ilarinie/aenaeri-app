@@ -35,6 +35,8 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
     networks:
       - backend
+    logging:
+      driver: 'none'
   mongo:
     image: 'mongo'
     restart: unless-stopped
@@ -50,7 +52,9 @@ services:
       - '27017-27019:27017-27019'
     networks:
       - backend
+    logging:
+      driver: 'none'
     command: --quiet
-
+ 
 networks:
   backend:

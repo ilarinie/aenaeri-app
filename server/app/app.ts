@@ -3,7 +3,9 @@ import cookieSession from 'cookie-session';
 import cors, { CorsOptions } from 'cors';
 import express from 'express';
 import path from 'path';
+import "reflect-metadata";
 import passport from '../auth/passport';
+import ApolloServer from '../graphql/ApolloServer';
 import { loggerMiddleWare } from '../logger/middleware';
 import { handleError } from './errorHandler';
 import { initializeRoutes } from './routes';
@@ -35,6 +37,8 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname, 'public', 'index.html'));
     });
 }
+
+ApolloServer(app);
 
 app.use(handleError);
 
