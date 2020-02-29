@@ -1,5 +1,3 @@
-
-import { gql } from 'apollo-boost';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Flex } from 'rebass';

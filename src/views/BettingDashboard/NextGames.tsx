@@ -4,12 +4,12 @@ import { addDays, format, subDays } from 'date-fns';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { PulseLoader} from 'react-spinners';
-import { Box, Text } from 'rebass';
+import { Box, Flex, Text } from 'rebass';
 import styled from 'styled-components';
 import { ExtendedBoxScore } from '../../../server/models/ExtendedBoxScoreType/index';
 import { RootState } from '../../state/rootReducer';
-import { NextGameItem } from './NextGameItem';
 import { mq } from '../../theme';
+import { NextGameItem } from './NextGameItem';
 
 interface NextGamesPanelProps {
 
@@ -51,15 +51,17 @@ export const NextGamesPanel: React.FC<NextGamesPanelProps> = () => {
             p={4}
             sx={{
                 [mq[1]]: {
-                    padding: '0.2em'
-                }
+                    padding: '0.2em',
+                },
             }}
         >
             <Text my={2} as='h1'>Betting</Text>
             {
                 data && data.boxScores[0] && data.boxScores[0].odds[0] && <div>Last refresh  {format(new Date(parseInt(data.boxScores[0].odds[0].updatedAt.toString()) || ''), 'HH:mm')}</div>
             }
-            <ScheduleContainer>
+            <Flex
+                flexWrap='wrap'
+            >
                 {data ?
                     data.boxScores.map((g) => (
                         <NextGameItem width='400px' key={g.gamePk} game={g} teamsStats={teams} />
@@ -69,7 +71,7 @@ export const NextGamesPanel: React.FC<NextGamesPanelProps> = () => {
                         <PulseLoader size={50} color='white' />
                     </LoadingContainer>
                 }
-            </ScheduleContainer>
+            </Flex>
         </Box>
     );
 };
@@ -111,9 +113,4 @@ const LoadingContainer = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
-`;
-
-const ScheduleContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
 `;
