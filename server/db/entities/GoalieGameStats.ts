@@ -8,10 +8,9 @@ export class GoalieGameStatsEntity extends BaseEntity implements GoalieGameStats
     public static fromNHLApiResponse = (response: NHLApiGoalieGameByGameStatsResponse, playerId: number): GoalieGameStatsEntity[] => {
         const entities: GoalieGameStatsEntity[] = [];
         response.stats[0].splits.forEach((s) => {
-            const { stat, season } = s;
+            const { stat } = s;
             entities.push(GoalieGameStatsEntity.create({
                 playerId,
-                season,
                 teamId: s.team.id,
                 opponentTeamId: s.opponent.id,
                 gameId: s.game.gamePk,

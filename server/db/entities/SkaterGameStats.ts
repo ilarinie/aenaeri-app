@@ -8,10 +8,9 @@ export class SkaterGameStatsEntity extends BaseEntity implements SkaterGameStats
     public static fromNHLApiResponse = (response: NHLApiSkaterGameByGameStatsResponse, playerId: number): SkaterGameStatsEntity[] => {
         const entities: SkaterGameStatsEntity[] = [];
         response.stats[0].splits.forEach((s) => {
-            const { stat, season } = s;
+            const { stat } = s;
             entities.push(SkaterGameStatsEntity.create({
                 playerId,
-                season,
                 teamId: s.team.id,
                 opponentTeamId: s.opponent.id,
                 gameId: s.game.gamePk,

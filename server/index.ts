@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
+ /* eslint-disable */
 import mongoose from 'mongoose';
 import app from './app/app';
 import { initializeDB } from './db';

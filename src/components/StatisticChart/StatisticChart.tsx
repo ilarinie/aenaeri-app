@@ -75,6 +75,7 @@ export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) =>
                         scale='time'
                         type='number'
                         domain={[new Date('2019-10-02').getTime(),  new Date('2020-04-05').getTime()]}
+                        // @ts-ignore
                         tick={CustomTick}
                     />
                     {renderLines}
@@ -82,7 +83,7 @@ export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) =>
                     <CartesianAxis  />
                     <Legend />
                     <Tooltip labelFormatter={(props: any) => <span>{new Date(props).toLocaleDateString()}</span>}/>
-                    <ReferenceLine y={formattedData.projected} label={(props) => <CustomLabel {...props} projected={formattedData.projected} />} />
+                    {/* <ReferenceLine y={formattedData.projected} label={(props: any) => <CustomLabel {...props} projected={formattedData.projected} />} /> */}
                 </LineChart>
             </ResponsiveContainer>
             <SkaterStatSelector value={selectedStat} onChange={setSelectedStat} />
