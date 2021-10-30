@@ -35,7 +35,7 @@
     "apollo-boost": "^0.4.9",
     "apollo-server-express": "^2.25.2",
     "awesome-typescript-loader": "^5.2.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "bcryptjs": "^2.4.3",
     "btoa": "^1.2.1",
     "chai": "^4.3.4",
