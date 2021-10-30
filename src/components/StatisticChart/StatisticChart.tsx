@@ -38,7 +38,7 @@ export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) =>
                 return dataPoint;
             });
             if (
-                gameDataSeasons[playerId]?.season === '20192020'
+                gameDataSeasons[playerId]?.season === '20212022'
             ) {
                 projected = Math.ceil(cumTotal / (arr ? arr.length : 1) * 82);
             }
@@ -60,7 +60,7 @@ export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) =>
 
     const renderLines = useMemo(() => (
         Object.keys(data).map((key) => (
-            <Line key={key} dataKey={key} name={players[key.substr(0, 7)].fullName + ' - ' + key.substr(8, 8)} stroke={key.includes('20192020') ? '#BB86FC' : '#03DAC5'} connectNulls dot={false} />
+            <Line key={key} dataKey={key} name={players[key.substr(0, 7)].fullName + ' - ' + key.substr(8, 8)} stroke={key.includes('20212022') ? '#BB86FC' : '#03DAC5'} connectNulls dot={false} />
         ))
     ), [data, players]);
 
@@ -74,7 +74,7 @@ export const StatisticChart: React.FC<StatisticChartProps> = ({ data, stat }) =>
                         dataKey='time'
                         scale='time'
                         type='number'
-                        domain={[new Date('2019-10-02').getTime(),  new Date('2020-04-05').getTime()]}
+                        domain={[new Date('2021-10-02').getTime(),  new Date('2022-04-05').getTime()]}
                         tick={CustomTick}
                     />
                     {renderLines}

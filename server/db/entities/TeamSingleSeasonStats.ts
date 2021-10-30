@@ -8,7 +8,7 @@ export class TeamSingleSeasonStatsEntity extends BaseEntity implements TeamSingl
 
     public static fromNHLApiTeamResponse = (res: NHLApiTeamResponse): TeamSingleSeasonStatsEntity => {
         return TeamSingleSeasonStatsEntity.create({
-            season: '20192020',
+            season: '20212022',
             teamId: res.id,
             ...res.teamStats[0].splits[0].stat,
         });

@@ -11,6 +11,7 @@ export class GoalieGameStatsEntity extends BaseEntity implements GoalieGameStats
             const { stat, season } = s;
             entities.push(GoalieGameStatsEntity.create({
                 playerId,
+                // @ts-ignore
                 season,
                 teamId: s.team.id,
                 opponentTeamId: s.opponent.id,

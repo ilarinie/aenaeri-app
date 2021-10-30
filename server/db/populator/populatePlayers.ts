@@ -7,7 +7,7 @@ import { PlayerEntity } from '../entities/Player';
 import { SkaterGameStatsEntity } from '../entities/SkaterGameStats';
 import { SkaterSingleSeasonStatsEntity } from '../entities/SkaterSingleSeasonStats';
 
-const CURRENT_SEASON = '20192020';
+const CURRENT_SEASON = '20212022';
 
 export const populatePlayers = async (playerIds: number[]) => {
     logger.info('Populating players');
@@ -35,15 +35,15 @@ export const populatePlayers = async (playerIds: number[]) => {
         }
         if (player && player.position === 'Goalie') {
             await populateGoalieStats(player.id, CURRENT_SEASON);
-            const res = await GoalieGameStatsEntity.find({ where: { season: '20182019', playerId: player.id}});
+            const res = await GoalieGameStatsEntity.find({ where: { season: '20202021', playerId: player.id}});
             if (res.length === 0) {
-                await populateGoalieStats(player.id, '20182019');
+                await populateGoalieStats(player.id, '20202021');
             }
         } else if (player) {
             await populatePlayerStats(player.id, CURRENT_SEASON);
-            const res = await SkaterGameStatsEntity.find({ where: { season: '20182019', playerId: player.id}});
+            const res = await SkaterGameStatsEntity.find({ where: { season: '20202021', playerId: player.id}});
             if (res.length === 0) {
-                await populatePlayerStats(player.id, '20182019');
+                await populatePlayerStats(player.id, '20202021');
             }
         }
         const end = new Date().getTime();
@@ -56,7 +56,7 @@ export const populatePlayers = async (playerIds: number[]) => {
     const endPlayerFetch = new Date().getTime();
     const totalDiff = ((endPlayerFetch - beginPlayerFetch) / 1000).toFixed(2) + 's';
     const playerCount = await PlayerEntity.findAndCount();
-    logger.info(`Player list refresh took ${totalDiff}, fetched ${playerCount} players`);
+    logger.info(`Player list refresh took ${totalDiff}, fetched ${playerCount.length} players`);
     logger.info(`${errors.length} errors detected.`);
     logger.info(`${errors[0]}`);
 };
@@ -90,6 +90,7 @@ const populateGoalieStats = async (playerId: number, season: string): Promise<st
 
 const populatePlayerStats = async (playerId: number, season: string): Promise<string[]> => {
     const errors: string[] = [];
+    logger.info(`${season}`)
     const statsResponse = await NhlApiService.fetchSkaterSeasonStats(playerId, season);
     if (statsResponse.stats[0].splits[0]) {
         try {

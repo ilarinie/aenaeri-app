@@ -34,7 +34,12 @@ const options = () => {
 };
 
 const initializeDB = async () => {
+    console.log('fib')
     try {
+        console.log('fl😋')
+        console.log(options());
+        console.log('🧖')
+
         await createConnection({
             type: 'postgres' as 'postgres',
             url: env.get('DATABASE_URL').asString() || '',
@@ -42,9 +47,11 @@ const initializeDB = async () => {
             logging: false,
             ...options(),
         });
+        console.log('flab')
         logger.info('Database connection initialized.');
     } catch (err) {
         logger.error(`Could not create a database connection: ${err}`);
+        throw err
     }
 };
 

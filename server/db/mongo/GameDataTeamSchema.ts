@@ -4,6 +4,7 @@ export const GameDataTeamSchema = new mongoose.Schema({
     id: Number,
     name: String,
     link: String,
+    // @ts-ignore
     venue: {
         id: Number,
         name: String,

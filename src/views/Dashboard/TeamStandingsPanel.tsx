@@ -24,8 +24,8 @@ export const TeamStandingsPanel = React.memo<TeamStandingsPanelProps>(({ teamSta
                 index={index + 1}
                 logoUri={getTeamLogoUri(teamId)}
                 mainText={teams.teamObject[teamId].name}
-                statistic={teamStats[teamId].statObject['20192020'].pts.toFixed(0)}
-                statisticNominator={teamStats[teamId].statObject['20192020'].gamesPlayed + 'gp'}
+                statistic={teamStats[teamId].statObject['20212022']?.pts.toFixed(0) || '0'}
+                statisticNominator={teamStats[teamId].statObject['20212022']?.gamesPlayed + 'gp' || '0'}
                 customColor={ index < 3 ? 'primaryAccent' : 'white'}
             />
         ))

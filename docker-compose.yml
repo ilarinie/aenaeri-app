@@ -1,15 +1,45 @@
 version: '3.5'
 
 services:
-  aenaeri-app:
-    build: .
+  aenaeri-app-frontend:
+    build: 
+      context: .
+      dockerfile: Dockerfile-client
     ports:
-      - "3001:3001"
       - "3000:3000"
     environment:
       NODE_ENV: development
     volumes:
-      - .:/home/app/appDir
+      - ./src:/home/app/appDir/src
+      - ./package.json:/home/app/appDir/package.json
+      - ./tsconfig.json:/home/app/appDir/tsconfig.json
+      - ./public:/home/app/appDir/public
+      - ./vite.config.ts:/home/app/appDir/vite.config.ts
+      - node_modules:/home/app/appDir/node_modules
+    depends_on:
+      - aenaeri-app-backend
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://aenaeri-app:password123@postgres/aenaeri-app
+      - MONGO_URI=mongodb://aenaeri-app:password123@mongo/aenaeri-app
+      - SECRET=acdcabbacd
+      - DEV_USER_NAME=ile
+    networks:
+      - backend
+    command: npm run-script start-frontend
+  
+  aenaeri-app-backend:
+    build: 
+      context: .
+      dockerfile: Dockerfile-server
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./server:/home/app/appDir/server
+      - ./package.json:/home/app/appDir/package.json
+      - node_modules:/home/app/appDir/node_modules
     depends_on:
       - postgres
       - mongo
@@ -21,9 +51,11 @@ services:
       - DEV_USER_NAME=ile
     networks:
       - backend
-    command: npm run dev
+    command: npm run-script start-backend
+
+
   postgres:
-    image: 'postgres:11.5'
+    image: 'postgres:12.8'
     restart: unless-stopped
     environment:
       - POSTGRES_USER=aenaeri-app
@@ -58,3 +90,6 @@ services:
  
 networks:
   backend:
+
+volumes:
+  node_modules:

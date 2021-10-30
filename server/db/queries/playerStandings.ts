@@ -5,7 +5,7 @@ import { GoalieSingleSeasonStats } from '../../models/GoalieSingleSeasonStats';
 import { SkaterSingleSeasonStats } from '../../models/SkaterSingleSeasonStats';
 import { PlayerEntity } from '../entities/Player';
 
-const CURRENT_SEASON = '20192020';
+const CURRENT_SEASON = '20212022';
 
 export const getPlayerStandings = async (): Promise<PlayerStandings> => {
 
@@ -48,8 +48,8 @@ const getSkatersOrderedByStatAndWhereClause = async (stat: keyof SkaterSingleSea
     return Promise.resolve(res.map((e: { playerId: string }) => e.playerId));
 };
 
-const getGoaliesOrderedByStat = async (stat: keyof GoalieSingleSeasonStats, reverse: boolean): Promise<string[]> => {
-    const sql = `SELECT "playerId" FROM goalie_single_season_stats_entity WHERE season = '20192020' AND games > 20 ORDER BY ${stat} ${reverse ? 'ASC' : 'DESC'} LIMIT 100;`;
+const getGoaliesOrderedByStat = async (stat: keyof GoalieSingleSeasonStats, reverse: boolean, season: string = CURRENT_SEASON): Promise<string[]> => {
+    const sql = `SELECT "playerId" FROM goalie_single_season_stats_entity WHERE season = '${season}' AND games > 20 ORDER BY ${stat} ${reverse ? 'ASC' : 'DESC'} LIMIT 100;`;
     const res = await getManager().query(sql);
     return Promise.resolve(res.map((e: { playerId: string }) => e.playerId));
 };

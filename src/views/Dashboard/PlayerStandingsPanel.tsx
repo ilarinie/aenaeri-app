@@ -26,9 +26,9 @@ export const PlayerStandingsPanel: React.FC<PlayerStandingsPanelProps> = ({ play
             const player = playerObject[playerId.toString()];
             let stat;
             if (!goalie) {
-                stat = skaterStats[playerId.toString()].statObject['20192020'][statName as keyof SkaterSingleSeasonStats];
+                stat = skaterStats[playerId.toString()].statObject['20212022'][statName as keyof SkaterSingleSeasonStats];
             } else {
-                stat = goalieStats[playerId.toString()].statObject['20192020'][statName as keyof GoalieSingleSeasonStats];
+                stat = goalieStats[playerId.toString()].statObject['20212022'][statName as keyof GoalieSingleSeasonStats];
             }
             return (
                 <SmallTeamRow
@@ -38,7 +38,7 @@ export const PlayerStandingsPanel: React.FC<PlayerStandingsPanelProps> = ({ play
                         getTeamLogoUri(player.teamId.toString())
                     }
                     statistic={parseFloat(stat as any).toFixed(fixed).toString()}
-                    statisticNominator={goalie ? goalieStats[playerId.toString()].statObject['20192020'].games.toString() : skaterStats[playerId.toString()].statObject['20192020'].games.toString()}
+                    statisticNominator={goalie ? goalieStats[playerId.toString()].statObject['20212022'].games.toString() : skaterStats[playerId.toString()].statObject['20212022'].games.toString()}
                     mainText={player.fullName}
                     index={index + 1}
                     finnish={player.nationality === 'FIN'}

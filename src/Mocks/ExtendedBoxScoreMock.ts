@@ -104,7 +104,7 @@ export const ExtendedBoxScoreMock: ExtendedBoxScore = {
         },
         game: {
             pk: 2019020942,
-            season: '20192020',
+            season: '20212022',
             type: 'R',
         },
         players: {

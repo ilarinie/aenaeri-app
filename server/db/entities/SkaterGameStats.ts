@@ -11,6 +11,7 @@ export class SkaterGameStatsEntity extends BaseEntity implements SkaterGameStats
             const { stat, season } = s;
             entities.push(SkaterGameStatsEntity.create({
                 playerId,
+                // @ts-ignore
                 season,
                 teamId: s.team.id,
                 opponentTeamId: s.opponent.id,

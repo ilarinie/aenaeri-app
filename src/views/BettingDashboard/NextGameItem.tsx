@@ -15,11 +15,11 @@ export const NextGameItem: React.FC<{ game: ExtendedBoxScore; teamsStats?: Seaso
 
     useEffect(() => {
         const record = { home: '', away: '' };
-        const homeStats = teamsStats ? teamsStats[game.gameData.teams.home.id].statObject['20192020'] : null;
+        const homeStats = teamsStats ? teamsStats[game.gameData.teams.home.id].statObject['20212022'] : null;
         if (homeStats) {
             record.home = `${homeStats.wins}-${homeStats.losses}-${homeStats.ot}`;
         }
-        const awayStats = teamsStats ? teamsStats[game.gameData.teams.away.id].statObject['20192020'] : null;
+        const awayStats = teamsStats ? teamsStats[game.gameData.teams.away.id].statObject['20212022'] : null;
         if (awayStats) {
             record.away = `${awayStats.wins}-${awayStats.losses}-${awayStats.ot}`;
         }

@@ -1,0 +1,21 @@
+FROM node:14.16.1-alpine
+
+ENV USER=app
+
+ENV SUBDIR=appDir
+ENV HOME=/home/$USER
+WORKDIR $HOME/$SUBDIR
+
+EXPOSE 3001
+
+# CMD ["node", "dist/index.js"]
+
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install --quiet
+
+COPY ./server $HOME/$SUBDIR/server
+
+ENV PATH $HOME/${SUBDIR}/node_modules/.bin:$PATH
+
+# RUN npm run build

@@ -13,7 +13,7 @@ interface OddsType {
     league: {
         name: 'nhl';
         seasons: Array<{
-            name: '2017/2018' | '2018/2019' | '2019/2020',
+            name: '2017/2018' | '2018/2019' | '2019/2020' | '2020/2021' | '2021/2022'
             games: GameOdds[];
         }>;
     };
@@ -128,7 +128,10 @@ export const populateBoxScores = async () => {
         const seventeen = await generateIdsToBeFetched('2017');
         const eighteen = await generateIdsToBeFetched('2018');
         const nineteen = await generateIdsToBeFetched('2019');
-        gameIds.push(...seventeen, ...eighteen, ...nineteen);
+        const twenty = await generateIdsToBeFetched('2020');
+        const twentyOne = await generateIdsToBeFetched('2021');
+
+        gameIds.push(...seventeen, ...eighteen, ...nineteen, ...twenty, ...twentyOne);
     } catch (err) {
         logger.error('could not generate ids');
     }
@@ -186,7 +189,7 @@ const fetchAndCreateBoxScore = async (gameId: string): Promise<any> => {
     }
 };
 
-const generateRange = (season: string = '2019', from: number = 1, to: number = 1271): string[] => {
+const generateRange = (season: string = '2019', from: number = 1, to: number = 1312): string[] => {
     const arr: string[] = [];
     /**
      * 1271 is the number of regular season games per season (82 games * 31 teams / 2 teams/game);

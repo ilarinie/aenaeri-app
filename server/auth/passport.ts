@@ -10,7 +10,7 @@ const opts = {
 
 const LocalStrategy = passportLocal.Strategy;
 
-passport.serializeUser<any, any>((user: UserEntity, done) => {
+passport.serializeUser<any, any>((user: UserEntity, done: any) => {
     return done(undefined, user.id);
 });
 

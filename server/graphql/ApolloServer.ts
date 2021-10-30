@@ -32,5 +32,5 @@ const NHLApolloServer = new ApolloServer(
 );
 
 export default (app) => {
-    NHLApolloServer.applyMiddleware({ app });
+    NHLApolloServer.applyMiddleware({ app, path: '/api/graphql' });
 };

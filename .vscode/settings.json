@@ -1,4 +1,29 @@
 {
     "typescript.preferences.quoteStyle": "single",
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "workbench.colorCustomizations": {
+        "terminal.background": "#231E18",
+        "terminal.foreground": "#CABCB1",
+        "terminalCursor.background": "#CABCB1",
+        "terminalCursor.foreground": "#CABCB1",
+        "terminal.ansiBlack": "#231E18",
+        "terminal.ansiBlue": "#88A4D3",
+        "terminal.ansiBrightBlack": "#9D8B70",
+        "terminal.ansiBrightBlue": "#88A4D3",
+        "terminal.ansiBrightCyan": "#6EB958",
+        "terminal.ansiBrightGreen": "#B7BA53",
+        "terminal.ansiBrightMagenta": "#BB90E2",
+        "terminal.ansiBrightRed": "#D35C5C",
+        "terminal.ansiBrightWhite": "#E4D4C8",
+        "terminal.ansiBrightYellow": "#E0AC16",
+        "terminal.ansiCyan": "#6EB958",
+        "terminal.ansiGreen": "#B7BA53",
+        "terminal.ansiMagenta": "#BB90E2",
+        "terminal.ansiRed": "#D35C5C",
+        "terminal.ansiWhite": "#CABCB1",
+        "terminal.ansiYellow": "#E0AC16",
+        "activityBar.background": "#0E1097",
+        "titleBar.activeBackground": "#1316D4",
+        "titleBar.activeForeground": "#FDFDFF"
+    }
 }
